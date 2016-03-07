@@ -5,22 +5,49 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_image.png" translatesAutoresizingMaskIntoConstraints="NO" id="2pc-wK-pj9">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="174"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="174" id="ygY-3s-0Mk"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="totalbg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="MlX-Od-O3J">
+                                <rect key="frame" x="0.0" y="174" width="320" height="306"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="MlX-Od-O3J" secondAttribute="trailing" id="440-Km-sXT"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="MlX-Od-O3J" secondAttribute="bottom" id="Dzy-ae-dpG"/>
+                            <constraint firstItem="2pc-wK-pj9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ECd-6x-SRs"/>
+                            <constraint firstItem="MlX-Od-O3J" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Tyf-TP-K3M"/>
+                            <constraint firstItem="MlX-Od-O3J" firstAttribute="top" secondItem="2pc-wK-pj9" secondAttribute="bottom" id="d7b-fF-Qu4"/>
+                            <constraint firstItem="2pc-wK-pj9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="oNU-Tv-nm0"/>
+                            <constraint firstAttribute="trailing" secondItem="2pc-wK-pj9" secondAttribute="trailing" id="rzx-Yd-pKN"/>
+                        </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="563" y="479"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="login_image.png" width="640" height="480"/>
+        <image name="totalbg.jpg" width="500" height="685"/>
+    </resources>
 </document>
