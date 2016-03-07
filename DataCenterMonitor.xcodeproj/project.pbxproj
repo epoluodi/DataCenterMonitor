@@ -186,6 +186,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B1514701C8DB99E0065115C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B4C8AA9D1C8D22E700DBC035 /* Main.storyboard */,
+				B4C8AAA01C8D22E700DBC035 /* Assets.xcassets */,
+				B4C8AAA21C8D22E700DBC035 /* LaunchScreen.storyboard */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		B4C8AA881C8D22E700DBC035 = {
 			isa = PBXGroup;
 			children = (
@@ -205,15 +215,13 @@
 		B4C8AA931C8D22E700DBC035 /* DataCenterMonitor */ = {
 			isa = PBXGroup;
 			children = (
+				7B1514701C8DB99E0065115C /* Resources */,
 				B4C8AAAE1C8D248100DBC035 /* FrameWork */,
 				B4C8AAAD1C8D246A00DBC035 /* PNG */,
 				B4C8AAAC1C8D246500DBC035 /* XIB */,
 				B4C8AAAB1C8D244900DBC035 /* View */,
 				B4C8AA971C8D22E700DBC035 /* AppDelegate.h */,
 				B4C8AA981C8D22E700DBC035 /* AppDelegate.m */,
-				B4C8AA9D1C8D22E700DBC035 /* Main.storyboard */,
-				B4C8AAA01C8D22E700DBC035 /* Assets.xcassets */,
-				B4C8AAA21C8D22E700DBC035 /* LaunchScreen.storyboard */,
 				B4C8AAA51C8D22E700DBC035 /* Info.plist */,
 				B4C8AA941C8D22E700DBC035 /* Supporting Files */,
 			);
@@ -638,6 +646,7 @@
 				B4C8AAAA1C8D22E700DBC035 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
