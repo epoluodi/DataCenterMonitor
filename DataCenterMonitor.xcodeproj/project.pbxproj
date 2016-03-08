@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B445BCCD1C8EA57700EF4907 /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445BCCC1C8EA57700EF4907 /* Common.framework */; };
+		B445BCCF1C8EA7AD00EF4907 /* Common.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B445BCCC1C8EA57700EF4907 /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B4C8AA961C8D22E700DBC035 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C8AA951C8D22E700DBC035 /* main.m */; };
 		B4C8AA991C8D22E700DBC035 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C8AA981C8D22E700DBC035 /* AppDelegate.m */; };
 		B4C8AA9F1C8D22E700DBC035 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4C8AA9D1C8D22E700DBC035 /* Main.storyboard */; };
@@ -88,7 +90,21 @@
 		B4C8AB631C8D7D7200DBC035 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C8AB621C8D7D7200DBC035 /* Common.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		B445BCCE1C8EA7A700EF4907 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B445BCCF1C8EA7AD00EF4907 /* Common.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		B445BCCC1C8EA57700EF4907 /* Common.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Common.framework; path = framework/Common.framework; sourceTree = "<group>"; };
 		B4C8AA911C8D22E700DBC035 /* DataCenterMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataCenterMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4C8AA951C8D22E700DBC035 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B4C8AA971C8D22E700DBC035 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -180,6 +196,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B445BCCD1C8EA57700EF4907 /* Common.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +352,7 @@
 		B4C8AAAE1C8D248100DBC035 /* FrameWork */ = {
 			isa = PBXGroup;
 			children = (
+				B445BCCC1C8EA57700EF4907 /* Common.framework */,
 			);
 			name = FrameWork;
 			sourceTree = "<group>";
@@ -358,6 +376,7 @@
 				B4C8AA8D1C8D22E700DBC035 /* Sources */,
 				B4C8AA8E1C8D22E700DBC035 /* Frameworks */,
 				B4C8AA8F1C8D22E700DBC035 /* Resources */,
+				B445BCCE1C8EA7A700EF4907 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -605,8 +624,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DataCenterMonitor/framework",
+				);
 				INFOPLIST_FILE = DataCenterMonitor/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pxzdh.DataCenterMonitor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -618,8 +641,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DataCenterMonitor/framework",
+				);
 				INFOPLIST_FILE = DataCenterMonitor/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pxzdh.DataCenterMonitor;
 				PRODUCT_NAME = "$(TARGET_NAME)";

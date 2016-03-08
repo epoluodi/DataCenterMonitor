@@ -46,6 +46,9 @@
                                 <state key="normal" title="外网" image="radiobutton_focussize_large_normal.png">
                                     <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnnetoutside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ak5-zz-jtU"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbx-Lw-c1j">
                                 <rect key="frame" x="260" y="320" width="103" height="34"/>
@@ -57,6 +60,9 @@
                                 <state key="normal" title="自动登录" image="checkbox_button_normal.png">
                                     <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="chkautologin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9Rb-zd-NGO"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="平行数据中心" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAv-oV-xgs">
                                 <rect key="frame" x="20" y="85" width="374" height="29"/>
@@ -80,6 +86,9 @@
                                 </constraints>
                                 <state key="normal" title="登录" backgroundImage="longlongnormalbutton_normal.png"/>
                                 <state key="highlighted" title="登录" backgroundImage="longlongnormalbutton_down.png"/>
+                                <connections>
+                                    <action selector="btnlogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bex-uW-q46"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXP-C1-nyD">
                                 <rect key="frame" x="20" y="442" width="374" height="30"/>
@@ -90,6 +99,9 @@
                                 <state key="normal" title="服务器地址设置">
                                     <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnsetting:" destination="BYZ-38-t0r" eventType="touchUpInside" id="feS-Hz-FyN"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45i-Ar-1Ke">
                                 <rect key="frame" x="55" y="320" width="103" height="34"/>
@@ -101,6 +113,9 @@
                                 <state key="normal" title="记住密码" image="checkbox_button_normal.png">
                                     <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="chkremember:" destination="BYZ-38-t0r" eventType="touchUpInside" id="clR-cj-mS9"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O3a-Gh-VbA">
                                 <rect key="frame" x="73" y="406" width="85" height="28"/>
@@ -113,6 +128,9 @@
                                 <state key="normal" title="内网 " image="radiobutton_focussize_large_normal.png">
                                     <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnnetinside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U1D-yk-mFn"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -138,7 +156,7 @@
                             <constraint firstAttribute="trailing" secondItem="bAv-oV-xgs" secondAttribute="trailing" constant="20" id="dbw-7W-cDW"/>
                             <constraint firstItem="NEH-CG-LlR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="i4S-9E-OW0"/>
                             <constraint firstItem="NdP-tF-u6J" firstAttribute="trailing" secondItem="4xL-eD-DUA" secondAttribute="trailing" constant="-29" id="iEc-S7-Jr1"/>
-                            <constraint firstItem="4xL-eD-DUA" firstAttribute="top" secondItem="2pc-wK-pj9" secondAttribute="bottom" constant="21" id="jqV-db-z3U"/>
+                            <constraint firstItem="4xL-eD-DUA" firstAttribute="top" secondItem="2pc-wK-pj9" secondAttribute="bottom" constant="21" identifier="loginviewTop" id="jqV-db-z3U"/>
                             <constraint firstAttribute="trailing" secondItem="4xL-eD-DUA" secondAttribute="trailing" constant="44" id="k1e-RL-a2N"/>
                             <constraint firstAttribute="trailing" secondItem="NEH-CG-LlR" secondAttribute="trailing" constant="20" id="kJ0-HC-dKe"/>
                             <constraint firstItem="4xL-eD-DUA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="45" id="kmX-dS-FTn"/>
@@ -157,6 +175,14 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="autologin" destination="fbx-Lw-c1j" id="Hdb-dT-ucg"/>
+                        <outlet property="btnlogin" destination="NdP-tF-u6J" id="aLe-VG-zpJ"/>
+                        <outlet property="loginview" destination="4xL-eD-DUA" id="4aS-6V-3nq"/>
+                        <outlet property="netinside" destination="O3a-Gh-VbA" id="lbm-gK-ISG"/>
+                        <outlet property="netoutside" destination="eTR-Dq-DGt" id="faJ-ga-5Fq"/>
+                        <outlet property="rememberpwd" destination="45i-Ar-1Ke" id="AS4-gg-fDg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

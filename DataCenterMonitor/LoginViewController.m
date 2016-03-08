@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import <Common/PublicCommon.h>
 
 @interface LoginViewController ()
 
@@ -16,8 +17,39 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    
+    
+    
+    
     // Do any additional setup after loading the view.
 }
+
+-(void)updateViewConstraints
+{
+    [super updateViewConstraints];
+    [self updateLayout];
+}
+
+
+
+
+-(void)updateLayout
+{
+    NSArray *layoutlist =  self.view.constraints;
+
+    for (NSLayoutConstraint *layout in layoutlist) {
+        if ([layout.identifier isEqualToString:@"loginviewTop"])
+        {
+            if (iPhone6plus)
+                layout.constant=40;
+        }
+    }
+    
+ 
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -34,4 +66,21 @@
 }
 */
 
+- (IBAction)btnlogin:(id)sender {
+}
+
+- (IBAction)btnsetting:(id)sender {
+}
+
+- (IBAction)chkremember:(id)sender {
+}
+
+- (IBAction)chkautologin:(id)sender {
+}
+
+- (IBAction)btnnetinside:(id)sender {
+}
+
+- (IBAction)btnnetoutside:(id)sender {
+}
 @end
