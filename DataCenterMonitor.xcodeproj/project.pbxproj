@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B8216891C8EEC2E00D371B9 /* HttpClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8216871C8EEC2E00D371B9 /* HttpClass.m */; };
+		7B82168D1C8F15E400D371B9 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B82168C1C8F15E400D371B9 /* MainViewController.m */; };
+		7B8216901C8F17BE00D371B9 /* ServerConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B82168F1C8F17BE00D371B9 /* ServerConfigViewController.m */; };
 		B445BCCD1C8EA57700EF4907 /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445BCCC1C8EA57700EF4907 /* Common.framework */; };
 		B445BCCF1C8EA7AD00EF4907 /* Common.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B445BCCC1C8EA57700EF4907 /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B4C8AA961C8D22E700DBC035 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C8AA951C8D22E700DBC035 /* main.m */; };
@@ -104,6 +107,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7B8216861C8EEC2E00D371B9 /* HttpClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpClass.h; sourceTree = "<group>"; };
+		7B8216871C8EEC2E00D371B9 /* HttpClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpClass.m; sourceTree = "<group>"; };
+		7B8216881C8EEC2E00D371B9 /* info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = info.h; sourceTree = "<group>"; };
+		7B82168B1C8F15E400D371B9 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		7B82168C1C8F15E400D371B9 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		7B82168E1C8F17BE00D371B9 /* ServerConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConfigViewController.h; sourceTree = "<group>"; };
+		7B82168F1C8F17BE00D371B9 /* ServerConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConfigViewController.m; sourceTree = "<group>"; };
 		B445BCCC1C8EA57700EF4907 /* Common.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Common.framework; path = framework/Common.framework; sourceTree = "<group>"; };
 		B4C8AA911C8D22E700DBC035 /* DataCenterMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataCenterMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4C8AA951C8D22E700DBC035 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -213,6 +223,16 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		7B8216851C8EEC1B00D371B9 /* WebService */ = {
+			isa = PBXGroup;
+			children = (
+				7B8216861C8EEC2E00D371B9 /* HttpClass.h */,
+				7B8216871C8EEC2E00D371B9 /* HttpClass.m */,
+				7B8216881C8EEC2E00D371B9 /* info.h */,
+			);
+			name = WebService;
+			sourceTree = "<group>";
+		};
 		B4C8AA881C8D22E700DBC035 = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +252,7 @@
 		B4C8AA931C8D22E700DBC035 /* DataCenterMonitor */ = {
 			isa = PBXGroup;
 			children = (
+				7B8216851C8EEC1B00D371B9 /* WebService */,
 				7B1514701C8DB99E0065115C /* Resources */,
 				B4C8AAAE1C8D248100DBC035 /* FrameWork */,
 				B4C8AAAD1C8D246A00DBC035 /* PNG */,
@@ -256,9 +277,13 @@
 		B4C8AAAB1C8D244900DBC035 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B4C8AB601C8D645600DBC035 /* Head */,
+				B4C8AB601C8D645600DBC035 /* Common */,
 				B4C8AB5D1C8D2A2900DBC035 /* LoginViewController.h */,
 				B4C8AB5E1C8D2A2900DBC035 /* LoginViewController.m */,
+				7B82168B1C8F15E400D371B9 /* MainViewController.h */,
+				7B82168C1C8F15E400D371B9 /* MainViewController.m */,
+				7B82168E1C8F17BE00D371B9 /* ServerConfigViewController.h */,
+				7B82168F1C8F17BE00D371B9 /* ServerConfigViewController.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -357,13 +382,13 @@
 			name = FrameWork;
 			sourceTree = "<group>";
 		};
-		B4C8AB601C8D645600DBC035 /* Head */ = {
+		B4C8AB601C8D645600DBC035 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				B4C8AB611C8D646700DBC035 /* Common.h */,
 				B4C8AB621C8D7D7200DBC035 /* Common.m */,
 			);
-			name = Head;
+			name = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -509,7 +534,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B8216901C8F17BE00D371B9 /* ServerConfigViewController.m in Sources */,
 				B4C8AB631C8D7D7200DBC035 /* Common.m in Sources */,
+				7B82168D1C8F15E400D371B9 /* MainViewController.m in Sources */,
+				7B8216891C8EEC2E00D371B9 /* HttpClass.m in Sources */,
 				B4C8AA991C8D22E700DBC035 /* AppDelegate.m in Sources */,
 				B4C8AA961C8D22E700DBC035 /* main.m in Sources */,
 				B4C8AB5F1C8D2A2900DBC035 /* LoginViewController.m in Sources */,

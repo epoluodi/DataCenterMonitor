@@ -7,11 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Common.h"
 
 @interface LoginViewController : UIViewController
 {
     UITextField *useredit;
     UITextField *pwdedit;
+    BOOL IschkRemember,IschkAutoLogin;
+    NetEnum NetMode;
+    int inport,outport;
+    NSString *urlinside,*urloutside;
+    BOOL IsShow;
+ 
 }
 
 
@@ -32,6 +39,7 @@
 - (IBAction)btnnetinside:(id)sender;
 - (IBAction)btnnetoutside:(id)sender;
 
-
+//读取用户信息
+-(void)LoadUserInfo;
 
 @end
