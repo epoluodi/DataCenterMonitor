@@ -65,7 +65,7 @@
 
     //定义NSMutableURLRequest
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:WebServiceUrl]];
-    [request setTimeoutInterval:15];
+    [request setTimeoutInterval:10];
     
     
     //设置提交方式为 POST
@@ -79,7 +79,7 @@
         NSLog(@"postLength=%@",postLength);
         //设置http-header:Content-Length
         
-        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+//        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
         //设置需要post提交的内容
         [request setHTTPBody:body];
     

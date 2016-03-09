@@ -8,8 +8,9 @@
 
 #import "LoginViewController.h"
 #import <Common/PublicCommon.h>
+#import <Common/LoadingView.h>
 #import "ServerConfigView.h"
-
+#import "HttpClass.h"
 
 @class ServerConfigViewController;
 @interface LoginViewController ()
@@ -25,7 +26,7 @@
 @synthesize btnlogin,netinside,netoutside;
 @synthesize logintopimgview;
 
-
+//系统方法
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -85,10 +86,6 @@
         }
         
     }
-    
-    
-
-    
     
     [self InitLoginView];
     [self LoadUserInfo];
@@ -332,6 +329,42 @@
         [alert show];
         return;
     }
+    
+    NSString *weburl;
+    if (NetMode == NETINSIDE)
+        weburl = [Common HttpString:urlinside port:inport];
+    if (NetMode == NETOUTSIDE)
+        weburl = [Common HttpString:urloutside port:outport];
+    
+    NSLog(@"web url :%@",weburl);
+    [Common DefaultCommon].webUrl=weburl;
+    //初始化连接http
+    __block HttpClass *httpclass;
+    dispatch_async([Common getThreadQueue], ^{
+        httpclass = [[HttpClass alloc] init:[Common HttpString:UserLogin]];
+        [httpclass addParamsString:@"userName" values:useredit.text];
+        [httpclass addParamsString:@"userPwd" values:pwdedit.text];
+        
+        NSData *data = [httpclass httprequest:[httpclass getDataForArrary]];
+        NSString *result = [httpclass getXmlString:data];
+        NSLog(@"结果 %@",result);
+        
+        
+        httpclass = [[HttpClass alloc] init:[Common HttpString:GetStation]];
+        [httpclass addParamsString:@"clerkStationID" values:@"1"];
+        [httpclass addParamsString:@"clerkID" values:@"3"];
+        [httpclass addParamsString:@"isReturnPicture" values:@"1"];
+         data = [httpclass httprequest:[httpclass getDataForArrary]];
+         result = [httpclass getXmlString:data];
+        NSLog(@"结果 %@",result);
+        
+    });
+
+    
+//    LoadingView *loadview= [[LoadingView alloc] init];
+//    [loadview setImages:[Common initLoadingImages]];
+//    [self.view addSubview:loadview];
+//    [loadview StartAnimation];
     
     
     

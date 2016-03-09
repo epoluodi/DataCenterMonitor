@@ -12,5 +12,5 @@
 
 
 +(BOOL)ValidateEmail:(NSString *)email;
-
++(BOOL)ValidIP:(NSString *)ip;
 @end

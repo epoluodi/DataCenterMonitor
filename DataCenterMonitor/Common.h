@@ -11,7 +11,7 @@
 #define UrlBody @"CSharpBackground/WebServer.asmx/"
 
 #define UserLogin @"UserLogin"
-
+#define GetStation @"GetStation"
 
 
 #import <Foundation/Foundation.h>
@@ -24,13 +24,16 @@ typedef enum {
 
 
 @interface Common :NSObject
+{
+    
+}
 
-
-@property (strong,nonatomic)NSString *webUrl;
+@property (copy,nonatomic)NSString *webUrl;
 @property (assign)NetEnum NetType;
 
-
++(instancetype)DefaultCommon;
 +(NSString *)HttpString:(NSString *)url port:(int)port;
-
-
++(NSString *)HttpString:(NSString *)srv;
++(NSArray *)initLoadingImages;
++(dispatch_queue_t)getThreadQueue;
 @end
