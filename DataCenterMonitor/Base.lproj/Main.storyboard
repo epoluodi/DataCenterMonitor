@@ -20,7 +20,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_image.png" translatesAutoresizingMaskIntoConstraints="NO" id="2pc-wK-pj9">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="184"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="184" id="ygY-3s-0Mk"/>
+                                    <constraint firstAttribute="height" constant="184" identifier="blueheight" id="ygY-3s-0Mk"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="综合监控系统" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEH-CG-LlR">
@@ -178,80 +178,16 @@
                     <connections>
                         <outlet property="autologin" destination="fbx-Lw-c1j" id="Hdb-dT-ucg"/>
                         <outlet property="btnlogin" destination="NdP-tF-u6J" id="aLe-VG-zpJ"/>
+                        <outlet property="logintopimgview" destination="2pc-wK-pj9" id="KyP-sB-F88"/>
                         <outlet property="loginview" destination="4xL-eD-DUA" id="4aS-6V-3nq"/>
                         <outlet property="netinside" destination="O3a-Gh-VbA" id="lbm-gK-ISG"/>
                         <outlet property="netoutside" destination="eTR-Dq-DGt" id="faJ-ga-5Fq"/>
                         <outlet property="rememberpwd" destination="45i-Ar-1Ke" id="AS4-gg-fDg"/>
-                        <segue destination="taA-NZ-FdZ" kind="modal" identifier="showconfig" id="NSo-YN-TAj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="119" y="262"/>
-        </scene>
-        <!--Server Config View Controller-->
-        <scene sceneID="t0c-4q-Bih">
-            <objects>
-                <viewController id="taA-NZ-FdZ" customClass="ServerConfigViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ngb-lA-jMk"/>
-                        <viewControllerLayoutGuide type="bottom" id="PXR-qA-c57"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="vqx-pm-iZl">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="totalbg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="6G4-Yd-lHf">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                            </imageView>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xzZ-92-X0r">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="58"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="58" id="sC5-Wp-q9O"/>
-                                </constraints>
-                                <items>
-                                    <navigationItem title="服务器设置" id="OVa-Bm-cz7">
-                                        <barButtonItem key="leftBarButtonItem" title="返回" id="Bi6-Qb-qx0">
-                                            <connections>
-                                                <action selector="clickreturn:" destination="taA-NZ-FdZ" id="0Eq-Uf-8Cc"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="保持" id="ggf-6I-XlK">
-                                            <connections>
-                                                <action selector="clicksave:" destination="taA-NZ-FdZ" id="Rio-vc-KmN"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QQw-sB-lor">
-                                <rect key="frame" x="0.0" y="58" width="320" height="422"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="PXR-qA-c57" firstAttribute="top" secondItem="QQw-sB-lor" secondAttribute="bottom" id="25S-af-KaL"/>
-                            <constraint firstAttribute="trailing" secondItem="xzZ-92-X0r" secondAttribute="trailing" id="3R1-1N-kYl"/>
-                            <constraint firstItem="6G4-Yd-lHf" firstAttribute="top" secondItem="vqx-pm-iZl" secondAttribute="top" id="7QU-us-Zh5"/>
-                            <constraint firstItem="PXR-qA-c57" firstAttribute="top" secondItem="6G4-Yd-lHf" secondAttribute="bottom" id="MxV-mi-AgN"/>
-                            <constraint firstItem="xzZ-92-X0r" firstAttribute="top" secondItem="vqx-pm-iZl" secondAttribute="top" id="Oqx-Kk-j6u"/>
-                            <constraint firstAttribute="trailing" secondItem="QQw-sB-lor" secondAttribute="trailing" id="PfU-Lp-Mbk"/>
-                            <constraint firstItem="6G4-Yd-lHf" firstAttribute="leading" secondItem="vqx-pm-iZl" secondAttribute="leading" id="VND-vl-ofb"/>
-                            <constraint firstItem="xzZ-92-X0r" firstAttribute="leading" secondItem="vqx-pm-iZl" secondAttribute="leading" id="WYR-yc-a24"/>
-                            <constraint firstItem="QQw-sB-lor" firstAttribute="leading" secondItem="vqx-pm-iZl" secondAttribute="leading" id="iKl-Wt-uDv"/>
-                            <constraint firstItem="QQw-sB-lor" firstAttribute="top" secondItem="xzZ-92-X0r" secondAttribute="bottom" id="sue-HY-rUj"/>
-                            <constraint firstAttribute="trailing" secondItem="6G4-Yd-lHf" secondAttribute="trailing" id="xG1-Z6-4oj"/>
-                        </constraints>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-                    <connections>
-                        <outlet property="table" destination="QQw-sB-lor" id="5dT-qY-TsC"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lbl-au-Ygb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="557" y="-148"/>
+            <point key="canvasLocation" x="112" y="335"/>
         </scene>
     </scenes>
     <resources>

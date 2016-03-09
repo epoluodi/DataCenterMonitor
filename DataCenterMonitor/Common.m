@@ -12,10 +12,16 @@
 
 @implementation Common
 
-
-+(void)InitVar
+/**********************
+ 函数名：HttpString
+ 描述:组合http请求字符串
+ 参数：url 服务地址
+         port 端口
+ 返回：http字符串
+ **********************/
++(NSString *)HttpString:(NSString *)url port:(int)port
 {
-    
+    return [NSString stringWithFormat:@"http://%@:%d/%@",url,port,UrlBody];
 }
 
 @end

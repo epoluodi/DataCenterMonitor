@@ -8,16 +8,22 @@
 
 #import "LoginViewController.h"
 #import <Common/PublicCommon.h>
-#import "ServerConfigViewController.h"
+#import "ServerConfigView.h"
+
 
 @class ServerConfigViewController;
 @interface LoginViewController ()
+{
+    ServerConfigView *scv;
+    UIView *backview;
+}
 
 @end
 
 @implementation LoginViewController
 @synthesize loginview,rememberpwd,autologin;
 @synthesize btnlogin,netinside,netoutside;
+@synthesize logintopimgview;
 
 
 - (void)viewDidLoad {
@@ -31,7 +37,7 @@
 #pragma mark 界面适应
 
 
-
+//系统重载
 -(void)viewDidAppear:(BOOL)animated
 {
     if (!IsShow){
@@ -41,6 +47,12 @@
 }
 
 
+/**********************
+ 函数名：updateLayout
+ 描述:更新界面布局，自适应不同尺寸设备
+ 参数：
+ 返回：
+**********************/
 -(void)updateLayout
 {
     NSArray *layoutlist =  self.view.constraints;
@@ -56,7 +68,27 @@
                 layout.constant=35;
           
         }
+
     }
+    
+    layoutlist =logintopimgview.constraints;
+    for (NSLayoutConstraint *layout in layoutlist) {
+        if ([layout.identifier isEqualToString:@"blueheight"])
+        {
+            if (iPhone6plus)
+                layout.constant=220;
+            if (iPhone6)
+                layout.constant=200;
+            if (iPhone5)
+                layout.constant=190;
+          
+        }
+        
+    }
+    
+    
+
+    
     
     [self InitLoginView];
     [self LoadUserInfo];
@@ -66,11 +98,16 @@
 
 #pragma mark 用户界面和信息
 
-
+/**********************
+ 函数名：LoadUserInfo
+ 描述:app启动，加载用户信息：用户名，密码和服务配置相关参数
+ 参数：
+ 返回：
+ **********************/
 -(void)LoadUserInfo
 {
     NSUserDefaults *userinfo  = [NSUserDefaults standardUserDefaults];
-    if ([userinfo integerForKey:@"IsFrist"] == 0)
+    if ([userinfo integerForKey:@"IsFrist"] == 0)//第一次启动预先创建用户信息
     {
         [userinfo setObject:@"" forKey:@"UserName"];
         [userinfo setObject:@"" forKey:@"UserPwd"];
@@ -109,14 +146,19 @@
         IschkAutoLogin = [userinfo integerForKey:@"autologin"];
         NetMode=(NetEnum)[userinfo integerForKey:@"netmode"];
         urlinside =[userinfo stringForKey:@"urlinside"];
-        urloutside =[userinfo stringForKey:@"protoutside"];
+        urloutside =[userinfo stringForKey:@"urloutside"];
         inport=[userinfo integerForKey:@"protinside"];
         outport=[userinfo integerForKey:@"protoutside"];
         
     }
 }
 
-//更新界面状态
+/**********************
+ 函数名：UpdateUI
+ 描述:根据用户信息更新界面相关元素
+ 参数：
+ 返回：
+ **********************/
 -(void)UpdateUI
 {
     if(IschkRemember)
@@ -138,7 +180,12 @@
 }
 
 
-//初始化登录UI
+/**********************
+ 函数名：InitLoginView
+ 描述:初始化登陆界面中用户名和密码ui
+ 参数：
+ 返回：
+ **********************/
 -(void)InitLoginView
 {
     UIImageView *imgview1 = [[UIImageView alloc] init];
@@ -191,6 +238,12 @@
     [loginview.layer addSublayer:shapeLayer];
 }
 
+/**********************
+ 函数名：closeinput
+ 描述:关闭键盘
+ 参数：
+ 返回：
+ **********************/
 -(void)closeinput
 {
     [useredit resignFirstResponder];
@@ -199,11 +252,55 @@
 
 #pragma mark -
 
+
+
+#pragma mark view回调控制
+
+
+/**********************
+ 函数名：closeServerConfigView
+ 描述:关闭服务设置界面
+ 参数：
+ 返回：
+ **********************/
+-(void)closeServerConfigView
+{
+    [backview removeFromSuperview];
+    [scv removeFromSuperview];
+}
+
+/**********************
+ 函数名：updateServerConfigInfo
+ 描述:更新服务配置界面设置的信息
+ 参数：nstring in_url 内网url
+          nstring in_port 内网端口
+          nstring out_url 外网url
+          nstring out_port 外网端口
+ 返回：
+ **********************/
+-(void)updateServerConfigInfo:(NSString *)in_url in_port:(NSString *)in_port out_url:(NSString *)out_url out_port:(NSString *)out_port
+{
+    NSUserDefaults *userinfo = [NSUserDefaults standardUserDefaults];
+    [userinfo setObject:in_url forKey:@"urlinside"];
+    [userinfo setInteger:[in_port intValue] forKey:@"protinside"];
+    [userinfo setObject:out_url forKey:@"urloutside"];
+    [userinfo setInteger:[out_port intValue] forKey:@"protoutside"];
+
+    urlinside =in_url;
+    urloutside = out_url;
+    inport =[in_port intValue];
+    outport =out_port.intValue;
+}
+#pragma mark -
+
+//系统方法
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
 }
 
+
+//系统方法
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -211,40 +308,98 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
-    if ([segue.identifier isEqualToString:@"showconfig"])
+//    if ([segue.identifier isEqualToString:@"showconfig"])
+//    {
+//        ServerConfigViewController *SC = [segue destinationViewController];
+//        SC.LC = self;
+//        
+//        return;
+//    }
+}
+
+
+/**********************
+ 函数名：btnsetting
+ 描述:点击登录
+ 参数：sender 系统对象
+ 返回：IBAction 系统对象
+ **********************/
+- (IBAction)btnlogin:(id)sender {
+    if ([useredit.text isEqualToString:@""] ||
+        [pwdedit.text isEqualToString:@""])
     {
-        ServerConfigViewController *SC = [segue destinationViewController];
-        SC.LC = self;
-        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请输入用户名和密码" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
         return;
     }
+    
+    
+    
 }
 
 
 
-- (IBAction)btnlogin:(id)sender {
-}
-
+/**********************
+ 函数名：btnsetting
+ 描述:点击服务器设置
+ 参数：sender 系统对象
+ 返回：IBAction 系统对象
+ **********************/
 - (IBAction)btnsetting:(id)sender {
-    [self performSegueWithIdentifier:@"showconfig" sender:self];
+    NSArray* xibs = [[NSBundle mainBundle] loadNibNamed:@"serverconfigview" owner:scv options:nil];
+    scv = xibs[0];
+    scv.loginVC=self;
+    backview = [[UIView alloc] init];
+    backview.frame=self.view.frame;
+    backview.backgroundColor=[[UIColor blackColor] colorWithAlphaComponent:0.8];
+    scv.frame = CGRectMake(20, [PublicCommon GetALLScreen].size.height/2 - 388/2, [PublicCommon GetALLScreen].size.width -40, 388);
+    [scv initServerinfo:urlinside in_port:[NSString stringWithFormat:@"%d",inport] out_ip:urloutside out_port:[NSString stringWithFormat:@"%d",outport]];
+    [backview addSubview:scv];
+    [self.view addSubview:backview];
+
 }
 
+
+/**********************
+ 函数名：chkremember
+ 描述:点击记住密码
+ 参数：sender 系统对象
+ 返回：IBAction 系统对象
+ **********************/
 - (IBAction)chkremember:(id)sender {
     IschkRemember = (IschkRemember)?NO:YES;
     [self UpdateUI];
     
 }
 
+/**********************
+ 函数名：chkautologin
+ 描述:点击自动登陆
+ 参数：sender 系统对象
+ 返回：IBAction 系统对象
+ **********************/
 - (IBAction)chkautologin:(id)sender {
     IschkAutoLogin = (IschkAutoLogin)?NO:YES;
     [self UpdateUI];
 }
 
+/**********************
+ 函数名：btnnetinside
+ 描述:点击内网
+ 参数：sender 系统对象
+ 返回：IBAction 系统对象
+ **********************/
 - (IBAction)btnnetinside:(id)sender {
     NetMode =NETINSIDE;
     [self UpdateUI];
 }
 
+/**********************
+ 函数名：btnnetoutside
+ 描述:点击外网
+ 参数：sender 系统对象
+ 返回：IBAction 系统对象
+ **********************/
 - (IBAction)btnnetoutside:(id)sender {
     NetMode = NETOUTSIDE;
     [self UpdateUI];

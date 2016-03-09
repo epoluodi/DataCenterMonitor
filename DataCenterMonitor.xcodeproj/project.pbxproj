@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		7B8216891C8EEC2E00D371B9 /* HttpClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8216871C8EEC2E00D371B9 /* HttpClass.m */; };
 		7B82168D1C8F15E400D371B9 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B82168C1C8F15E400D371B9 /* MainViewController.m */; };
-		7B8216901C8F17BE00D371B9 /* ServerConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B82168F1C8F17BE00D371B9 /* ServerConfigViewController.m */; };
 		B445BCCD1C8EA57700EF4907 /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445BCCC1C8EA57700EF4907 /* Common.framework */; };
 		B445BCCF1C8EA7AD00EF4907 /* Common.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B445BCCC1C8EA57700EF4907 /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B447CF451C8FFE0C004C7FCD /* serverconfigview.xib in Resources */ = {isa = PBXBuildFile; fileRef = B447CF441C8FFE0C004C7FCD /* serverconfigview.xib */; };
+		B447CF491C900465004C7FCD /* ServerConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = B447CF481C900465004C7FCD /* ServerConfigView.m */; };
 		B4C8AA961C8D22E700DBC035 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C8AA951C8D22E700DBC035 /* main.m */; };
 		B4C8AA991C8D22E700DBC035 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C8AA981C8D22E700DBC035 /* AppDelegate.m */; };
 		B4C8AA9F1C8D22E700DBC035 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4C8AA9D1C8D22E700DBC035 /* Main.storyboard */; };
@@ -112,9 +113,10 @@
 		7B8216881C8EEC2E00D371B9 /* info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = info.h; sourceTree = "<group>"; };
 		7B82168B1C8F15E400D371B9 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		7B82168C1C8F15E400D371B9 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		7B82168E1C8F17BE00D371B9 /* ServerConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConfigViewController.h; sourceTree = "<group>"; };
-		7B82168F1C8F17BE00D371B9 /* ServerConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConfigViewController.m; sourceTree = "<group>"; };
 		B445BCCC1C8EA57700EF4907 /* Common.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Common.framework; path = framework/Common.framework; sourceTree = "<group>"; };
+		B447CF441C8FFE0C004C7FCD /* serverconfigview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = serverconfigview.xib; sourceTree = "<group>"; };
+		B447CF471C900465004C7FCD /* ServerConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConfigView.h; sourceTree = "<group>"; };
+		B447CF481C900465004C7FCD /* ServerConfigView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConfigView.m; sourceTree = "<group>"; };
 		B4C8AA911C8D22E700DBC035 /* DataCenterMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataCenterMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4C8AA951C8D22E700DBC035 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B4C8AA971C8D22E700DBC035 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -233,6 +235,15 @@
 			name = WebService;
 			sourceTree = "<group>";
 		};
+		B447CF461C900408004C7FCD /* xibClass */ = {
+			isa = PBXGroup;
+			children = (
+				B447CF471C900465004C7FCD /* ServerConfigView.h */,
+				B447CF481C900465004C7FCD /* ServerConfigView.m */,
+			);
+			name = xibClass;
+			sourceTree = "<group>";
+		};
 		B4C8AA881C8D22E700DBC035 = {
 			isa = PBXGroup;
 			children = (
@@ -277,13 +288,12 @@
 		B4C8AAAB1C8D244900DBC035 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B447CF461C900408004C7FCD /* xibClass */,
 				B4C8AB601C8D645600DBC035 /* Common */,
 				B4C8AB5D1C8D2A2900DBC035 /* LoginViewController.h */,
 				B4C8AB5E1C8D2A2900DBC035 /* LoginViewController.m */,
 				7B82168B1C8F15E400D371B9 /* MainViewController.h */,
 				7B82168C1C8F15E400D371B9 /* MainViewController.m */,
-				7B82168E1C8F17BE00D371B9 /* ServerConfigViewController.h */,
-				7B82168F1C8F17BE00D371B9 /* ServerConfigViewController.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -291,6 +301,7 @@
 		B4C8AAAC1C8D246500DBC035 /* XIB */ = {
 			isa = PBXGroup;
 			children = (
+				B447CF441C8FFE0C004C7FCD /* serverconfigview.xib */,
 			);
 			name = XIB;
 			sourceTree = "<group>";
@@ -518,6 +529,7 @@
 				B4C8AB2C1C8D25D800DBC035 /* login_spinner_bg.png in Resources */,
 				B4C8AB0A1C8D25D800DBC035 /* bottom_signallist.png in Resources */,
 				B4C8AA9F1C8D22E700DBC035 /* Main.storyboard in Resources */,
+				B447CF451C8FFE0C004C7FCD /* serverconfigview.xib in Resources */,
 				B4C8AB531C8D25D900DBC035 /* subgridviewbg_selected_old.png in Resources */,
 				B4C8AB291C8D25D800DBC035 /* listviewbg_normal.png in Resources */,
 				B4C8AB201C8D25D800DBC035 /* ex_titlemenubutton_normal.png in Resources */,
@@ -534,11 +546,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B8216901C8F17BE00D371B9 /* ServerConfigViewController.m in Sources */,
 				B4C8AB631C8D7D7200DBC035 /* Common.m in Sources */,
 				7B82168D1C8F15E400D371B9 /* MainViewController.m in Sources */,
 				7B8216891C8EEC2E00D371B9 /* HttpClass.m in Sources */,
 				B4C8AA991C8D22E700DBC035 /* AppDelegate.m in Sources */,
+				B447CF491C900465004C7FCD /* ServerConfigView.m in Sources */,
 				B4C8AA961C8D22E700DBC035 /* main.m in Sources */,
 				B4C8AB5F1C8D2A2900DBC035 /* LoginViewController.m in Sources */,
 			);

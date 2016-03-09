@@ -30,7 +30,7 @@ typedef enum {
 @property (assign)NetEnum NetType;
 
 
-+(void)InitVar;
++(NSString *)HttpString:(NSString *)url port:(int)port;
 
 
 @end

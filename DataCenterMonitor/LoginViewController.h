@@ -1,7 +1,7 @@
 //
 //  LoginViewController.h
 //  DataCenterMonitor
-//
+//  登录界面
 //  Created by Stereo on 16/3/7.
 //  Copyright © 2016年 pxzdh. All rights reserved.
 //
@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Common.h"
 
+//登录界面控制类
 @interface LoginViewController : UIViewController
 {
     UITextField *useredit;
@@ -19,6 +20,7 @@
     NSString *urlinside,*urloutside;
     BOOL IsShow;
  
+    
 }
 
 
@@ -29,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnlogin;
 @property (weak, nonatomic) IBOutlet UIButton *netinside;
 @property (weak, nonatomic) IBOutlet UIButton *netoutside;
+@property (weak, nonatomic) IBOutlet UIImageView *logintopimgview;
 
 
 
@@ -42,4 +45,9 @@
 //读取用户信息
 -(void)LoadUserInfo;
 
+
+//view 回调关闭
+-(void)closeServerConfigView;
+
+-(void)updateServerConfigInfo:(NSString *)in_url in_port:(NSString *)in_port out_url:(NSString *)out_url out_port:(NSString *)out_port;
 @end
