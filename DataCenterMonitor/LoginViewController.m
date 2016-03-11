@@ -17,6 +17,7 @@
 {
     ServerConfigView *scv;
     UIView *backview;
+    LoadingView *loadview;
 }
 
 @end
@@ -53,11 +54,11 @@
  描述:更新界面布局，自适应不同尺寸设备
  参数：
  返回：
-**********************/
+ **********************/
 -(void)updateLayout
 {
     NSArray *layoutlist =  self.view.constraints;
-
+    
     for (NSLayoutConstraint *layout in layoutlist) {
         if ([layout.identifier isEqualToString:@"loginviewTop"])
         {
@@ -67,9 +68,9 @@
                 layout.constant=40;
             if (iPhone5)
                 layout.constant=35;
-          
+            
         }
-
+        
     }
     
     layoutlist =logintopimgview.constraints;
@@ -82,7 +83,7 @@
                 layout.constant=200;
             if (iPhone5)
                 layout.constant=190;
-          
+            
         }
         
     }
@@ -90,6 +91,14 @@
     [self InitLoginView];
     [self LoadUserInfo];
     [self UpdateUI];
+    
+    //判断是否自动登录
+    if (IschkAutoLogin)
+    {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            NSLog(@"自动登陆");
+        });
+    }
 }
 #pragma mark -
 
@@ -128,13 +137,14 @@
     }
     else
     {
+        
         IschkRemember = [userinfo integerForKey:@"rememberpwd"];
         
         NSString *_username =[userinfo stringForKey:@"UserName"] ;
         if (![_username isEqualToString:@""])
         {
             useredit.text=_username;
-          
+            
             if (IschkRemember)
             {
                 pwdedit.text= [userinfo stringForKey:@"UserPwd"];
@@ -146,6 +156,7 @@
         urloutside =[userinfo stringForKey:@"urloutside"];
         inport=[userinfo integerForKey:@"protinside"];
         outport=[userinfo integerForKey:@"protoutside"];
+ 
         
     }
 }
@@ -161,7 +172,7 @@
     if(IschkRemember)
         [rememberpwd setImage:[UIImage imageNamed:@"checkbox_button_selected"] forState:UIControlStateNormal];
     else
-            [rememberpwd setImage:[UIImage imageNamed:@"checkbox_button_normal"] forState:UIControlStateNormal];
+        [rememberpwd setImage:[UIImage imageNamed:@"checkbox_button_normal"] forState:UIControlStateNormal];
     if(IschkAutoLogin)
         [autologin setImage:[UIImage imageNamed:@"checkbox_button_selected"] forState:UIControlStateNormal];
     else
@@ -222,15 +233,15 @@
     [shapeLayer setPosition:self.view.center];
     [shapeLayer setFillColor:[[UIColor clearColor] CGColor]];
     [shapeLayer setStrokeColor:[[UIColor colorWithRed:223/255.0 green:223/255.0 blue:223/255.0 alpha:1.0f] CGColor]];
-     [shapeLayer setLineWidth:1.0f];
+    [shapeLayer setLineWidth:1.0f];
     [shapeLayer setLineJoin:kCALineJoinRound];
     
     [NSArray arrayWithObjects:[NSNumber numberWithInt:3],
      [NSNumber numberWithInt:1],nil];
-   CGMutablePathRef path = CGPathCreateMutable();
+    CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, NULL, 15, loginview.bounds.size.height/2 );
     CGPathAddLineToPoint(path, NULL, loginview.frame.size.width -15,loginview.bounds.size.height/2 );
-    [shapeLayer setPath:path]; 
+    [shapeLayer setPath:path];
     CGPathRelease(path);
     [loginview.layer addSublayer:shapeLayer];
 }
@@ -270,9 +281,9 @@
  函数名：updateServerConfigInfo
  描述:更新服务配置界面设置的信息
  参数：nstring in_url 内网url
-          nstring in_port 内网端口
-          nstring out_url 外网url
-          nstring out_port 外网端口
+ nstring in_port 内网端口
+ nstring out_url 外网url
+ nstring out_port 外网端口
  返回：
  **********************/
 -(void)updateServerConfigInfo:(NSString *)in_url in_port:(NSString *)in_port out_url:(NSString *)out_url out_port:(NSString *)out_port
@@ -282,7 +293,7 @@
     [userinfo setInteger:[in_port intValue] forKey:@"protinside"];
     [userinfo setObject:out_url forKey:@"urloutside"];
     [userinfo setInteger:[out_port intValue] forKey:@"protoutside"];
-
+    
     urlinside =in_url;
     urloutside = out_url;
     inport =[in_port intValue];
@@ -304,14 +315,14 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-
-//    if ([segue.identifier isEqualToString:@"showconfig"])
-//    {
-//        ServerConfigViewController *SC = [segue destinationViewController];
-//        SC.LC = self;
-//        
-//        return;
-//    }
+    
+    //    if ([segue.identifier isEqualToString:@"showconfig"])
+    //    {
+    //        ServerConfigViewController *SC = [segue destinationViewController];
+    //        SC.LC = self;
+    //
+    //        return;
+    //    }
 }
 
 
@@ -340,6 +351,11 @@
     [Common DefaultCommon].webUrl=weburl;
     //初始化连接http
     __block HttpClass *httpclass;
+    //显示loadview
+    loadview= [[LoadingView alloc] init];
+    [loadview setImages:[Common initLoadingImages]];
+    [self.view addSubview:loadview];
+    [loadview StartAnimation];
     dispatch_async([Common getThreadQueue], ^{
         httpclass = [[HttpClass alloc] init:[Common HttpString:UserLogin]];
         [httpclass addParamsString:@"userName" values:useredit.text];
@@ -348,28 +364,92 @@
         NSData *data = [httpclass httprequest:[httpclass getDataForArrary]];
         NSString *result = [httpclass getXmlString:data];
         NSLog(@"结果 %@",result);
+        if (!result)
+        {
+            [self CloseLoadingView];
+            [Common NetErrorAlert:@"网络错误，无法登录"];
+            
+            return ;
+        }
+        
+        NSDictionary *resultjson = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
+        if ([[resultjson objectForKey:@"success"] isEqualToString:@"false"])
+        {
+            [self CloseLoadingView];
+            [Common NetErrorAlert:@"登录失败!!"];
+            return ;
+        }
+        
+        //登录成功记录当前登录界面状态信息
+        NSUserDefaults *userinfo = [NSUserDefaults standardUserDefaults];
+        [userinfo setInteger:IschkAutoLogin forKey:@"autologin"];
+        [userinfo setInteger:IschkRemember forKey:@"rememberpwd"];
+        [userinfo setInteger:NetMode forKey:@"netmode"];
+        [userinfo setObject:useredit.text forKey:@"UserName"];
+        if (IschkRemember)
+            [userinfo setObject:pwdedit.text forKey:@"UserPwd"];
+        
+        //登录信息保存
+        NSDictionary *returndata = [resultjson objectForKey:@"data"];
+        [Common DefaultCommon].ClerkID =[returndata objectForKey:@"ClerkID"];
+        [Common DefaultCommon].ClerkStationID =[returndata objectForKey:@"ClerkStationID"];
         
         
         httpclass = [[HttpClass alloc] init:[Common HttpString:GetStation]];
-        [httpclass addParamsString:@"clerkStationID" values:@"1"];
-        [httpclass addParamsString:@"clerkID" values:@"3"];
+        [httpclass addParamsString:@"clerkStationID" values:[Common DefaultCommon].ClerkStationID];
+        [httpclass addParamsString:@"clerkID" values:[Common DefaultCommon].ClerkID];
         [httpclass addParamsString:@"isReturnPicture" values:@"1"];
-         data = [httpclass httprequest:[httpclass getDataForArrary]];
-         result = [httpclass getXmlString:data];
+        data = [httpclass httprequest:[httpclass getDataForArrary]];
+        result = [httpclass getXmlString:data];
         NSLog(@"结果 %@",result);
+        if (!result)
+        {
+            [self CloseLoadingView];
+            [Common NetErrorAlert:@"网络错误，无法登录"];
+            return ;
+        }
+        NSArray *arry = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
+        if (!arry)
+        {
+            [self CloseLoadingView];
+            [Common NetErrorAlert:@"获取局站信息失败!!"];
+            return ;
+        }
+        
+        
+        if (![[Common DefaultCommon] SaveStationinfo:arry])
+        {
+            [self CloseLoadingView];
+            [Common NetErrorAlert:@"获取局站信息失败!!"];
+            return ;
+        }
+        
+        [self CloseLoadingView];
+        dispatch_async([Common getThreadMainQueue], ^{
+           
+            
+            [self performSegueWithIdentifier:@"showmain" sender:nil];
+     
+        });
+        
         
     });
 
     
-//    LoadingView *loadview= [[LoadingView alloc] init];
-//    [loadview setImages:[Common initLoadingImages]];
-//    [self.view addSubview:loadview];
-//    [loadview StartAnimation];
-    
-    
-    
 }
 
+// 关闭load
+-(void)CloseLoadingView
+{
+    dispatch_async([Common getThreadMainQueue], ^{
+        if (loadview){
+            [loadview StopAnimation];
+            [loadview removeFromSuperview];
+            loadview=nil;
+        }
+    });
+
+}
 
 
 /**********************
@@ -389,7 +469,7 @@
     [scv initServerinfo:urlinside in_port:[NSString stringWithFormat:@"%d",inport] out_ip:urloutside out_port:[NSString stringWithFormat:@"%d",outport]];
     [backview addSubview:scv];
     [self.view addSubview:backview];
-
+    
 }
 
 
@@ -402,7 +482,6 @@
 - (IBAction)chkremember:(id)sender {
     IschkRemember = (IschkRemember)?NO:YES;
     [self UpdateUI];
-    
 }
 
 /**********************

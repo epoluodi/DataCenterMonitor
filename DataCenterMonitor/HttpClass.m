@@ -195,7 +195,8 @@
 
 -(NSString *)getXmlString:(NSData *)data
 {
-    
+    if (!data)
+        return nil;
     
     NSXMLParser * parser = [[NSXMLParser alloc] initWithData:data];
     parser.delegate =self;

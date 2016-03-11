@@ -13,7 +13,8 @@
 static Common *_common;
 
 @implementation Common
-
+@synthesize ClerkID,ClerkStationID;
+@synthesize webMainUrl,webUrl;
 /**********************
  函数名：DefaultCommon
  描述:返回Common对象实例
@@ -38,8 +39,10 @@ static Common *_common;
  **********************/
 +(NSString *)HttpString:(NSString *)url port:(int)port
 {
+    [Common DefaultCommon].webMainUrl = [NSString stringWithFormat:@"http://%@:%D/",url,port];
     return [NSString stringWithFormat:@"http://%@:%d/%@",url,port,UrlBody];
 }
+
 
 /**********************
  函数名：HttpString
@@ -82,5 +85,113 @@ static Common *_common;
 {
     return dispatch_get_main_queue();
 }
+
+
+/**********************
+ 函数名：NetErrorAlert
+ 描述:网络错误提示
+ 参数：msg 提示信息
+ 返回：
+ **********************/
++(void)NetErrorAlert:(NSString *)msg
+{
+    dispatch_async([Common getThreadMainQueue], ^{
+        UIAlertView *alert =[[UIAlertView alloc] initWithTitle:@"错误" message:msg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+    });
+}
+
+/**********************
+ 函数名：downloadFile
+ 描述:下载文件
+ 参数：url 下载地址
+ 返回：文件数据 NSDATA
+ **********************/
++(NSData *)downloadFile:(NSString *)url
+{
+    @try {
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+        return data;
+    }
+    @catch (NSException *exception) {
+        return nil;
+    }
+
+  
+}
+
+
+#pragma mark 实例化
+
+
+/**********************
+ 函数名：SaveStationinfo
+ 描述:存当前登录后局站信息
+ 参数：arry 局站信息json
+ 返回：YES 成功  NO 失败
+ **********************/
+-(BOOL)SaveStationinfo:(NSArray *)arry
+{
+    NSString *path = [FileCommon getCacheDirectory];
+    int index=0;
+    stationinfolist = [arry copy];
+    for (NSDictionary *d in stationinfolist) {
+        NSString *url = [NSString stringWithFormat:@"%@%@",webMainUrl,[d objectForKey:@"StationPicturePath"]];
+        NSData *data = [Common downloadFile:url];
+      
+        if (!data)
+            return NO;
+        NSFileManager *fm = [NSFileManager defaultManager];
+        NSString *filename = [NSString stringWithFormat:@"%@_%@_%d.png",[d objectForKey:@"StationID"],[d objectForKey:@"StationName"],index];
+        NSString* _filename = [path stringByAppendingPathComponent:filename];
+        //NSString* new_folder = [doc_path stringByAppendingPathComponent:@"test"];
+        //创建目录
+        //[fm createDirectoryAtPath:new_folder withIntermediateDirectories:YES attributes:nil error:nil];
+        [fm createFileAtPath:_filename contents:data attributes:nil];
+        index++;
+    }
+    
+    return YES;
+    
+}
+
+/**********************
+ 函数名：getStationS
+ 描述:获取局站信息数量
+ 参数：
+ 返回：数量
+ **********************/
+-(int)getStationS
+{
+    return [stationinfolist count];
+}
+
+/**********************
+ 函数名：getStationinfo
+ 描述:获取局站信息
+ 参数：index 当前索引
+ 返回：Stationinfo 结构
+ **********************/
+-(Stationinfo *)getStationinfo:(int)index
+{
+    
+    NSDictionary *d =stationinfolist[index];
+    stationinfo.stationid=[[d objectForKey:@"StationID"] UTF8String];
+    stationinfo.StationName=[[d objectForKey:@"StationName"] UTF8String];
+    stationinfo.StationPicturePath=[[d objectForKey:@"StationPicturePath"] UTF8String];
+    stationinfo.imgpath = [[NSString stringWithFormat:@"%@_%@_%d.png",[d objectForKey:@"StationID"],[d objectForKey:@"StationName"],index] UTF8String];
+    return &stationinfo;
+}
+
+
+
+// 释放Common
+-(void)Uninit
+{
+    [stationinfolist removeAllObjects];
+    stationinfolist=nil;
+    _common = nil;
+}
+#pragma mark -
 
 @end

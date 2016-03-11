@@ -15,19 +15,34 @@
 
 
 #import <Foundation/Foundation.h>
-
+#import <Common/FileCommon.h>
 
 
 typedef enum {
     NETINSIDE,NETOUTSIDE,
 } NetEnum;
 
+struct StationStruct{
+    const char *stationid;
+    const char *StationName;
+    const char *StationPicturePath;
+    const char *imgpath;
+};
+
+typedef struct StationStruct Stationinfo;
 
 @interface Common :NSObject
 {
-    
+    //存当前局站信息字典
+    NSMutableArray *stationinfolist;
+    Stationinfo stationinfo;
 }
 
+
+@property (copy,nonatomic)NSString *ClerkID;//用户ID
+@property (copy,nonatomic)NSString *ClerkStationID;//局站ID
+
+@property (strong,nonatomic)NSString *webMainUrl;
 @property (copy,nonatomic)NSString *webUrl;
 @property (assign)NetEnum NetType;
 
@@ -36,4 +51,12 @@ typedef enum {
 +(NSString *)HttpString:(NSString *)srv;
 +(NSArray *)initLoadingImages;
 +(dispatch_queue_t)getThreadQueue;
++(dispatch_queue_t)getThreadMainQueue;
++(void)NetErrorAlert:(NSString *)msg;
+
+
+
+-(BOOL)SaveStationinfo:(NSArray *)arry;
+-(Stationinfo *)getStationinfo:(int)index;
+-(int)getStationS;
 @end
