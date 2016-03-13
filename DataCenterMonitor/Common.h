@@ -12,10 +12,13 @@
 
 #define UserLogin @"UserLogin"
 #define GetStation @"GetStation"
-
+#define GetEquTypebase @"GetEquTypebase"
+#define GetLastCommTime @"GetLastCommTime"
+#define GetSumOfAlarm @"GetSumOfAlarm"
 
 #import <Foundation/Foundation.h>
 #import <Common/FileCommon.h>
+#import <Common/PublicCommon.h>
 
 
 typedef enum {
@@ -53,7 +56,7 @@ typedef struct StationStruct Stationinfo;
 +(dispatch_queue_t)getThreadQueue;
 +(dispatch_queue_t)getThreadMainQueue;
 +(void)NetErrorAlert:(NSString *)msg;
-
++(int)getphoneX;
 
 
 -(BOOL)SaveStationinfo:(NSArray *)arry;

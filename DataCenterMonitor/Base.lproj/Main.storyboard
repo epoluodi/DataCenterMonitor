@@ -270,64 +270,58 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bRy-ia-akq">
-                                <rect key="frame" x="0.0" y="174" width="320" height="200"/>
+                                <rect key="frame" x="0.0" y="179" width="320" height="181"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="d3s-sW-HEG">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="I5Y-vi-h7w">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kuj-oS-jy7">
-                                <rect key="frame" x="0.0" y="374" width="320" height="62"/>
+                                <rect key="frame" x="0.0" y="360" width="320" height="76"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="总告警 3 条" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KlW-CX-JwB">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="32"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="42"/>
                                         <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="0.39566617398648651" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="cVU-47-gdd"/>
+                                            <constraint firstAttribute="height" constant="42" id="cVU-47-gdd"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8s-hN-0KX">
-                                        <rect key="frame" x="0.0" y="32" width="320" height="30"/>
+                                        <rect key="frame" x="0.0" y="42" width="320" height="34"/>
                                         <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="0.24767736486486486" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="Pcl-iy-K8A"/>
+                                            <constraint firstAttribute="height" constant="34" id="gxt-AZ-i1d"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="告警信息">
                                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="clickAlert:" destination="KRb-DI-KC7" eventType="touchUpInside" id="614-9t-q2x"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="KlW-CX-JwB" firstAttribute="top" secondItem="Kuj-oS-jy7" secondAttribute="top" id="3FA-Ca-nrs"/>
                                     <constraint firstAttribute="trailing" secondItem="KlW-CX-JwB" secondAttribute="trailing" id="6Pg-7p-6vr"/>
-                                    <constraint firstAttribute="height" constant="62" id="Aos-1l-SJt"/>
-                                    <constraint firstAttribute="trailing" secondItem="t8s-hN-0KX" secondAttribute="trailing" id="BO7-D2-bg3"/>
-                                    <constraint firstAttribute="bottom" secondItem="t8s-hN-0KX" secondAttribute="bottom" id="O3h-yI-xgT"/>
+                                    <constraint firstAttribute="height" constant="76" identifier="alertviewheight" id="Aos-1l-SJt"/>
+                                    <constraint firstItem="t8s-hN-0KX" firstAttribute="top" secondItem="KlW-CX-JwB" secondAttribute="bottom" id="JIM-mf-9rR"/>
+                                    <constraint firstItem="t8s-hN-0KX" firstAttribute="leading" secondItem="Kuj-oS-jy7" secondAttribute="leading" id="QKW-VM-Xbn"/>
                                     <constraint firstItem="KlW-CX-JwB" firstAttribute="leading" secondItem="Kuj-oS-jy7" secondAttribute="leading" id="UMu-2K-cOE"/>
-                                    <constraint firstItem="t8s-hN-0KX" firstAttribute="leading" secondItem="Kuj-oS-jy7" secondAttribute="leading" id="e4k-Yc-qVm"/>
+                                    <constraint firstAttribute="trailing" secondItem="t8s-hN-0KX" secondAttribute="trailing" id="o7U-9t-0Se"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2f2-oS-QFa">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="174"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="174" id="PO9-Ha-AoL"/>
+                                    <constraint firstAttribute="height" constant="174" identifier="scrollheight" id="PO9-Ha-AoL"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -344,7 +338,7 @@
                             <constraint firstItem="oW2-ST-7z4" firstAttribute="top" secondItem="GJZ-ut-YmB" secondAttribute="bottom" id="ZjG-ON-zFO"/>
                             <constraint firstAttribute="trailing" secondItem="bRy-ia-akq" secondAttribute="trailing" id="bXq-UB-sAB"/>
                             <constraint firstItem="GJZ-ut-YmB" firstAttribute="leading" secondItem="ezF-Ks-19e" secondAttribute="leading" id="hPm-hz-wd1"/>
-                            <constraint firstItem="bRy-ia-akq" firstAttribute="top" secondItem="2f2-oS-QFa" secondAttribute="bottom" id="ip2-wm-Kyc"/>
+                            <constraint firstItem="bRy-ia-akq" firstAttribute="top" secondItem="2f2-oS-QFa" secondAttribute="bottom" constant="5" id="ip2-wm-Kyc"/>
                             <constraint firstItem="2f2-oS-QFa" firstAttribute="top" secondItem="ezF-Ks-19e" secondAttribute="top" id="l6n-gV-3lF"/>
                             <constraint firstItem="bRy-ia-akq" firstAttribute="leading" secondItem="ezF-Ks-19e" secondAttribute="leading" id="qv2-04-ki1"/>
                             <constraint firstItem="WAT-pr-EeT" firstAttribute="top" secondItem="2f2-oS-QFa" secondAttribute="bottom" constant="15" id="vIL-AA-nfT"/>
@@ -355,7 +349,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="alertinfo" destination="KlW-CX-JwB" id="XD3-Gs-IYL"/>
-                        <outlet property="alertview" destination="GJZ-ut-YmB" id="lE8-bb-5fJ"/>
+                        <outlet property="alertview" destination="Kuj-oS-jy7" id="n1J-vW-4Xl"/>
                         <outlet property="btnalert" destination="t8s-hN-0KX" id="YjQ-kf-MYt"/>
                         <outlet property="btnalertview" destination="ZdT-n2-m4i" id="PeC-zY-IBd"/>
                         <outlet property="btnhome" destination="Gf2-Ni-Hve" id="0IV-ln-BFo"/>

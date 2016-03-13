@@ -39,7 +39,7 @@ static Common *_common;
  **********************/
 +(NSString *)HttpString:(NSString *)url port:(int)port
 {
-    [Common DefaultCommon].webMainUrl = [NSString stringWithFormat:@"http://%@:%D/",url,port];
+    [Common DefaultCommon].webMainUrl = [NSString stringWithFormat:@"http://%@:%d",url,port];
     return [NSString stringWithFormat:@"http://%@:%d/%@",url,port,UrlBody];
 }
 
@@ -120,6 +120,23 @@ static Common *_common;
   
 }
 
+/**********************
+ 函数名：getphoneX
+ 描述:获得iphone逻辑分辨率
+ 参数：
+ 返回：逻辑分辨率 X
+ **********************/
++(int)getphoneX
+{
+    if (iPhone6plus)
+        return 414;
+    if (iPhone6)
+        return 375;
+    if (iPhone5 || iPhone4)
+        return 320;
+    return 320;
+        
+}
 
 #pragma mark 实例化
 

@@ -10,10 +10,19 @@
 #import <Common/PublicCommon.h>
 #import "Common.h"
 
-@interface MainViewController : UIViewController<UIScrollViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
+
+
+@interface MainViewController : UIViewController<UIScrollViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
- 
-   
+    BOOL IsShow;
+    int scrollheight;
+    UIImageView *imgview1;
+    UILabel *serverrefreshtime;
+    NSMutableArray *EquTypebasearry;//大类信息
+    NSArray *NowEquTypeBaseArry;//当前大类
+    int nowPage;//当前页面索引
+    NSLayoutConstraint *alertviewheight;//alertview高度
+    UITableView *table;
 }
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
@@ -26,10 +35,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnmodeview;
 @property (weak, nonatomic) IBOutlet UIButton *btnmoreview;
 @property (weak, nonatomic) IBOutlet UIButton *btnalertview;
-
 @property (weak, nonatomic) IBOutlet UIButton *btnhome;
 
 
+- (IBAction)clickAlert:(id)sender;
 
 
 

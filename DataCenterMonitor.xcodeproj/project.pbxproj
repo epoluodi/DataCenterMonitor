@@ -17,6 +17,8 @@
 		7B47E9691C90661D00CCB3A8 /* progress_8.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B47E9611C90661D00CCB3A8 /* progress_8.png */; };
 		7B8216891C8EEC2E00D371B9 /* HttpClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8216871C8EEC2E00D371B9 /* HttpClass.m */; };
 		7B82168D1C8F15E400D371B9 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B82168C1C8F15E400D371B9 /* MainViewController.m */; };
+		7BD58E891C93CD90001360AE /* girdcell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BD58E881C93CD90001360AE /* girdcell.xib */; };
+		7BD58E8C1C93CE7D001360AE /* GridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD58E8B1C93CE7D001360AE /* GridCell.m */; };
 		B445BCCD1C8EA57700EF4907 /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445BCCC1C8EA57700EF4907 /* Common.framework */; };
 		B445BCCF1C8EA7AD00EF4907 /* Common.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B445BCCC1C8EA57700EF4907 /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B447CF451C8FFE0C004C7FCD /* serverconfigview.xib in Resources */ = {isa = PBXBuildFile; fileRef = B447CF441C8FFE0C004C7FCD /* serverconfigview.xib */; };
@@ -129,6 +131,9 @@
 		7B8216881C8EEC2E00D371B9 /* info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = info.h; sourceTree = "<group>"; };
 		7B82168B1C8F15E400D371B9 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		7B82168C1C8F15E400D371B9 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		7BD58E881C93CD90001360AE /* girdcell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = girdcell.xib; sourceTree = "<group>"; };
+		7BD58E8A1C93CE7D001360AE /* GridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridCell.h; sourceTree = "<group>"; };
+		7BD58E8B1C93CE7D001360AE /* GridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridCell.m; sourceTree = "<group>"; };
 		B445BCCC1C8EA57700EF4907 /* Common.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Common.framework; path = framework/Common.framework; sourceTree = "<group>"; };
 		B447CF441C8FFE0C004C7FCD /* serverconfigview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = serverconfigview.xib; sourceTree = "<group>"; };
 		B447CF471C900465004C7FCD /* ServerConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConfigView.h; sourceTree = "<group>"; };
@@ -271,6 +276,8 @@
 			children = (
 				B447CF471C900465004C7FCD /* ServerConfigView.h */,
 				B447CF481C900465004C7FCD /* ServerConfigView.m */,
+				7BD58E8A1C93CE7D001360AE /* GridCell.h */,
+				7BD58E8B1C93CE7D001360AE /* GridCell.m */,
 			);
 			name = xibClass;
 			sourceTree = "<group>";
@@ -333,6 +340,7 @@
 			isa = PBXGroup;
 			children = (
 				B447CF441C8FFE0C004C7FCD /* serverconfigview.xib */,
+				7BD58E881C93CD90001360AE /* girdcell.xib */,
 			);
 			name = XIB;
 			sourceTree = "<group>";
@@ -572,6 +580,7 @@
 				7B47E9671C90661D00CCB3A8 /* progress_6.png in Resources */,
 				B4C8AB531C8D25D900DBC035 /* subgridviewbg_selected_old.png in Resources */,
 				B4C8AB291C8D25D800DBC035 /* listviewbg_normal.png in Resources */,
+				7BD58E891C93CD90001360AE /* girdcell.xib in Resources */,
 				B4C8AB201C8D25D800DBC035 /* ex_titlemenubutton_normal.png in Resources */,
 				B4C8AB301C8D25D900DBC035 /* longlongnormalbutton_disable.png in Resources */,
 				B4C8AB231C8D25D800DBC035 /* homepagegridviewbg_down.png in Resources */,
@@ -589,6 +598,7 @@
 				B4C8AB631C8D7D7200DBC035 /* Common.m in Sources */,
 				7B82168D1C8F15E400D371B9 /* MainViewController.m in Sources */,
 				7B8216891C8EEC2E00D371B9 /* HttpClass.m in Sources */,
+				7BD58E8C1C93CE7D001360AE /* GridCell.m in Sources */,
 				B4C8AA991C8D22E700DBC035 /* AppDelegate.m in Sources */,
 				B447CF491C900465004C7FCD /* ServerConfigView.m in Sources */,
 				B4C8AA961C8D22E700DBC035 /* main.m in Sources */,
