@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "HttpClass.h"
 #import "GridCell.h"
+#import "alertlisthome.h"
 @interface MainViewController ()
 {
     __block HttpClass *httpclass;
@@ -40,6 +41,7 @@
     [gridview addSubview:serverrefreshtime];
     [self updateLayout];
     [self InitscrollView];
+   
     gridview.backgroundColor=[UIColor clearColor];
     imgview1 = [[UIImageView alloc] init];
     imgview1.image= [UIImage imageNamed:@"closeflag"];
@@ -50,8 +52,10 @@
 
     gridview.delegate=self;
     gridview.dataSource=self;
-    
-    
+    alertlist = [[NSMutableArray alloc] init];
+    startrecordAlert=0;
+    [self initAlertList];
+    [self LoadAlertlist];
     
         // Do any additional setup after loading the view.
 }
@@ -180,6 +184,142 @@
         
     });
 }
+
+/**********************
+ 函数名：LoadAlertlist
+ 描述:获取告警所有信息
+ 参数：
+ 返回：
+ **********************/
+-(void)LoadAlertlist
+{
+    dispatch_async([Common getThreadQueue], ^{
+        httpclass = [[HttpClass alloc] init:[Common HttpString:GetAllListAlarm]];
+        [httpclass addParamsString:@"startRecord" values:[NSString stringWithFormat:@"%d",startrecordAlert]];
+        [httpclass addParamsString:@"sumRecord" values:[NSString stringWithFormat:@"%d",3]];
+        
+        NSData *data = [httpclass httprequest:[httpclass getDataForArrary]];
+        NSString *result = [httpclass getXmlString:data];
+        NSLog(@"结果 %@",result);
+        if (!result)
+        {
+            [self clickAlert:nil];
+            [Common NetErrorAlert:@"网络错误，无法获得告警信息"];
+            return ;
+        }
+        NSArray *resultjson = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
+        if (!resultjson)
+        {
+            [self clickAlert:nil];
+            [Common NetErrorAlert:@"网络错误，无法获得告警信息"];
+            return ;
+        }
+        dispatch_async([Common getThreadMainQueue], ^{
+            [alertlist addObjectsFromArray:resultjson];
+   
+            [table beginUpdates];
+            [table reloadData];
+            [table endUpdates];
+        });
+    });
+}
+
+
+
+#pragma mark table委托
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (alertlist)
+        return [alertlist count];
+    return 0;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 175;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView *v= [[UIView alloc] init];
+//    v.frame=CGRectMake(0, 0, table.frame.size.width, 50);
+//    v.backgroundColor=[UIColor redColor];
+    return v;
+}
+//-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+//{
+//    return 50;
+//}
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    alertlisthome *cell = (alertlisthome*)[tableView dequeueReusableCellWithIdentifier:@"alertlist"];
+    NSDictionary *d = [alertlist objectAtIndex:indexPath.row];
+    cell.website.text=[NSString stringWithFormat:@"网站:%@",[d objectForKey:@"StationName"]];
+    cell.device.text = [NSString stringWithFormat:@"设备:%@",[d objectForKey:@"EquipmentName"]];
+    cell.alertid.text=[NSString stringWithFormat:@"告警编号:%@", [d objectForKey:@"AlarmNo"]];
+    
+//    告警类型:0-普通;-1-前置机不在线告警;-2-前置机所在磁盘容量低
+//    告警;-3-过滤告警
+//    告警级别:0-正常;1-一般告警;2-重要告警;3-紧急告警
+    
+    NSString *str1,*str2;
+    if ([[d objectForKey:@"AlarmType"] isEqualToString:@"0"])
+        str1=@"普通";
+    else if([[d objectForKey:@"AlarmType"] isEqualToString:@"1"])
+        str1 = @"前置机不在线告警";
+    else if([[d objectForKey:@"AlarmType"] isEqualToString:@"2"])
+        str1 = @"前置机所在磁盘容量低告警";
+    else if([[d objectForKey:@"AlarmType"] isEqualToString:@"3"])
+        str1 = @"过滤告警";
+    
+    if ([[d objectForKey:@"AlarmGrade"] isEqualToString:@"0"])
+        str2=@"正常";
+    else if([[d objectForKey:@"AlarmGrade"] isEqualToString:@"1"])
+        str2 = @"一般告警";
+    else if([[d objectForKey:@"AlarmGrade"] isEqualToString:@"2"])
+        str2 = @"重要告警";
+    else if([[d objectForKey:@"AlarmGrade"] isEqualToString:@"3"])
+        str2 = @"紧急告警";
+    
+    
+    cell.alerttype.text = [NSString stringWithFormat:@"类别:%@  级别:%@",str1,str2];
+    cell.temp.text=[NSString stringWithFormat:@"%@:%@",[d objectForKey:@"SignalName"],[d objectForKey:@"Meanings"]];
+    cell.value.text=[NSString stringWithFormat:@"触发值:%@",[d objectForKey:@"TriggerValue"]];
+    
+    if ([[d objectForKey:@"StartTime"] isEqualToString:@"1900/1/1 0:00:00"])
+        str1 =@"未开始";
+    else
+        str1 = [d objectForKey:@"StartTime"];
+    
+    if ([[d objectForKey:@"EndTime"] isEqualToString:@"1900/1/1 0:00:00"])
+        str2 =@"未结束";
+    else
+        str2 = [d objectForKey:@"EndTime"];
+    
+    
+    
+    cell.times.text=[NSString stringWithFormat:@"开始时间:%@ 结束时间:%@",str1,str2];
+    if ([[d objectForKey:@"ConfirmTime"] isEqualToString:@"1900/1/1 0:00:00"])
+        cell.state.text=[NSString stringWithFormat:@"确认时间:%@",@"未确认"];
+    else
+        cell.state.text=[NSString stringWithFormat:@"确认时间:%@",[d objectForKey:@"ConfirmTime"] ];
+    
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"123123123");
+}
+#pragma mark -
 #pragma mark scroll委托
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -247,6 +387,16 @@
 -(void)initAlertList
 {
     
+        table = [[UITableView alloc] init];
+        table.frame= CGRectMake(0, 76, [PublicCommon GetALLScreen].size.width , 76* 4-76);
+        table.backgroundColor = [UIColor clearColor];
+        UINib *nib = [UINib nibWithNibName:@"alertlistathome" bundle:nil];
+        [table registerNib:nib forCellReuseIdentifier:@"alertlist"];
+        table.delegate=self;
+        table.dataSource=self;
+
+    
+
 }
 
 /**********************
@@ -268,9 +418,7 @@
     _scrollview.tag=1983;
     Stationinfo *stationinfo;
     NSString *path = [FileCommon getCacheDirectory];
-
     for (int i = 0; i< stations; i++) {
-        
         stationinfo = [[Common DefaultCommon]getStationinfo:i];
         NSString* _filename = [path stringByAppendingPathComponent:[NSString stringWithCString:stationinfo->imgpath encoding:NSUTF8StringEncoding]];
         NSData *data = [NSData dataWithContentsOfFile:_filename];
@@ -400,12 +548,15 @@
     if (alertviewheight.constant==76){
         alertviewheight.constant=76*4;
         imgview1.image = [UIImage imageNamed:@"openflag"];
+        if ([alertlist count] == 0)
+            [self LoadAlertlist];
+        [alertview addSubview:table];
+        
     }
     else{
-        table.delegate=nil;
-        table.dataSource=nil;
+
         [table removeFromSuperview];
-        table=nil;
+
         alertviewheight.constant=76;
         imgview1.image = [UIImage imageNamed:@"closeflag"];
         

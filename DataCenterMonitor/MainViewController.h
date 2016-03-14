@@ -18,11 +18,13 @@
     int scrollheight;
     UIImageView *imgview1;
     UILabel *serverrefreshtime;
-    NSMutableArray *EquTypebasearry;//大类信息
     NSArray *NowEquTypeBaseArry;//当前大类
     int nowPage;//当前页面索引
     NSLayoutConstraint *alertviewheight;//alertview高度
     UITableView *table;
+    NSMutableArray *alertlist;
+    
+    int startrecordAlert;
 }
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;

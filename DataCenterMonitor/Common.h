@@ -15,6 +15,7 @@
 #define GetEquTypebase @"GetEquTypebase"
 #define GetLastCommTime @"GetLastCommTime"
 #define GetSumOfAlarm @"GetSumOfAlarm"
+#define GetAllListAlarm @"GetAllListAlarm"
 
 #import <Foundation/Foundation.h>
 #import <Common/FileCommon.h>

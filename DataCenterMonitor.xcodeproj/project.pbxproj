@@ -23,6 +23,9 @@
 		B445BCCF1C8EA7AD00EF4907 /* Common.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B445BCCC1C8EA57700EF4907 /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B447CF451C8FFE0C004C7FCD /* serverconfigview.xib in Resources */ = {isa = PBXBuildFile; fileRef = B447CF441C8FFE0C004C7FCD /* serverconfigview.xib */; };
 		B447CF491C900465004C7FCD /* ServerConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = B447CF481C900465004C7FCD /* ServerConfigView.m */; };
+		B4B91BA71C9671C700172D76 /* alertlistathome.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4B91BA61C9671C700172D76 /* alertlistathome.xib */; };
+		B4B91BAA1C9697B300172D76 /* alertlisthome.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B91BA91C9697B300172D76 /* alertlisthome.m */; };
+		B4B91BAC1C96BE5A00172D76 /* moreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4B91BAB1C96BE5A00172D76 /* moreCell.xib */; };
 		B4C8AA961C8D22E700DBC035 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C8AA951C8D22E700DBC035 /* main.m */; };
 		B4C8AA991C8D22E700DBC035 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C8AA981C8D22E700DBC035 /* AppDelegate.m */; };
 		B4C8AA9F1C8D22E700DBC035 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4C8AA9D1C8D22E700DBC035 /* Main.storyboard */; };
@@ -138,6 +141,10 @@
 		B447CF441C8FFE0C004C7FCD /* serverconfigview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = serverconfigview.xib; sourceTree = "<group>"; };
 		B447CF471C900465004C7FCD /* ServerConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConfigView.h; sourceTree = "<group>"; };
 		B447CF481C900465004C7FCD /* ServerConfigView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConfigView.m; sourceTree = "<group>"; };
+		B4B91BA61C9671C700172D76 /* alertlistathome.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = alertlistathome.xib; sourceTree = "<group>"; };
+		B4B91BA81C9697B300172D76 /* alertlisthome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = alertlisthome.h; sourceTree = "<group>"; };
+		B4B91BA91C9697B300172D76 /* alertlisthome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = alertlisthome.m; sourceTree = "<group>"; };
+		B4B91BAB1C96BE5A00172D76 /* moreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = moreCell.xib; sourceTree = "<group>"; };
 		B4C8AA911C8D22E700DBC035 /* DataCenterMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataCenterMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4C8AA951C8D22E700DBC035 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B4C8AA971C8D22E700DBC035 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -278,6 +285,8 @@
 				B447CF481C900465004C7FCD /* ServerConfigView.m */,
 				7BD58E8A1C93CE7D001360AE /* GridCell.h */,
 				7BD58E8B1C93CE7D001360AE /* GridCell.m */,
+				B4B91BA81C9697B300172D76 /* alertlisthome.h */,
+				B4B91BA91C9697B300172D76 /* alertlisthome.m */,
 			);
 			name = xibClass;
 			sourceTree = "<group>";
@@ -341,6 +350,8 @@
 			children = (
 				B447CF441C8FFE0C004C7FCD /* serverconfigview.xib */,
 				7BD58E881C93CD90001360AE /* girdcell.xib */,
+				B4B91BA61C9671C700172D76 /* alertlistathome.xib */,
+				B4B91BAB1C96BE5A00172D76 /* moreCell.xib */,
 			);
 			name = XIB;
 			sourceTree = "<group>";
@@ -532,6 +543,7 @@
 				B4C8AB381C8D25D900DBC035 /* newfailed.png in Resources */,
 				B4C8AB2D1C8D25D800DBC035 /* logintable_bg.png in Resources */,
 				B4C8AB341C8D25D900DBC035 /* longnormalbutton_disable.png in Resources */,
+				B4B91BA71C9671C700172D76 /* alertlistathome.xib in Resources */,
 				B4C8AB3B1C8D25D900DBC035 /* normalbutton_down.png in Resources */,
 				7B47E9691C90661D00CCB3A8 /* progress_8.png in Resources */,
 				7B47E9641C90661D00CCB3A8 /* progress_3.png in Resources */,
@@ -585,6 +597,7 @@
 				B4C8AB301C8D25D900DBC035 /* longlongnormalbutton_disable.png in Resources */,
 				B4C8AB231C8D25D800DBC035 /* homepagegridviewbg_down.png in Resources */,
 				B4C8AB4B1C8D25D900DBC035 /* signalalarm_empty.png in Resources */,
+				B4B91BAC1C96BE5A00172D76 /* moreCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -597,6 +610,7 @@
 			files = (
 				B4C8AB631C8D7D7200DBC035 /* Common.m in Sources */,
 				7B82168D1C8F15E400D371B9 /* MainViewController.m in Sources */,
+				B4B91BAA1C9697B300172D76 /* alertlisthome.m in Sources */,
 				7B8216891C8EEC2E00D371B9 /* HttpClass.m in Sources */,
 				7BD58E8C1C93CE7D001360AE /* GridCell.m in Sources */,
 				B4C8AA991C8D22E700DBC035 /* AppDelegate.m in Sources */,

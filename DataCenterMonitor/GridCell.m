@@ -94,7 +94,7 @@
     [super setHighlighted:highlighted];
     if (highlighted)
     {
-        backview.backgroundColor =[[UIColor blackColor] colorWithAlphaComponent:0.2] ;
+        backview.backgroundColor =[[UIColor grayColor] colorWithAlphaComponent:0.2] ;
     }
     else
     {
