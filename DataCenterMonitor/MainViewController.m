@@ -50,6 +50,10 @@
 
     [gridview registerNib:[UINib nibWithNibName:@"girdcell" bundle:nil] forCellWithReuseIdentifier:@"Collectioncell"];
 
+    NSArray *arryviews= [[NSBundle mainBundle] loadNibNamed:@"moreCell" owner:morecell options:nil];
+    morecell = arryviews[0];
+    morecell.delegate=self;
+    
     gridview.delegate=self;
     gridview.dataSource=self;
     alertlist = [[NSMutableArray alloc] init];
@@ -210,16 +214,16 @@
         NSArray *resultjson = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
         if (!resultjson)
         {
-            [self clickAlert:nil];
-            [Common NetErrorAlert:@"网络错误，无法获得告警信息"];
+        
             return ;
         }
         dispatch_async([Common getThreadMainQueue], ^{
             [alertlist addObjectsFromArray:resultjson];
    
-            [table beginUpdates];
+            [morecell.indview stopAnimating];
+//            [table beginUpdates];
             [table reloadData];
-            [table endUpdates];
+//            [table endUpdates];
         });
     });
 }
@@ -235,24 +239,21 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (alertlist)
-        return [alertlist count];
+        return [alertlist count] +1;
     return 0;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == [alertlist count])
+        return 44;
     return 175;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *v= [[UIView alloc] init];
-//    v.frame=CGRectMake(0, 0, table.frame.size.width, 50);
-//    v.backgroundColor=[UIColor redColor];
     return v;
 }
-//-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-//{
-//    return 50;
-//}
+
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -260,6 +261,11 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    if (indexPath.row == [alertlist count])
+    {
+        return morecell;
+    }
     alertlisthome *cell = (alertlisthome*)[tableView dequeueReusableCellWithIdentifier:@"alertlist"];
     NSDictionary *d = [alertlist objectAtIndex:indexPath.row];
     cell.website.text=[NSString stringWithFormat:@"网站:%@",[d objectForKey:@"StationName"]];
@@ -315,9 +321,11 @@
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)clickMore
 {
-    NSLog(@"123123123");
+    [morecell.indview startAnimating];
+    startrecordAlert +=3;
+    [self LoadAlertlist];
 }
 #pragma mark -
 #pragma mark scroll委托
@@ -548,8 +556,8 @@
     if (alertviewheight.constant==76){
         alertviewheight.constant=76*4;
         imgview1.image = [UIImage imageNamed:@"openflag"];
-        if ([alertlist count] == 0)
-            [self LoadAlertlist];
+//        if ([alertlist count] == 0)
+//            [self LoadAlertlist];
         [alertview addSubview:table];
         
     }

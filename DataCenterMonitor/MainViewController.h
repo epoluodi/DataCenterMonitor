@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <Common/PublicCommon.h>
 #import "Common.h"
+#import "moreCell.h"
 
 
 
-@interface MainViewController : UIViewController<UIScrollViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface MainViewController : UIViewController<UIScrollViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,MoreDelegate>
 {
     BOOL IsShow;
     int scrollheight;
@@ -23,7 +24,7 @@
     NSLayoutConstraint *alertviewheight;//alertview高度
     UITableView *table;
     NSMutableArray *alertlist;
-    
+    moreCell *morecell;
     int startrecordAlert;
 }
 

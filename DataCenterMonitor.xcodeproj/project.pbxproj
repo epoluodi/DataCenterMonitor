@@ -15,10 +15,11 @@
 		7B47E9671C90661D00CCB3A8 /* progress_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B47E95F1C90661D00CCB3A8 /* progress_6.png */; };
 		7B47E9681C90661D00CCB3A8 /* progress_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B47E9601C90661D00CCB3A8 /* progress_7.png */; };
 		7B47E9691C90661D00CCB3A8 /* progress_8.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B47E9611C90661D00CCB3A8 /* progress_8.png */; };
-		7B8216891C8EEC2E00D371B9 /* HttpClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8216871C8EEC2E00D371B9 /* HttpClass.m */; };
 		7B82168D1C8F15E400D371B9 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B82168C1C8F15E400D371B9 /* MainViewController.m */; };
 		7BD58E891C93CD90001360AE /* girdcell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BD58E881C93CD90001360AE /* girdcell.xib */; };
 		7BD58E8C1C93CE7D001360AE /* GridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD58E8B1C93CE7D001360AE /* GridCell.m */; };
+		7BFBC4FE1C96DEF7007B9E2F /* moreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFBC4FD1C96DEF7007B9E2F /* moreCell.m */; };
+		7BFBC5001C96E785007B9E2F /* libHttpClass.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BFBC4FF1C96E785007B9E2F /* libHttpClass.a */; };
 		B445BCCD1C8EA57700EF4907 /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445BCCC1C8EA57700EF4907 /* Common.framework */; };
 		B445BCCF1C8EA7AD00EF4907 /* Common.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B445BCCC1C8EA57700EF4907 /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B447CF451C8FFE0C004C7FCD /* serverconfigview.xib in Resources */ = {isa = PBXBuildFile; fileRef = B447CF441C8FFE0C004C7FCD /* serverconfigview.xib */; };
@@ -130,13 +131,15 @@
 		7B47E9601C90661D00CCB3A8 /* progress_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress_7.png; sourceTree = "<group>"; };
 		7B47E9611C90661D00CCB3A8 /* progress_8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress_8.png; sourceTree = "<group>"; };
 		7B8216861C8EEC2E00D371B9 /* HttpClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpClass.h; sourceTree = "<group>"; };
-		7B8216871C8EEC2E00D371B9 /* HttpClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpClass.m; sourceTree = "<group>"; };
 		7B8216881C8EEC2E00D371B9 /* info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = info.h; sourceTree = "<group>"; };
 		7B82168B1C8F15E400D371B9 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		7B82168C1C8F15E400D371B9 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		7BD58E881C93CD90001360AE /* girdcell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = girdcell.xib; sourceTree = "<group>"; };
 		7BD58E8A1C93CE7D001360AE /* GridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridCell.h; sourceTree = "<group>"; };
 		7BD58E8B1C93CE7D001360AE /* GridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridCell.m; sourceTree = "<group>"; };
+		7BFBC4FC1C96DEF7007B9E2F /* moreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = moreCell.h; sourceTree = "<group>"; };
+		7BFBC4FD1C96DEF7007B9E2F /* moreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = moreCell.m; sourceTree = "<group>"; };
+		7BFBC4FF1C96E785007B9E2F /* libHttpClass.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libHttpClass.a; path = framework/libHttpClass.a; sourceTree = "<group>"; };
 		B445BCCC1C8EA57700EF4907 /* Common.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Common.framework; path = framework/Common.framework; sourceTree = "<group>"; };
 		B447CF441C8FFE0C004C7FCD /* serverconfigview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = serverconfigview.xib; sourceTree = "<group>"; };
 		B447CF471C900465004C7FCD /* ServerConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConfigView.h; sourceTree = "<group>"; };
@@ -236,6 +239,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BFBC5001C96E785007B9E2F /* libHttpClass.a in Frameworks */,
 				B445BCCD1C8EA57700EF4907 /* Common.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,7 +276,6 @@
 			isa = PBXGroup;
 			children = (
 				7B8216861C8EEC2E00D371B9 /* HttpClass.h */,
-				7B8216871C8EEC2E00D371B9 /* HttpClass.m */,
 				7B8216881C8EEC2E00D371B9 /* info.h */,
 			);
 			name = WebService;
@@ -287,6 +290,8 @@
 				7BD58E8B1C93CE7D001360AE /* GridCell.m */,
 				B4B91BA81C9697B300172D76 /* alertlisthome.h */,
 				B4B91BA91C9697B300172D76 /* alertlisthome.m */,
+				7BFBC4FC1C96DEF7007B9E2F /* moreCell.h */,
+				7BFBC4FD1C96DEF7007B9E2F /* moreCell.m */,
 			);
 			name = xibClass;
 			sourceTree = "<group>";
@@ -439,6 +444,7 @@
 		B4C8AAAE1C8D248100DBC035 /* FrameWork */ = {
 			isa = PBXGroup;
 			children = (
+				7BFBC4FF1C96E785007B9E2F /* libHttpClass.a */,
 				B445BCCC1C8EA57700EF4907 /* Common.framework */,
 			);
 			name = FrameWork;
@@ -611,9 +617,9 @@
 				B4C8AB631C8D7D7200DBC035 /* Common.m in Sources */,
 				7B82168D1C8F15E400D371B9 /* MainViewController.m in Sources */,
 				B4B91BAA1C9697B300172D76 /* alertlisthome.m in Sources */,
-				7B8216891C8EEC2E00D371B9 /* HttpClass.m in Sources */,
 				7BD58E8C1C93CE7D001360AE /* GridCell.m in Sources */,
 				B4C8AA991C8D22E700DBC035 /* AppDelegate.m in Sources */,
+				7BFBC4FE1C96DEF7007B9E2F /* moreCell.m in Sources */,
 				B447CF491C900465004C7FCD /* ServerConfigView.m in Sources */,
 				B4C8AA961C8D22E700DBC035 /* main.m in Sources */,
 				B4C8AB5F1C8D2A2900DBC035 /* LoginViewController.m in Sources */,
@@ -735,6 +741,10 @@
 				INFOPLIST_FILE = DataCenterMonitor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DataCenterMonitor/framework",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.pxzdh.DataCenterMonitor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -752,6 +762,10 @@
 				INFOPLIST_FILE = DataCenterMonitor/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DataCenterMonitor/framework",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.pxzdh.DataCenterMonitor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
