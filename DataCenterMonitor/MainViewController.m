@@ -10,6 +10,7 @@
 #import "HttpClass.h"
 #import "GridCell.h"
 #import "alertlisthome.h"
+
 @interface MainViewController ()
 {
     __block HttpClass *httpclass;
@@ -532,16 +533,24 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+        if ([segue.identifier isEqualToString:@"showMoreVIew"])
+        {
+            MoreViewController *vc = (MoreViewController *)[segue destinationViewController];
+            vc.delegate = self;
+            return;
+        }
 }
-*/
 
+#pragma mark MoreViewdelegate
+
+-(void)exitMainView
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma  mark -
 
 /**********************
  函数名：clickAlert
@@ -571,5 +580,15 @@
     }
     [UIView commitAnimations];
     
+}
+
+/**********************
+ 函数名：clickAlert
+ 描述:点击打开告警信息列表
+ 参数：
+ 返回：
+ **********************/
+- (IBAction)clickmore:(id)sender {
+    [self performSegueWithIdentifier:@"showMoreVIew" sender:nil];
 }
 @end

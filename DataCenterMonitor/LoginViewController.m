@@ -124,6 +124,7 @@
         [userinfo setInteger:86 forKey:@"protinside"];
         [userinfo setObject:@"14546223xi.51mypc.cn" forKey:@"urloutside"];
         [userinfo setInteger:86 forKey:@"protoutside"];
+        [userinfo setInteger:1 forKey:@"IsNotification"];
         [userinfo setInteger:1 forKey:@"IsFrist"];
         
         IschkAutoLogin = NO;

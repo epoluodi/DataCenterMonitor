@@ -60,6 +60,7 @@ typedef struct StationStruct Stationinfo;
 +(dispatch_queue_t)getThreadQueue;
 +(dispatch_queue_t)getThreadMainQueue;
 +(void)NetErrorAlert:(NSString *)msg;
++(void)NetOKAlert:(NSString *)msg;
 +(int)getphoneX;
 
 

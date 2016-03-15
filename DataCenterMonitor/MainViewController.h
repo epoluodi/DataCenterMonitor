@@ -10,10 +10,10 @@
 #import <Common/PublicCommon.h>
 #import "Common.h"
 #import "moreCell.h"
+#import "MoreViewController.h"
 
 
-
-@interface MainViewController : UIViewController<UIScrollViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,MoreDelegate>
+@interface MainViewController : UIViewController<UIScrollViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,MoreDelegate,MoreViewdelegate>
 {
     BOOL IsShow;
     int scrollheight;
@@ -42,6 +42,7 @@
 
 
 - (IBAction)clickAlert:(id)sender;
+- (IBAction)clickmore:(id)sender;
 
 
 

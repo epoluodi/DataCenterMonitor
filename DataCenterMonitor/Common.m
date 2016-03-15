@@ -100,6 +100,19 @@ static Common *_common;
         [alert show];
     });
 }
+/**********************
+ 函数名：NetOKAlert
+ 描述:网络OK提示
+ 参数：msg 提示信息
+ 返回：
+ **********************/
++(void)NetOKAlert:(NSString *)msg
+{
+    dispatch_async([Common getThreadMainQueue], ^{
+        UIAlertView *alert =[[UIAlertView alloc] initWithTitle:@"错误" message:msg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+    });
+}
 
 /**********************
  函数名：downloadFile

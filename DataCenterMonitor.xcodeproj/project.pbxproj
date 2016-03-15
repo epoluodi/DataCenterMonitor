@@ -18,6 +18,7 @@
 		7B82168D1C8F15E400D371B9 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B82168C1C8F15E400D371B9 /* MainViewController.m */; };
 		7BD58E891C93CD90001360AE /* girdcell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BD58E881C93CD90001360AE /* girdcell.xib */; };
 		7BD58E8C1C93CE7D001360AE /* GridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD58E8B1C93CE7D001360AE /* GridCell.m */; };
+		7BEC40071C98380500D0CDE2 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEC40061C98380500D0CDE2 /* MoreViewController.m */; };
 		7BFBC4FE1C96DEF7007B9E2F /* moreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFBC4FD1C96DEF7007B9E2F /* moreCell.m */; };
 		7BFBC5001C96E785007B9E2F /* libHttpClass.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BFBC4FF1C96E785007B9E2F /* libHttpClass.a */; };
 		B445BCCD1C8EA57700EF4907 /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445BCCC1C8EA57700EF4907 /* Common.framework */; };
@@ -137,6 +138,8 @@
 		7BD58E881C93CD90001360AE /* girdcell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = girdcell.xib; sourceTree = "<group>"; };
 		7BD58E8A1C93CE7D001360AE /* GridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridCell.h; sourceTree = "<group>"; };
 		7BD58E8B1C93CE7D001360AE /* GridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridCell.m; sourceTree = "<group>"; };
+		7BEC40051C98380500D0CDE2 /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
+		7BEC40061C98380500D0CDE2 /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 		7BFBC4FC1C96DEF7007B9E2F /* moreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = moreCell.h; sourceTree = "<group>"; };
 		7BFBC4FD1C96DEF7007B9E2F /* moreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = moreCell.m; sourceTree = "<group>"; };
 		7BFBC4FF1C96E785007B9E2F /* libHttpClass.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libHttpClass.a; path = framework/libHttpClass.a; sourceTree = "<group>"; };
@@ -346,6 +349,8 @@
 				B4C8AB5E1C8D2A2900DBC035 /* LoginViewController.m */,
 				7B82168B1C8F15E400D371B9 /* MainViewController.h */,
 				7B82168C1C8F15E400D371B9 /* MainViewController.m */,
+				7BEC40051C98380500D0CDE2 /* MoreViewController.h */,
+				7BEC40061C98380500D0CDE2 /* MoreViewController.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -623,6 +628,7 @@
 				B447CF491C900465004C7FCD /* ServerConfigView.m in Sources */,
 				B4C8AA961C8D22E700DBC035 /* main.m in Sources */,
 				B4C8AB5F1C8D2A2900DBC035 /* LoginViewController.m in Sources */,
+				7BEC40071C98380500D0CDE2 /* MoreViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
