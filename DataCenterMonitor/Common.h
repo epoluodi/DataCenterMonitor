@@ -23,9 +23,12 @@
 
 
 typedef enum {
-    NETINSIDE,NETOUTSIDE,
+    NETINSIDE,//内网
+    NETOUTSIDE,//外网
 } NetEnum;
 
+
+//局站信息结构
 struct StationStruct{
     const char *stationid;
     const char *StationName;

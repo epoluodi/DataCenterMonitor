@@ -30,7 +30,7 @@
 }
 
 
-
+//点击更多回调到调用页面
 - (IBAction)clickmore:(id)sender {
     [_delegate clickMore];
 }

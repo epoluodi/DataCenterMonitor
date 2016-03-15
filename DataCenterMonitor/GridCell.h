@@ -10,6 +10,7 @@
 #import <Common/PublicCommon.h>
 #import "Common.h"
 
+//首页大类显示样式
 @interface GridCell : UICollectionViewCell
 {
     

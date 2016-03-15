@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+
+//告警信息列表样式
 @interface alertlisthome : UITableViewCell
 
 
