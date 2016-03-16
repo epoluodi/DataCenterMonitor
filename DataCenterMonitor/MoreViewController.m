@@ -25,6 +25,7 @@
     
     NSUserDefaults *userinfo  = [NSUserDefaults standardUserDefaults];
     isNotification = [userinfo integerForKey:@"IsNotification"];
+    [self LoadUserInfo];
     
     table.backgroundColor=[UIColor clearColor];
     table.delegate=self;
@@ -46,7 +47,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return 5;
+    return 6;
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -81,23 +82,29 @@
             break;
         case 1:
             cell = [[UITableViewCell alloc] init];
+            
+            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+            cell.textLabel.text=@"历史告警";
+            break;
+        case 2:
+            cell = [[UITableViewCell alloc] init];
        
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
             cell.textLabel.text=@"服务器设置";
             break;
-        case 2:
+        case 3:
             cell = [[UITableViewCell alloc] init];
            
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
             cell.textLabel.text=@"视频预览";
             break;
-        case 3:
+        case 4:
             cell = [[UITableViewCell alloc] init];
         
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
             cell.textLabel.text=@"清空本地缓存";
             break;
-        case 4:
+        case 5:
             cell = [[UITableViewCell alloc] init];
             
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
@@ -117,12 +124,28 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSArray* xibs;
     switch (indexPath.row) {
+        case 2:
+            xibs = [[NSBundle mainBundle] loadNibNamed:@"serverconfigview" owner:configview options:nil];
+            configview = xibs[0];
+            configview.VC=self;
+            backview = [[UIView alloc] init];
+            backview.frame=self.view.frame;
+            backview.backgroundColor=[[UIColor blackColor] colorWithAlphaComponent:0.8];
+            configview.frame = CGRectMake(20, [PublicCommon GetALLScreen].size.height/2 - 388/2, [PublicCommon GetALLScreen].size.width -40, 388);
+            [configview initServerinfo:urlinside in_port:[NSString stringWithFormat:@"%d",inport] out_ip:urloutside out_port:[NSString stringWithFormat:@"%d",outport]];
+            [backview addSubview:configview];
+            [self.view addSubview:backview];
+            break;
         case 3:
+            [self performSegueWithIdentifier:@"showcamre" sender:nil];
+            break;
+        case 4:
             [self ClearCacheFile];
             
             break;
-        case 4:
+        case 5:
             
             [self dismissViewControllerAnimated:YES completion:nil];
             [_delegate exitMainView];
@@ -139,6 +162,70 @@
 }
 */
 #pragma mark -
+
+
+
+/**********************
+ 函数名：closeServerConfigView
+ 描述:关闭服务设置界面
+ 参数：
+ 返回：
+ **********************/
+-(void)closeServerConfigView
+{
+    [backview removeFromSuperview];
+    [configview removeFromSuperview];
+    configview.VC=nil;
+    configview=nil;
+}
+
+/**********************
+ 函数名：updateServerConfigInfo
+ 描述:更新服务配置界面设置的信息
+ 参数：nstring in_url 内网url
+ nstring in_port 内网端口
+ nstring out_url 外网url
+ nstring out_port 外网端口
+ 返回：
+ **********************/
+-(void)updateServerConfigInfo:(NSString *)in_url in_port:(NSString *)in_port out_url:(NSString *)out_url out_port:(NSString *)out_port
+{
+    NSUserDefaults *userinfo = [NSUserDefaults standardUserDefaults];
+    [userinfo setObject:in_url forKey:@"urlinside"];
+    [userinfo setInteger:[in_port intValue] forKey:@"protinside"];
+    [userinfo setObject:out_url forKey:@"urloutside"];
+    [userinfo setInteger:[out_port intValue] forKey:@"protoutside"];
+    
+    urlinside =in_url;
+    urloutside = out_url;
+    inport =[in_port intValue];
+    outport =out_port.intValue;
+    
+    NSString *weburl;
+    if ((NetEnum)[userinfo integerForKey:@"netmode"] == NETINSIDE)
+        weburl = [Common HttpString:urlinside port:inport];
+    if ((NetEnum)[userinfo integerForKey:@"netmode"] == NETOUTSIDE)
+        weburl = [Common HttpString:urloutside port:outport];
+    
+    NSLog(@"web url :%@",weburl);
+    [Common DefaultCommon].webUrl=weburl;
+    
+    
+}
+
+
+//读取服务配置信息
+-(void)LoadUserInfo
+{
+    NSUserDefaults *userinfo  = [NSUserDefaults standardUserDefaults];
+
+        urlinside =[userinfo stringForKey:@"urlinside"];
+        urloutside =[userinfo stringForKey:@"urloutside"];
+        inport=[userinfo integerForKey:@"protinside"];
+        outport=[userinfo integerForKey:@"protoutside"];
+
+}
+
 
 //改变通知事件
 -(void)changeIsNotification

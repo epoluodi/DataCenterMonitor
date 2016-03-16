@@ -9,18 +9,23 @@
 #import <UIKit/UIKit.h>
 #import "ServerConfigView.h"
 
+//委托
 @protocol MoreViewdelegate
 
+//退出到首页
 -(void)exitMainView;
 
 @end
 
 
-@interface MoreViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface MoreViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,ServiceConfigdelegate>
 {
     int isNotification;//是否需要通知
     UISwitch *sw;
     ServerConfigView *configview;//配置view
+    UIView *backview;
+    int inport,outport;
+    NSString *urlinside,*urloutside;
 }
 
 

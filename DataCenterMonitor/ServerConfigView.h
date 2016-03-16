@@ -7,24 +7,36 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LoginViewController.h"
 
-@class LoginViewController;
+
+
+
+
+
 
 
 
 //服务器配置view类
+
+
+//配置委托
+@protocol ServiceConfigdelegate
+
+//回调更新
+-(void)updateServerConfigInfo:(NSString *)in_url in_port:(NSString *)in_port out_url:(NSString *)out_url out_port:(NSString *)out_port;
+//关闭配置页面
+-(void)closeServerConfigView;
+
+@end
+
+
 @interface ServerConfigView : UIView
-
-
-
-@property (weak,nonatomic) LoginViewController *loginVC;
+@property (weak,nonatomic) NSObject<ServiceConfigdelegate> *VC;
 @property (weak, nonatomic) IBOutlet UITextField *inip;
 @property (weak, nonatomic) IBOutlet UITextField *inport;
 
 @property (weak, nonatomic) IBOutlet UITextField *outip;
 @property (weak, nonatomic) IBOutlet UITextField *ouport;
-
 
 
 - (IBAction)btnOK:(id)sender;

@@ -151,6 +151,17 @@ static Common *_common;
         
 }
 
+/**********************
+ 函数名：ShowSheet
+ 描述:打开局站信息sheet
+ 参数：delegate 参数协议
+ 返回：
+ **********************/
++(void)ShowStationSheet:(UIViewController<SheetDelegate> *)delegate
+{
+    
+}
+
 #pragma mark 实例化
 
 

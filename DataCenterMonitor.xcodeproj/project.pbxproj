@@ -107,6 +107,7 @@
 		B4C8AB5C1C8D25D900DBC035 /* totalbg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B4C8AB051C8D25D800DBC035 /* totalbg.jpg */; };
 		B4C8AB5F1C8D2A2900DBC035 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C8AB5E1C8D2A2900DBC035 /* LoginViewController.m */; };
 		B4C8AB631C8D7D7200DBC035 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C8AB621C8D7D7200DBC035 /* Common.m */; };
+		B4CB42CE1C9959B100E92E69 /* CamereViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4CB42CD1C9959B100E92E69 /* CamereViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -235,6 +236,8 @@
 		B4C8AB5E1C8D2A2900DBC035 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		B4C8AB611C8D646700DBC035 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		B4C8AB621C8D7D7200DBC035 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
+		B4CB42CC1C9959B100E92E69 /* CamereViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CamereViewController.h; sourceTree = "<group>"; };
+		B4CB42CD1C9959B100E92E69 /* CamereViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CamereViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -351,6 +354,8 @@
 				7B82168C1C8F15E400D371B9 /* MainViewController.m */,
 				7BEC40051C98380500D0CDE2 /* MoreViewController.h */,
 				7BEC40061C98380500D0CDE2 /* MoreViewController.m */,
+				B4CB42CC1C9959B100E92E69 /* CamereViewController.h */,
+				B4CB42CD1C9959B100E92E69 /* CamereViewController.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -619,6 +624,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4CB42CE1C9959B100E92E69 /* CamereViewController.m in Sources */,
 				B4C8AB631C8D7D7200DBC035 /* Common.m in Sources */,
 				7B82168D1C8F15E400D371B9 /* MainViewController.m in Sources */,
 				B4B91BAA1C9697B300172D76 /* alertlisthome.m in Sources */,

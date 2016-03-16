@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Common.h"
-
+#import "ServerConfigView.h"
 //登录界面控制类
-@interface LoginViewController : UIViewController
+@class ServerConfigView;
+@interface LoginViewController : UIViewController<ServiceConfigdelegate>
 {
     UITextField *useredit;
     UITextField *pwdedit;
@@ -47,7 +48,7 @@
 
 
 //view 回调关闭
--(void)closeServerConfigView;
-
--(void)updateServerConfigInfo:(NSString *)in_url in_port:(NSString *)in_port out_url:(NSString *)out_url out_port:(NSString *)out_port;
+//-(void)closeServerConfigView;
+//
+//-(void)updateServerConfigInfo:(NSString *)in_url in_port:(NSString *)in_port out_url:(NSString *)out_url out_port:(NSString *)out_port;
 @end

@@ -38,12 +38,25 @@ struct StationStruct{
 
 typedef struct StationStruct Stationinfo;
 
+
+
+//sheet委托
+@protocol SheetDelegate
+
+//返回sheeti选择的局站信息
+-(Stationinfo *)SheetStationinfo;
+
+@end
+
+
 @interface Common :NSObject
 {
     //存当前局站信息字典
     NSMutableArray *stationinfolist;
     Stationinfo stationinfo;
 }
+
+
 
 
 @property (copy,nonatomic)NSString *ClerkID;//用户ID
@@ -62,7 +75,7 @@ typedef struct StationStruct Stationinfo;
 +(void)NetErrorAlert:(NSString *)msg;
 +(void)NetOKAlert:(NSString *)msg;
 +(int)getphoneX;
-
++(void)ShowStationSheet:(UIViewController<SheetDelegate>*) delegate;
 
 -(BOOL)SaveStationinfo:(NSArray *)arry;
 -(Stationinfo *)getStationinfo:(int)index;

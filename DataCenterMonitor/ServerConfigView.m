@@ -80,8 +80,8 @@
     }
     
     
-    [_loginVC updateServerConfigInfo:inip.text in_port:inport.text out_url:outip.text out_port:ouport.text];
-     [_loginVC closeServerConfigView];
+    [_VC updateServerConfigInfo:inip.text in_port:inport.text out_url:outip.text out_port:ouport.text];
+     [_VC closeServerConfigView];
 }
 
 
@@ -92,7 +92,7 @@
  返回：IBAction 系统对象
  **********************/
 - (IBAction)btnCancel:(id)sender {
-    [_loginVC closeServerConfigView];
+    [_VC closeServerConfigView];
     
 }
 @end

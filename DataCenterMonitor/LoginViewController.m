@@ -9,7 +9,7 @@
 #import "LoginViewController.h"
 #import <Common/PublicCommon.h>
 #import <Common/LoadingView.h>
-#import "ServerConfigView.h"
+
 #import "HttpClass.h"
 
 @class ServerConfigViewController;
@@ -276,6 +276,8 @@
 {
     [backview removeFromSuperview];
     [scv removeFromSuperview];
+    scv.VC=nil;
+    scv=nil;
 }
 
 /**********************
@@ -462,7 +464,7 @@
 - (IBAction)btnsetting:(id)sender {
     NSArray* xibs = [[NSBundle mainBundle] loadNibNamed:@"serverconfigview" owner:scv options:nil];
     scv = xibs[0];
-    scv.loginVC=self;
+    scv.VC=self;
     backview = [[UIView alloc] init];
     backview.frame=self.view.frame;
     backview.backgroundColor=[[UIColor blackColor] colorWithAlphaComponent:0.8];
