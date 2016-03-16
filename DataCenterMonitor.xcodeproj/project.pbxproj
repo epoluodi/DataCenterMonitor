@@ -16,6 +16,7 @@
 		7B47E9681C90661D00CCB3A8 /* progress_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B47E9601C90661D00CCB3A8 /* progress_7.png */; };
 		7B47E9691C90661D00CCB3A8 /* progress_8.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B47E9611C90661D00CCB3A8 /* progress_8.png */; };
 		7B82168D1C8F15E400D371B9 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B82168C1C8F15E400D371B9 /* MainViewController.m */; };
+		7BBB66291C9999AF0095FB4A /* AlertAndSingalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBB66281C9999AF0095FB4A /* AlertAndSingalViewController.m */; };
 		7BD58E891C93CD90001360AE /* girdcell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BD58E881C93CD90001360AE /* girdcell.xib */; };
 		7BD58E8C1C93CE7D001360AE /* GridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD58E8B1C93CE7D001360AE /* GridCell.m */; };
 		7BEC40071C98380500D0CDE2 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEC40061C98380500D0CDE2 /* MoreViewController.m */; };
@@ -136,6 +137,8 @@
 		7B8216881C8EEC2E00D371B9 /* info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = info.h; sourceTree = "<group>"; };
 		7B82168B1C8F15E400D371B9 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		7B82168C1C8F15E400D371B9 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		7BBB66271C9999AF0095FB4A /* AlertAndSingalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertAndSingalViewController.h; sourceTree = "<group>"; };
+		7BBB66281C9999AF0095FB4A /* AlertAndSingalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertAndSingalViewController.m; sourceTree = "<group>"; };
 		7BD58E881C93CD90001360AE /* girdcell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = girdcell.xib; sourceTree = "<group>"; };
 		7BD58E8A1C93CE7D001360AE /* GridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridCell.h; sourceTree = "<group>"; };
 		7BD58E8B1C93CE7D001360AE /* GridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridCell.m; sourceTree = "<group>"; };
@@ -356,6 +359,8 @@
 				7BEC40061C98380500D0CDE2 /* MoreViewController.m */,
 				B4CB42CC1C9959B100E92E69 /* CamereViewController.h */,
 				B4CB42CD1C9959B100E92E69 /* CamereViewController.m */,
+				7BBB66271C9999AF0095FB4A /* AlertAndSingalViewController.h */,
+				7BBB66281C9999AF0095FB4A /* AlertAndSingalViewController.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -633,6 +638,7 @@
 				7BFBC4FE1C96DEF7007B9E2F /* moreCell.m in Sources */,
 				B447CF491C900465004C7FCD /* ServerConfigView.m in Sources */,
 				B4C8AA961C8D22E700DBC035 /* main.m in Sources */,
+				7BBB66291C9999AF0095FB4A /* AlertAndSingalViewController.m in Sources */,
 				B4C8AB5F1C8D2A2900DBC035 /* LoginViewController.m in Sources */,
 				7BEC40071C98380500D0CDE2 /* MoreViewController.m in Sources */,
 			);

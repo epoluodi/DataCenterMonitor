@@ -11,9 +11,16 @@
 #import <UIKit/UIKit.h>
 #import "Common.h"
 #import <Common/PublicCommon.h>
+#import <Common/LoadingView.h>
+#import "HttpClass.h"
 
-@interface CamereViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
+@interface CamereViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,SheetDelegate>
+{
+    LoadingView *loadview;
+    NSString *stationid;
+    NSArray *CameraList;
+}
 
 @property (weak, nonatomic) IBOutlet UIButton *searchar1;
 @property (weak, nonatomic) IBOutlet UITableView *table;

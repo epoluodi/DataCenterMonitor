@@ -18,12 +18,11 @@
     [super viewDidLoad];
     
     table.backgroundColor=[UIColor clearColor];
+    stationid=nil;
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    table.delegate=self;
+    table.dataSource=self;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,58 +33,46 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+
+    if (!CameraList)
+        return 0;
+    return [CameraList count];;
 }
 
-/*
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView *v = [[UIView alloc] init];
+    return v;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell1"];
+    cell.backgroundColor = [UIColor clearColor];
     
-    // Configure the cell...
+    NSDictionary *d = [CameraList objectAtIndex:indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"局站:%@",[d objectForKey:@"StationName"]] ;
+    cell.detailTextLabel.text= [NSString stringWithFormat:@"摄像头:%@",[d objectForKey:@"TitleText"]];
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIView *v =[[UIView alloc] init];
+    v.frame=cell.frame;
+    v.backgroundColor= [[UIColor blackColor] colorWithAlphaComponent:0.1];
+    cell.selectedBackgroundView =v;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 55;
 }
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+#pragma mark -
 
 /*
 #pragma mark - Navigation
@@ -98,14 +85,92 @@
 */
 
 
+#pragma mark sheet 回调
+
+//sheet 选择
+-(void)SheetStationinfo:(Stationinfo *)stationinfo
+{
+    if (stationinfo == NULL)
+    {
+        stationid=nil;
+            [searchar1 setTitle:@"<全部>" forState:UIControlStateNormal];
+    }
+    else
+    {
+    stationid =[NSString stringWithUTF8String:stationinfo->stationid];
+    [searchar1 setTitle:[NSString stringWithUTF8String:stationinfo->StationName] forState:UIControlStateNormal];
+    }
+}
+
+#pragma mark -
+
+
+-(void)loadAllCamera:(NSString *)stationid
+{
+    loadview= [[LoadingView alloc] init];
+    [loadview setImages:[Common initLoadingImages]];
+    [self.view addSubview:loadview];
+    [loadview StartAnimation];
+    
+    __block HttpClass *httpclass;
+    dispatch_async([Common getThreadQueue], ^{
+
+        httpclass = [[HttpClass alloc] init:[Common HttpString:(stationid)?GetCamera:GetAllCamera]];
+        [httpclass addParamsString:@"clerkStationID" values:[Common DefaultCommon].ClerkStationID];
+        [httpclass addParamsString:@"clerkID" values:[Common DefaultCommon].ClerkID];
+        if (stationid)
+            [httpclass addParamsString:@"stationID" values:stationid];
+
+        NSData *data = [httpclass httprequest:[httpclass getDataForArrary]];
+        NSString *result = [httpclass getXmlString:data];
+        NSLog(@"结果 %@",result);
+        if (!result)
+        {
+            dispatch_async([Common getThreadMainQueue], ^{
+                [loadview StopAnimation];
+                [loadview removeFromSuperview];
+                loadview = nil;
+            });
+            [Common NetErrorAlert:@"信息获取失败"];
+            return ;
+        }
+        CameraList = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
+        if (!CameraList)
+        {
+            dispatch_async([Common getThreadMainQueue], ^{
+                [loadview StopAnimation];
+                [loadview removeFromSuperview];
+                loadview = nil;
+                [table reloadData];
+            });
+            [Common NetErrorAlert:@"没哟数据"];
+            return ;
+        }
+        
+        
+        dispatch_async([Common getThreadMainQueue], ^{
+            [loadview StopAnimation];
+            [loadview removeFromSuperview];
+            loadview = nil;
+            [table reloadData];
+        });
+
+        
+    });
+
+}
+
+
 // 点击返回
 - (IBAction)clickreturn:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)clicksearch1:(id)sender {
+    [[Common DefaultCommon] ShowStationSheet:self];
 }
 
 - (IBAction)btnsearch:(id)sender {
+    [self loadAllCamera:stationid];
 }
 @end

@@ -151,19 +151,75 @@ static Common *_common;
         
 }
 
+
+#pragma mark 实例化
+
+
+
 /**********************
  函数名：ShowSheet
  描述:打开局站信息sheet
  参数：delegate 参数协议
  返回：
  **********************/
-+(void)ShowStationSheet:(UIViewController<SheetDelegate> *)delegate
+-(void)ShowStationSheet:(UIViewController<SheetDelegate> *)delegate
 {
+    picktype=1;
+    UIAlertController *alert =[UIAlertController alertControllerWithTitle:@"局站信息" message:@"\n\n\n\n\n\n\n\n\n" preferredStyle:UIAlertControllerStyleActionSheet];
+    //添加pickview
+    
+    pickview =[[UIPickerView alloc] init];
+    pickview.frame = CGRectMake(10, 15, [PublicCommon GetALLScreen].size.width-40, pickview.frame.size.height);
+    pickview.dataSource=self;
+    pickview.delegate=self;
+    pickview.backgroundColor=[UIColor clearColor];
+    [alert.view addSubview:pickview];
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+        if ([pickview selectedRowInComponent:0]==0)
+            [delegate SheetStationinfo:NULL];
+        else{
+            Stationinfo *s = [self getStationinfo:[pickview     selectedRowInComponent:0]-1];
+            [delegate SheetStationinfo:s];
+        }
+        pickview.delegate=nil;
+        pickview.dataSource = nil;
+        pickview = nil;
+        
+        
+    }];
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:action1];
+    [alert addAction:action2];
+    [delegate presentViewController:alert animated:YES completion:nil];
+}
+
+
+#pragma mark pickview delegate
+
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [stationinfolist count] +1;
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    if (row==0)
+        return @"<全部>";
+    Stationinfo *s = [self getStationinfo:row-1];
+    return [NSString stringWithUTF8String:s->StationName];
     
 }
 
-#pragma mark 实例化
 
+
+#pragma mark -
 
 /**********************
  函数名：SaveStationinfo

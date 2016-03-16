@@ -43,6 +43,9 @@
 
 - (IBAction)clickAlert:(id)sender;
 - (IBAction)clickmore:(id)sender;
+- (IBAction)clicksingal:(id)sender;
+- (IBAction)clickalertlist:(id)sender;
+
 
 
 

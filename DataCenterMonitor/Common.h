@@ -16,6 +16,9 @@
 #define GetLastCommTime @"GetLastCommTime"
 #define GetSumOfAlarm @"GetSumOfAlarm"
 #define GetAllListAlarm @"GetAllListAlarm"
+#define GetAllCamera @"GetAllCamera"
+#define GetCamera @"GetCamera"
+
 
 #import <Foundation/Foundation.h>
 #import <Common/FileCommon.h>
@@ -44,16 +47,18 @@ typedef struct StationStruct Stationinfo;
 @protocol SheetDelegate
 
 //返回sheeti选择的局站信息
--(Stationinfo *)SheetStationinfo;
+-(void)SheetStationinfo:(Stationinfo *)stationinfo;
 
 @end
 
 
-@interface Common :NSObject
+@interface Common :NSObject<UIPickerViewDataSource,UIPickerViewDelegate>
 {
     //存当前局站信息字典
     NSMutableArray *stationinfolist;
     Stationinfo stationinfo;
+    __block UIPickerView *pickview;
+    int picktype;
 }
 
 
@@ -75,9 +80,10 @@ typedef struct StationStruct Stationinfo;
 +(void)NetErrorAlert:(NSString *)msg;
 +(void)NetOKAlert:(NSString *)msg;
 +(int)getphoneX;
-+(void)ShowStationSheet:(UIViewController<SheetDelegate>*) delegate;
+
 
 -(BOOL)SaveStationinfo:(NSArray *)arry;
 -(Stationinfo *)getStationinfo:(int)index;
 -(int)getStationS;
+-(void)ShowStationSheet:(UIViewController<SheetDelegate>*) delegate;
 @end

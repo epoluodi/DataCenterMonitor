@@ -591,4 +591,12 @@
 - (IBAction)clickmore:(id)sender {
     [self performSegueWithIdentifier:@"showMoreVIew" sender:nil];
 }
+
+- (IBAction)clicksingal:(id)sender {
+    [self performSegueWithIdentifier:@"showAlertAndSingal" sender:nil];
+}
+
+- (IBAction)clickalertlist:(id)sender {
+        [self performSegueWithIdentifier:@"showAlertAndSingal" sender:nil];
+}
 @end
