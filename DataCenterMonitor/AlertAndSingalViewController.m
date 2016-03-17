@@ -39,6 +39,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+#pragma mark 信号列表刷新
+
+
+
+#pragma mark -
 /*
 #pragma mark - Navigation
 
@@ -51,7 +57,7 @@
 
 #pragma mark sheet 回调
 
-//sheet 选择
+//局站 选择
 -(void)SheetStationinfo:(Stationinfo *)stationinfo
 {
     if (stationinfo == NULL)
@@ -64,6 +70,11 @@
         stationid =[NSString stringWithUTF8String:stationinfo->stationid];
         [btnstationinfo setTitle:[NSString stringWithUTF8String:stationinfo->StationName] forState:UIControlStateNormal];
     }
+    
+    equtypeid=nil;
+    deviceid =nil;
+    [btnEquType setTitle:@"<全部>" forState:UIControlStateNormal];
+    [btndevicetype setTitle:@"<全部>" forState:UIControlStateNormal];
 }
 
 //大类选择
@@ -71,15 +82,33 @@
 {
     if (EquTypeID == NULL)
     {
-        stationid=nil;
+        equtypeid =nil;
         [btnEquType setTitle:@"<全部>" forState:UIControlStateNormal];
     }
     else
     {
+        equtypeid=EquTypeID;
         [btnEquType setTitle:EquName forState:UIControlStateNormal];
     }
+    deviceid =nil;
+    [btndevicetype setTitle:@"<全部>" forState:UIControlStateNormal];
 }
 
+//设备选择
+-(void)SheetEquipmenyinfo:(NSString *)EquipmentID EquipmentName:(NSString *)EquipmentName
+{
+    if (EquipmentID == NULL)
+    {
+        deviceid =nil;
+        [btndevicetype setTitle:@"<全部>" forState:UIControlStateNormal];
+    }
+    else
+    {
+        deviceid=EquipmentID;
+        [btndevicetype setTitle:EquipmentName forState:UIControlStateNormal];
+    }
+
+}
 #pragma mark -
 
 //系统方法
@@ -90,22 +119,33 @@
 
 
 
-
+//返回
 - (IBAction)clickreturn:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+//点击查询
 - (IBAction)clicksearch:(id)sender {
 }
 
+
+//点击局站
 - (IBAction)clickstation:(id)sender {
     [[Common DefaultCommon] ShowStationSheet:self];
 }
 
+
+//点击大类
 - (IBAction)clickequtype:(id)sender {
-    [[Common DefaultCommon] ShowEquTypeSheet:self stationid:nil];
+    [[Common DefaultCommon] ShowEquTypeSheet:self stationid:stationid];
 }
 
+//点击设备
 - (IBAction)clickdevice:(id)sender {
+    
+    if (stationid==nil || equtypeid==nil)
+        return;
+    [[Common DefaultCommon] ShowEquipmentSheet:self stationid:stationid equdtypeid:equtypeid];
 }
 @end

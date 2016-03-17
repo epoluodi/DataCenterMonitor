@@ -264,8 +264,81 @@ static Common *_common;
     [self LoadEquTypeBase:statiodid];
 }
 
-
-
+/**********************
+ 函数名：ShowEquipmentSheet
+ 描述:打开设备信息sheet
+ 参数：delegate 参数协议
+ stationid 局站ID
+ equdtypeid 大类ID
+ 返回：
+ **********************/
+-(void)ShowEquipmentSheet:(UIViewController<SheetDelegate> *)delegate stationid:(NSString *)statiodid equdtypeid:(NSString *)equdtypeid
+{
+    picktype=3;
+    equtypelist =nil;
+    UIAlertController *alert =[UIAlertController alertControllerWithTitle:@"设备信息" message:@"\n\n\n\n\n\n\n\n\n" preferredStyle:UIAlertControllerStyleActionSheet];
+    //添加pickview
+    pickview =[[UIPickerView alloc] init];
+    pickview.frame = CGRectMake(10, 15, [PublicCommon GetALLScreen].size.width-40, pickview.frame.size.height);
+    pickview.dataSource=self;
+    pickview.delegate=self;
+    pickview.backgroundColor=[UIColor clearColor];
+    [alert.view addSubview:pickview];
+    pickview.hidden=YES;
+    
+    
+    indview = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indview.frame = CGRectMake(pickview.frame.size.width /2 -40 +30, pickview.frame.size.height /2 -20 +15, 40, 40);
+    [alert.view addSubview:indview];
+    [indview startAnimating];
+    
+    actionok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        switch (picktype) {
+            case 1:
+                if ([pickview selectedRowInComponent:0]==0)
+                    [delegate SheetStationinfo:NULL];
+                else{
+                    Stationinfo *s = [self getStationinfo:[pickview  selectedRowInComponent:0]-1];
+                    [delegate SheetStationinfo:s];
+                }
+                break;
+            case 2:
+                if ([pickview selectedRowInComponent:0]==0)
+                    [delegate SheetEquTypeinfo:nil EquName:nil];
+                else{
+                    NSDictionary *d = [equtypelist objectAtIndex:[pickview  selectedRowInComponent:0]-1];
+                    [delegate SheetEquTypeinfo:[ d objectForKey:@"EquTypeID"] EquName:[ d objectForKey:@"EquTypeName"]];
+                }
+                
+                
+                break;
+            case 3:
+                if ([pickview selectedRowInComponent:0]==0)
+                    [delegate SheetEquipmenyinfo:nil EquipmentName:nil];
+                else{
+                    NSDictionary *d = [devicelist objectAtIndex:[pickview  selectedRowInComponent:0]-1];
+                    [delegate SheetEquipmenyinfo:[ d objectForKey:@"EquipmentID"] EquipmentName:[ d objectForKey:@"EquipmentName"]];
+                }
+                
+                
+                break;
+        }
+        
+        pickview.delegate=nil;
+        pickview.dataSource = nil;
+        pickview = nil;
+        
+        
+    }];
+    
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    actionok.enabled=NO;
+    [alert addAction:actionok];
+    [alert addAction:action2];
+    [delegate presentViewController:alert animated:YES completion:nil];
+    [self LoadEquipment:statiodid EquTypeid:equdtypeid];
+}
 #pragma mark 读取大类信息和设备信息
 
 /**********************
@@ -323,6 +396,56 @@ static Common *_common;
 }
 
 
+
+/**********************
+ 函数名：LoadEquipment
+ 描述:获取局站下面的大类
+ 参数：当前局站索引
+ 返回：
+ **********************/
+-(void)LoadEquipment:(NSString *)stationid EquTypeid:(NSString *)EquTypeid
+{
+    dispatch_async([Common getThreadQueue], ^{
+        
+        HttpClass *httpclass;
+      
+        httpclass= [[HttpClass alloc] init:[Common HttpString:GetEquipment]];
+        [httpclass addParamsString:@"clerkStationID" values:ClerkStationID];
+        [httpclass addParamsString:@"clerkID" values:ClerkID];
+        [httpclass addParamsString:@"stationID" values:stationid];
+        [httpclass addParamsString:@"typeBaseID" values:EquTypeid];
+        
+        NSData *data = [httpclass httprequest:[httpclass getDataForArrary]];
+        NSString *result = [httpclass getXmlString:data];
+        NSLog(@"结果 %@",result);
+        if (result)
+        {
+            devicelist = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
+            if (!devicelist)
+            {
+                devicelist = [[NSArray alloc] init];
+            }
+        }
+        else
+            devicelist = [[NSArray alloc] init];
+        
+        dispatch_async([Common getThreadMainQueue], ^{
+            [indview stopAnimating];
+            [indview removeFromSuperview];
+            actionok.enabled=YES;
+            pickview.hidden=NO;
+            [pickview reloadAllComponents];
+            indview = nil;
+            return ;
+        });
+        
+        
+    });
+}
+
+
+
+
 #pragma mark -
 
 
@@ -340,6 +463,8 @@ static Common *_common;
             return [stationinfolist count] +1;
         case 2:
             return [equtypelist count] +1;
+        case 3:
+            return [devicelist count] +1;
     }
     return 0;
 }
@@ -354,8 +479,13 @@ static Common *_common;
     }
     if (picktype==2)
     {
-        NSDictionary *d =[equtypelist objectAtIndex:row];
+        NSDictionary *d =[equtypelist objectAtIndex:row-1];
         return [d objectForKey:@"EquTypeName"];
+    }
+    if (picktype==3)
+    {
+        NSDictionary *d =[devicelist objectAtIndex:row-1];
+        return [d objectForKey:@"EquipmentName"];
     }
     return @"";
 }

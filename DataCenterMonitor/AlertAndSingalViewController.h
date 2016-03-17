@@ -15,6 +15,8 @@
 @interface AlertAndSingalViewController : UIViewController<SheetDelegate>
 {
     NSString *stationid;
+    NSString *equtypeid;
+    NSString *deviceid;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *btnstationinfo;

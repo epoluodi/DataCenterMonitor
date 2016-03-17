@@ -14,9 +14,20 @@
 #define GetStation @"GetStation"
 #define GetEquTypebase @"GetEquTypebase"
 #define GetEquTypebaseByUser @"GetEquTypebaseByUser"
+#define GetEquipment @"GetEquipment"
+
+//信号列表
+#define GetListSignalByUser @"GetListSignalByUser"
+
+
+//刷新时间
 #define GetLastCommTime @"GetLastCommTime"
+
+//告警总数
 #define GetSumOfAlarm @"GetSumOfAlarm"
 #define GetAllListAlarm @"GetAllListAlarm"
+
+//视频
 #define GetAllCamera @"GetAllCamera"
 #define GetCamera @"GetCamera"
 
@@ -54,7 +65,7 @@ typedef struct StationStruct Stationinfo;
 @optional
 //返回选择的大类信息
 -(void)SheetEquTypeinfo:(NSString *)EquTypeID EquName:(NSString *)EquName;
-
+-(void)SheetEquipmenyinfo:(NSString *)EquipmentID EquipmentName:(NSString *)EquipmentName;
 
 @end
 
@@ -64,6 +75,7 @@ typedef struct StationStruct Stationinfo;
     //存当前局站信息字典
     NSMutableArray *stationinfolist;
     NSArray *equtypelist;//大类信息暂存
+    NSArray *devicelist;//设备信息
     Stationinfo stationinfo;
     __block UIPickerView *pickview;
     __block UIActivityIndicatorView *indview;
@@ -97,4 +109,5 @@ typedef struct StationStruct Stationinfo;
 -(int)getStationS;
 -(void)ShowStationSheet:(UIViewController<SheetDelegate>*) delegate;
 -(void)ShowEquTypeSheet:(UIViewController<SheetDelegate> *)delegate stationid:(NSString *)statiodid;
+-(void)ShowEquipmentSheet:(UIViewController<SheetDelegate> *)delegate stationid:(NSString *)statiodid equdtypeid:(NSString *)equdtypeid;
 @end
