@@ -13,6 +13,7 @@
 #define UserLogin @"UserLogin"
 #define GetStation @"GetStation"
 #define GetEquTypebase @"GetEquTypebase"
+#define GetEquTypebaseByUser @"GetEquTypebaseByUser"
 #define GetLastCommTime @"GetLastCommTime"
 #define GetSumOfAlarm @"GetSumOfAlarm"
 #define GetAllListAlarm @"GetAllListAlarm"
@@ -49,6 +50,12 @@ typedef struct StationStruct Stationinfo;
 //返回sheeti选择的局站信息
 -(void)SheetStationinfo:(Stationinfo *)stationinfo;
 
+
+@optional
+//返回选择的大类信息
+-(void)SheetEquTypeinfo:(NSString *)EquTypeID EquName:(NSString *)EquName;
+
+
 @end
 
 
@@ -56,9 +63,12 @@ typedef struct StationStruct Stationinfo;
 {
     //存当前局站信息字典
     NSMutableArray *stationinfolist;
+    NSArray *equtypelist;//大类信息暂存
     Stationinfo stationinfo;
     __block UIPickerView *pickview;
+    __block UIActivityIndicatorView *indview;
     int picktype;
+    __block UIAlertAction *actionok;
 }
 
 
@@ -86,4 +96,5 @@ typedef struct StationStruct Stationinfo;
 -(Stationinfo *)getStationinfo:(int)index;
 -(int)getStationS;
 -(void)ShowStationSheet:(UIViewController<SheetDelegate>*) delegate;
+-(void)ShowEquTypeSheet:(UIViewController<SheetDelegate> *)delegate stationid:(NSString *)statiodid;
 @end

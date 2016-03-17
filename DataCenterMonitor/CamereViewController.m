@@ -22,6 +22,8 @@
     
     table.delegate=self;
     table.dataSource=self;
+    
+    [self loadAllCamera:stationid];
 
 }
 
@@ -55,7 +57,7 @@
     
     NSDictionary *d = [CameraList objectAtIndex:indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"局站:%@",[d objectForKey:@"StationName"]] ;
-    cell.detailTextLabel.text= [NSString stringWithFormat:@"摄像头:%@",[d objectForKey:@"TitleText"]];
+    cell.detailTextLabel.text= [NSString stringWithFormat:@"摄像头:%@",[d objectForKey:@"ShowCameraName"]];
     
     return cell;
 }
@@ -172,5 +174,11 @@
 
 - (IBAction)btnsearch:(id)sender {
     [self loadAllCamera:stationid];
+}
+
+//状态栏设定
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 @end

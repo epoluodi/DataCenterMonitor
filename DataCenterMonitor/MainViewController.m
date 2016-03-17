@@ -10,6 +10,7 @@
 #import "HttpClass.h"
 #import "GridCell.h"
 #import "alertlisthome.h"
+#import "AlertAndSingalViewController.h"
 
 @interface MainViewController ()
 {
@@ -535,12 +536,20 @@
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSLog(@"%@",sender);
         if ([segue.identifier isEqualToString:@"showMoreVIew"])
         {
             MoreViewController *vc = (MoreViewController *)[segue destinationViewController];
             vc.delegate = self;
             return;
         }
+    
+    if ([segue.identifier isEqualToString:@"showAlertAndSingal"])
+    {
+        AlertAndSingalViewController *vc = (AlertAndSingalViewController *)[segue destinationViewController];
+        vc.viewtype = [((NSNumber *)sender) intValue];
+        return;
+    }
 }
 
 #pragma mark MoreViewdelegate
@@ -593,10 +602,10 @@
 }
 
 - (IBAction)clicksingal:(id)sender {
-    [self performSegueWithIdentifier:@"showAlertAndSingal" sender:nil];
+    [self performSegueWithIdentifier:@"showAlertAndSingal" sender:@1];
 }
 
 - (IBAction)clickalertlist:(id)sender {
-        [self performSegueWithIdentifier:@"showAlertAndSingal" sender:nil];
+        [self performSegueWithIdentifier:@"showAlertAndSingal" sender:@2];
 }
 @end

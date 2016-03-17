@@ -482,6 +482,9 @@
                                         </constraints>
                                         <state key="normal" backgroundImage="ex_titlebackbutton_normal.png"/>
                                         <state key="highlighted" backgroundImage="ex_titlebackbutton_down.png"/>
+                                        <connections>
+                                            <action selector="clickreturn:" destination="Ymh-G7-pnb" eventType="touchUpInside" id="d4B-kR-6TF"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="更多功能" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXI-zS-WKa">
                                         <rect key="frame" x="8" y="19" width="304" height="21"/>
@@ -501,6 +504,9 @@
                                         <state key="normal" title="查询">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="clicksearch:" destination="Ymh-G7-pnb" eventType="touchUpInside" id="his-sN-AxD"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.094117647060000004" green="0.70588235290000001" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -526,6 +532,9 @@
                                         <state key="normal" title="&lt;全部&gt;" backgroundImage="search_spinner_bg.png">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="clickstation:" destination="Ymh-G7-pnb" eventType="touchUpInside" id="fpk-39-hpg"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="局站:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0C-WA-1pv">
                                         <rect key="frame" x="8" y="12" width="68" height="21"/>
@@ -545,6 +554,9 @@
                                         <state key="normal" title="&lt;全部&gt;" backgroundImage="search_spinner_bg.png">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="clickequtype:" destination="Ymh-G7-pnb" eventType="touchUpInside" id="FmR-KH-SHc"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设备大类:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tOe-r1-vS8">
                                         <rect key="frame" x="8" y="51" width="68" height="21"/>
@@ -564,6 +576,9 @@
                                         <state key="normal" title="&lt;全部&gt;" backgroundImage="search_spinner_bg.png">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="clickdevice:" destination="Ymh-G7-pnb" eventType="touchUpInside" id="afA-Og-abn"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设备:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCP-cZ-iHs">
                                         <rect key="frame" x="8" y="89" width="68" height="21"/>
@@ -576,7 +591,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="eVs-Sq-zcu" secondAttribute="trailing" constant="8" id="HOv-NX-kJV"/>
                                     <constraint firstItem="WCP-cZ-iHs" firstAttribute="top" secondItem="tOe-r1-vS8" secondAttribute="bottom" constant="17" id="I2p-0K-SgM"/>
@@ -620,6 +635,13 @@
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="bartitle" destination="QXI-zS-WKa" id="Gf7-t3-jgJ"/>
+                        <outlet property="btnEquType" destination="4E1-Q6-eE8" id="Uuq-5E-M8c"/>
+                        <outlet property="btndevicetype" destination="eVs-Sq-zcu" id="IPy-H5-B9f"/>
+                        <outlet property="btnstationinfo" destination="B6A-cx-gtt" id="eRO-Qb-W6B"/>
+                        <outlet property="table" destination="Cmb-LN-CqE" id="K1H-fP-nA4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Hi-aE-jgT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
