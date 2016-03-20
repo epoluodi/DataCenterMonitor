@@ -110,7 +110,7 @@
     [backview addSubview:indview];
     [indview startAnimating];
     jpgview = [[UIImageView alloc] init];
-    jpgview.frame = CGRectMake(30, 60, backview.frame.size.width-60, backview.frame.size.height - 120);
+    jpgview.frame = CGRectMake(30, 80, backview.frame.size.width-60, backview.frame.size.height - 160);
     jpgview.contentMode = UIViewContentModeScaleAspectFit;
     IsExit = NO;
     
@@ -151,10 +151,10 @@
             return ;
         }
         
-        NSString *url = [NSString stringWithFormat:@"%@%@",[Common DefaultCommon].webMainUrl,[d objectForKey:@"VideoPicPath"]];
-        if (!IsExit)
+        NSString *url = [NSString stringWithFormat:@"%@%@",[Common DefaultCommon].webMainUrl,[jpgjson objectForKey:@"VideoPicPath"]];
+        if (IsExit)
             return;
-        data = [Common downloadFile:url];
+        data = [Common downloadFile:url ];
         if (!data)
         {
             dispatch_async([Common getThreadMainQueue], ^{
@@ -165,13 +165,20 @@
                 [Common NetErrorAlert:@"没有图片数据"];
             return ;
         }
-        if (!IsExit)
+        if (IsExit)
             return;
-        jpgview.image = [UIImage imageWithData:data];
+        
         dispatch_async([Common getThreadMainQueue], ^{
             [indview stopAnimating];
             [indview removeFromSuperview];
+            jpgview.image = [UIImage imageWithData:data];
+            
+            jpgview.layer.shadowColor = [UIColor blackColor].CGColor;
+            jpgview.layer.shadowOffset = CGSizeMake(4,4);//
+            jpgview.layer.shadowOpacity = 0.8;            jpgview.layer.shadowRadius = 4;
+            
             [backview addSubview:jpgview];
+            
         });
         
         
