@@ -269,6 +269,7 @@
         return morecell;
     }
     alertlisthome *cell = (alertlisthome*)[tableView dequeueReusableCellWithIdentifier:@"alertlist"];
+    cell.btncheck.hidden=YES;
     NSDictionary *d = [alertlist objectAtIndex:indexPath.row];
     cell.website.text=[NSString stringWithFormat:@"网站:%@",[d objectForKey:@"StationName"]];
     cell.device.text = [NSString stringWithFormat:@"设备:%@",[d objectForKey:@"EquipmentName"]];
@@ -556,6 +557,7 @@
 
 -(void)exitMainView
 {
+    [[Common DefaultCommon] Uninit];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

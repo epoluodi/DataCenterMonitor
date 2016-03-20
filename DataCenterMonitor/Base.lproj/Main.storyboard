@@ -450,6 +450,7 @@
                         <outlet property="btnReturn" destination="UgO-ZK-CC9" id="iHg-yd-bXB"/>
                         <outlet property="table" destination="t4E-Kg-lHd" id="uWs-pT-WVn"/>
                         <segue destination="2Ue-pN-jpM" kind="modal" identifier="showcamre" id="VbC-NW-B4i"/>
+                        <segue destination="Ymh-G7-pnb" kind="modal" identifier="showhestoryalertview" id="UNH-NL-Xa6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5FU-RH-swY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -802,4 +803,7 @@
         <image name="search_spinner_bg.png" width="398" height="82"/>
         <image name="totalbg.jpg" width="500" height="685"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="UNH-NL-Xa6"/>
+    </inferredMetricsTieBreakers>
 </document>

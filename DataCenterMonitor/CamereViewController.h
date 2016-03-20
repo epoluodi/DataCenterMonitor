@@ -20,6 +20,13 @@
     LoadingView *loadview;
     NSString *stationid;
     NSArray *CameraList;
+    
+    //显示图片
+    UIView *backview;
+    UIImageView *jpgview;
+    UIButton *btnclose;
+    UIActivityIndicatorView *indview;
+    __block BOOL IsExit;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *searchar1;

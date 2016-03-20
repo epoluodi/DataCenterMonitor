@@ -8,15 +8,25 @@
 
 #import <UIKit/UIKit.h>
 #import "Common.h"
+#import "moreCell.h"
+#import "HttpClass.h"
+#import "alertlisthome.h"
+#define EveryOnceCounts 10;//一次最多加载总数
 
 
-
-
-@interface AlertAndSingalViewController : UIViewController<SheetDelegate>
+@interface AlertAndSingalViewController : UIViewController<SheetDelegate,MoreDelegate,AlertCellDelegate, UITableViewDataSource,UITableViewDelegate>
 {
     NSString *stationid;
     NSString *equtypeid;
     NSString *deviceid;
+    
+    int startrecordAlert;//当前加载位置
+    moreCell *morecell;//更多view
+    NSMutableArray *chkAlertidList;//告警确认队列
+    NSMutableArray *dataarry;//数据加载队列
+    BOOL Isfoot;//是否显示脚
+    
+    UIButton *btnAlertConfim;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *btnstationinfo;

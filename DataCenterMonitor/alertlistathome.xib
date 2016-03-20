@@ -83,6 +83,17 @@
                         <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D6C-hB-h7b">
+                        <rect key="frame" x="268" y="8" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="44" id="Rxo-fC-F8J"/>
+                            <constraint firstAttribute="height" constant="44" id="SaG-TY-4E0"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="checkbox_button_normal.png"/>
+                        <connections>
+                            <action selector="clickchk:" destination="LvE-rn-sb7" eventType="touchUpInside" id="yOy-ll-KVM"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="A81-op-7pq" secondAttribute="trailing" constant="8" id="2wF-5X-CAf"/>
@@ -97,6 +108,8 @@
                     <constraint firstAttribute="trailing" secondItem="gVY-s9-JeP" secondAttribute="trailing" constant="8" id="Hcz-5G-UET"/>
                     <constraint firstAttribute="trailing" secondItem="8Oz-aa-Ebu" secondAttribute="trailing" constant="8" id="I4e-dO-VY3"/>
                     <constraint firstItem="A81-op-7pq" firstAttribute="top" secondItem="8Oz-aa-Ebu" secondAttribute="bottom" constant="3" id="Ksg-ix-OHS"/>
+                    <constraint firstAttribute="trailing" secondItem="D6C-hB-h7b" secondAttribute="trailing" constant="8" id="MqP-FI-cKD"/>
+                    <constraint firstItem="D6C-hB-h7b" firstAttribute="top" secondItem="D7b-VT-Tlc" secondAttribute="top" constant="8" id="QM0-gX-Vxb"/>
                     <constraint firstItem="gVY-s9-JeP" firstAttribute="top" secondItem="A81-op-7pq" secondAttribute="bottom" constant="3" id="QZQ-I7-uPA"/>
                     <constraint firstItem="Kei-Fr-ppl" firstAttribute="top" secondItem="gVY-s9-JeP" secondAttribute="bottom" constant="3" id="Tif-9V-i6f"/>
                     <constraint firstItem="AkR-1z-gQ7" firstAttribute="top" secondItem="D7b-VT-Tlc" secondAttribute="top" constant="8" id="f6u-E2-UAI"/>
@@ -114,6 +127,7 @@
             <connections>
                 <outlet property="alertid" destination="8Oz-aa-Ebu" id="WTZ-PQ-La6"/>
                 <outlet property="alerttype" destination="A81-op-7pq" id="rGF-Rg-3L5"/>
+                <outlet property="btncheck" destination="D6C-hB-h7b" id="J8D-WD-u3w"/>
                 <outlet property="device" destination="fQr-sb-rbU" id="KW5-UD-Apc"/>
                 <outlet property="state" destination="kyG-wj-e4F" id="4cj-sX-Chz"/>
                 <outlet property="temp" destination="gVY-s9-JeP" id="GVI-JF-hMS"/>
@@ -124,4 +138,7 @@
             <point key="canvasLocation" x="475" y="370"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="checkbox_button_normal.png" width="30" height="30"/>
+    </resources>
 </document>

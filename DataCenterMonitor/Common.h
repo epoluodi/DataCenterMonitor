@@ -26,11 +26,20 @@
 //告警总数
 #define GetSumOfAlarm @"GetSumOfAlarm"
 #define GetAllListAlarm @"GetAllListAlarm"
+#define GetListAlarmByStation @"GetListAlarmByStation"
+#define GetListAlarmByStationAndTypebase @"GetListAlarmByStationAndTypebase"
+#define GetListAlarm @"GetListAlarm"
+#define ConfirmAlarm @"ConfirmAlarm"
+
+//告警历史
+#define GetListAlarmDataedByStation @"GetListAlarmDataedByStation"
+#define GetListAlarmDataedByStationAndTypebase @"GetListAlarmDataedByStationAndTypebase"
+#define GetListAlarmDataed @"GetListAlarmDataed"
 
 //视频
 #define GetAllCamera @"GetAllCamera"
 #define GetCamera @"GetCamera"
-
+#define GetVideoPicture @"GetVideoPicture"
 
 #import <Foundation/Foundation.h>
 #import <Common/FileCommon.h>
@@ -81,6 +90,7 @@ typedef struct StationStruct Stationinfo;
     __block UIActivityIndicatorView *indview;
     int picktype;
     __block UIAlertAction *actionok;
+     
 }
 
 
@@ -92,6 +102,8 @@ typedef struct StationStruct Stationinfo;
 @property (strong,nonatomic)NSString *webMainUrl;
 @property (copy,nonatomic)NSString *webUrl;
 @property (assign)NetEnum NetType;
+@property (assign) __block BOOL IsPickALL;
+
 
 +(instancetype)DefaultCommon;
 +(NSString *)HttpString:(NSString *)url port:(int)port;
@@ -102,7 +114,7 @@ typedef struct StationStruct Stationinfo;
 +(void)NetErrorAlert:(NSString *)msg;
 +(void)NetOKAlert:(NSString *)msg;
 +(int)getphoneX;
-
++(NSData *)downloadFile:(NSString *)url;
 
 -(BOOL)SaveStationinfo:(NSArray *)arry;
 -(Stationinfo *)getStationinfo:(int)index;
@@ -110,4 +122,6 @@ typedef struct StationStruct Stationinfo;
 -(void)ShowStationSheet:(UIViewController<SheetDelegate>*) delegate;
 -(void)ShowEquTypeSheet:(UIViewController<SheetDelegate> *)delegate stationid:(NSString *)statiodid;
 -(void)ShowEquipmentSheet:(UIViewController<SheetDelegate> *)delegate stationid:(NSString *)statiodid equdtypeid:(NSString *)equdtypeid;
+
+-(void)Uninit;
 @end

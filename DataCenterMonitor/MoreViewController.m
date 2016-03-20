@@ -11,6 +11,7 @@
 #import <Common/LoadingView.h>
 #import <Common/FileCommon.h>
 #import "Common.h"
+#import "AlertAndSingalViewController.h"
 
 @interface MoreViewController ()
 {
@@ -126,6 +127,11 @@
 {
     NSArray* xibs;
     switch (indexPath.row) {
+        case 1:
+    
+            [self performSegueWithIdentifier:@"showhestoryalertview" sender:@3];
+            
+            break;
         case 2:
             xibs = [[NSBundle mainBundle] loadNibNamed:@"serverconfigview" owner:configview options:nil];
             configview = xibs[0];
@@ -152,16 +158,25 @@
             break;
     }
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
+
 #pragma mark -
+
+
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSLog(@"%@",sender);
+    
+    if ([segue.identifier isEqualToString:@"showhestoryalertview"])
+    {
+        AlertAndSingalViewController *vc = (AlertAndSingalViewController *)[segue destinationViewController];
+        vc.viewtype = [((NSNumber *)sender) intValue];
+        return;
+    }
+}
+
 
 
 

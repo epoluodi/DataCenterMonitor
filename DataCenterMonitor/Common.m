@@ -27,6 +27,7 @@ static Common *_common;
     if (!_common)
     {
         _common = [[Common alloc] init];
+        
     }
     return _common;
 }
@@ -177,11 +178,17 @@ static Common *_common;
     [alert.view addSubview:pickview];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        
-        if ([pickview selectedRowInComponent:0]==0)
-            [delegate SheetStationinfo:NULL];
-        else{
-            Stationinfo *s = [self getStationinfo:[pickview     selectedRowInComponent:0]-1];
+        if (_IsPickALL){
+            if ([pickview selectedRowInComponent:0]==0)
+                [delegate SheetStationinfo:NULL];
+            else{
+                Stationinfo *s = [self getStationinfo:[pickview     selectedRowInComponent:0]-1];
+                [delegate SheetStationinfo:s];
+            }
+        }
+        else
+        {
+            Stationinfo *s = [self getStationinfo:[pickview     selectedRowInComponent:0]];
             [delegate SheetStationinfo:s];
         }
         pickview.delegate=nil;
@@ -225,30 +232,19 @@ static Common *_common;
     indview.frame = CGRectMake(pickview.frame.size.width /2 -40 +30, pickview.frame.size.height /2 -20 +15, 40, 40);
     [alert.view addSubview:indview];
     [indview startAnimating];
-
+    
     actionok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        switch (picktype) {
-            case 1:
-                if ([pickview selectedRowInComponent:0]==0)
-                    [delegate SheetStationinfo:NULL];
-                else{
-                    Stationinfo *s = [self getStationinfo:[pickview  selectedRowInComponent:0]-1];
-                    [delegate SheetStationinfo:s];
-                }
-                break;
-            case 2:
-                if ([pickview selectedRowInComponent:0]==0)
-                    [delegate SheetEquTypeinfo:nil EquName:nil];
-                else{
-                    NSDictionary *d = [equtypelist objectAtIndex:[pickview  selectedRowInComponent:0]-1];
-                    [delegate SheetEquTypeinfo:[ d objectForKey:@"EquTypeID"] EquName:[ d objectForKey:@"EquTypeName"]];
-                }
-                
-                
-                break;
+        
+        
+        if ([pickview selectedRowInComponent:0]==0)
+            [delegate SheetEquTypeinfo:nil EquName:nil];
+        else{
+            NSDictionary *d = [equtypelist objectAtIndex:[pickview  selectedRowInComponent:0]-1];
+            [delegate SheetEquTypeinfo:[ d objectForKey:@"EquTypeID"] EquName:[ d objectForKey:@"EquTypeName"]];
         }
-
+        
+        
         pickview.delegate=nil;
         pickview.dataSource = nil;
         pickview = nil;
@@ -294,36 +290,16 @@ static Common *_common;
     
     actionok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        switch (picktype) {
-            case 1:
-                if ([pickview selectedRowInComponent:0]==0)
-                    [delegate SheetStationinfo:NULL];
-                else{
-                    Stationinfo *s = [self getStationinfo:[pickview  selectedRowInComponent:0]-1];
-                    [delegate SheetStationinfo:s];
-                }
-                break;
-            case 2:
-                if ([pickview selectedRowInComponent:0]==0)
-                    [delegate SheetEquTypeinfo:nil EquName:nil];
-                else{
-                    NSDictionary *d = [equtypelist objectAtIndex:[pickview  selectedRowInComponent:0]-1];
-                    [delegate SheetEquTypeinfo:[ d objectForKey:@"EquTypeID"] EquName:[ d objectForKey:@"EquTypeName"]];
-                }
-                
-                
-                break;
-            case 3:
-                if ([pickview selectedRowInComponent:0]==0)
-                    [delegate SheetEquipmenyinfo:nil EquipmentName:nil];
-                else{
-                    NSDictionary *d = [devicelist objectAtIndex:[pickview  selectedRowInComponent:0]-1];
-                    [delegate SheetEquipmenyinfo:[ d objectForKey:@"EquipmentID"] EquipmentName:[ d objectForKey:@"EquipmentName"]];
-                }
-                
-                
-                break;
+        
+        if ([pickview selectedRowInComponent:0]==0)
+            [delegate SheetEquipmenyinfo:nil EquipmentName:nil];
+        else{
+            NSDictionary *d = [devicelist objectAtIndex:[pickview  selectedRowInComponent:0]-1];
+            [delegate SheetEquipmenyinfo:[ d objectForKey:@"EquipmentID"] EquipmentName:[ d objectForKey:@"EquipmentName"]];
         }
+        
+        
+        
         
         pickview.delegate=nil;
         pickview.dataSource = nil;
@@ -350,7 +326,7 @@ static Common *_common;
 -(void)LoadEquTypeBase:(NSString *)stationid
 {
     dispatch_async([Common getThreadQueue], ^{
-       
+        
         HttpClass *httpclass;
         if (stationid)
         {
@@ -380,7 +356,7 @@ static Common *_common;
         }
         else
             equtypelist = [[NSArray alloc] init];
-
+        
         dispatch_async([Common getThreadMainQueue], ^{
             [indview stopAnimating];
             [indview removeFromSuperview];
@@ -390,7 +366,7 @@ static Common *_common;
             indview = nil;
             return ;
         });
-
+        
         
     });
 }
@@ -408,7 +384,7 @@ static Common *_common;
     dispatch_async([Common getThreadQueue], ^{
         
         HttpClass *httpclass;
-      
+        
         httpclass= [[HttpClass alloc] init:[Common HttpString:GetEquipment]];
         [httpclass addParamsString:@"clerkStationID" values:ClerkStationID];
         [httpclass addParamsString:@"clerkID" values:ClerkID];
@@ -460,31 +436,42 @@ static Common *_common;
 {
     switch (picktype) {
         case 1:
-            return [stationinfolist count] +1;
+            if (_IsPickALL)
+                return [stationinfolist count] +1;
+            else
+                return [stationinfolist count];
         case 2:
-            return [equtypelist count] +1;
+            if (_IsPickALL)
+                return [equtypelist count] +1;
+            else
+                return [equtypelist count] ;
         case 3:
-            return [devicelist count] +1;
+            if (_IsPickALL)
+                return [devicelist count] +1;
+            else
+                return [devicelist count] ;
     }
     return 0;
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    if (row==0)
-        return @"<全部>";
+    if (_IsPickALL){
+        if (row==0)
+            return @"<全部>";
+    }
     if (picktype ==1){
-        Stationinfo *s = [self getStationinfo:row-1];
+        Stationinfo *s = [self getStationinfo:(_IsPickALL)?row-1:row];
         return [NSString stringWithUTF8String:s->StationName];
     }
     if (picktype==2)
     {
-        NSDictionary *d =[equtypelist objectAtIndex:row-1];
+        NSDictionary *d =[equtypelist objectAtIndex:(_IsPickALL)?row-1:row];
         return [d objectForKey:@"EquTypeName"];
     }
     if (picktype==3)
     {
-        NSDictionary *d =[devicelist objectAtIndex:row-1];
+        NSDictionary *d =[devicelist objectAtIndex:(_IsPickALL)?row-1:row];
         return [d objectForKey:@"EquipmentName"];
     }
     return @"";
@@ -560,6 +547,10 @@ static Common *_common;
 {
     [stationinfolist removeAllObjects];
     stationinfolist=nil;
+    equtypelist=nil;
+    devicelist=nil;
+    pickview =nil;
+    indview=nil;
     _common = nil;
 }
 #pragma mark -
