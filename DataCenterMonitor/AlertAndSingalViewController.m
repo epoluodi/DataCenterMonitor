@@ -770,6 +770,12 @@
         case 3:
             if (stationid && !equtypeid && !deviceid)
                 [self loadHestoryAlertBystationid];
+            if (stationid && equtypeid && !deviceid)
+                [self loadAlertBystationidAndEqutypeid];
+            if (stationid && equtypeid && deviceid)
+                [self loadAlertByALL];
+            
+
             break;
     }
     

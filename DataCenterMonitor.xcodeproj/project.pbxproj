@@ -16,6 +16,9 @@
 		7B47E9681C90661D00CCB3A8 /* progress_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B47E9601C90661D00CCB3A8 /* progress_7.png */; };
 		7B47E9691C90661D00CCB3A8 /* progress_8.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B47E9611C90661D00CCB3A8 /* progress_8.png */; };
 		7B82168D1C8F15E400D371B9 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B82168C1C8F15E400D371B9 /* MainViewController.m */; };
+		7B82F02E1CA0466A000A7E3D /* signalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B82F02D1CA0466A000A7E3D /* signalCell.m */; };
+		7B82F0301CA046D6000A7E3D /* signalcelllist.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B82F02F1CA046D6000A7E3D /* signalcelllist.xib */; };
+		7B82F0331CA049D3000A7E3D /* signalCelllist.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B82F0321CA049D3000A7E3D /* signalCelllist.m */; };
 		7B8E2F211C9C34B8007E90C4 /* signalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B8E2F201C9C34B8007E90C4 /* signalCell.xib */; };
 		7B8E2F231C9D53BA007E90C4 /* button-close.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B8E2F221C9D53BA007E90C4 /* button-close.png */; };
 		7BBB66291C9999AF0095FB4A /* AlertAndSingalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBB66281C9999AF0095FB4A /* AlertAndSingalViewController.m */; };
@@ -139,6 +142,11 @@
 		7B8216881C8EEC2E00D371B9 /* info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = info.h; sourceTree = "<group>"; };
 		7B82168B1C8F15E400D371B9 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		7B82168C1C8F15E400D371B9 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		7B82F02C1CA0466A000A7E3D /* signalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = signalCell.h; sourceTree = "<group>"; };
+		7B82F02D1CA0466A000A7E3D /* signalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = signalCell.m; sourceTree = "<group>"; };
+		7B82F02F1CA046D6000A7E3D /* signalcelllist.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = signalcelllist.xib; sourceTree = "<group>"; };
+		7B82F0311CA049D3000A7E3D /* signalCelllist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = signalCelllist.h; sourceTree = "<group>"; };
+		7B82F0321CA049D3000A7E3D /* signalCelllist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = signalCelllist.m; sourceTree = "<group>"; };
 		7B8E2F201C9C34B8007E90C4 /* signalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = signalCell.xib; sourceTree = "<group>"; };
 		7B8E2F221C9D53BA007E90C4 /* button-close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-close.png"; sourceTree = "<group>"; };
 		7BBB66271C9999AF0095FB4A /* AlertAndSingalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertAndSingalViewController.h; sourceTree = "<group>"; };
@@ -305,6 +313,10 @@
 				B4B91BA91C9697B300172D76 /* alertlisthome.m */,
 				7BFBC4FC1C96DEF7007B9E2F /* moreCell.h */,
 				7BFBC4FD1C96DEF7007B9E2F /* moreCell.m */,
+				7B82F02C1CA0466A000A7E3D /* signalCell.h */,
+				7B82F02D1CA0466A000A7E3D /* signalCell.m */,
+				7B82F0311CA049D3000A7E3D /* signalCelllist.h */,
+				7B82F0321CA049D3000A7E3D /* signalCelllist.m */,
 			);
 			name = xibClass;
 			sourceTree = "<group>";
@@ -377,6 +389,7 @@
 				B4B91BA61C9671C700172D76 /* alertlistathome.xib */,
 				B4B91BAB1C96BE5A00172D76 /* moreCell.xib */,
 				7B8E2F201C9C34B8007E90C4 /* signalCell.xib */,
+				7B82F02F1CA046D6000A7E3D /* signalcelllist.xib */,
 			);
 			name = XIB;
 			sourceTree = "<group>";
@@ -567,6 +580,7 @@
 				B4C8AB171C8D25D800DBC035 /* equipmenttype_empty.png in Resources */,
 				B4C8AB3F1C8D25D900DBC035 /* openflag.png in Resources */,
 				B4C8AB0D1C8D25D800DBC035 /* buttonleft_normal.png in Resources */,
+				7B82F0301CA046D6000A7E3D /* signalcelllist.xib in Resources */,
 				7B8E2F211C9C34B8007E90C4 /* signalCell.xib in Resources */,
 				B4C8AB381C8D25D900DBC035 /* newfailed.png in Resources */,
 				B4C8AB2D1C8D25D800DBC035 /* logintable_bg.png in Resources */,
@@ -639,12 +653,14 @@
 			files = (
 				B4CB42CE1C9959B100E92E69 /* CamereViewController.m in Sources */,
 				B4C8AB631C8D7D7200DBC035 /* Common.m in Sources */,
+				7B82F02E1CA0466A000A7E3D /* signalCell.m in Sources */,
 				7B82168D1C8F15E400D371B9 /* MainViewController.m in Sources */,
 				B4B91BAA1C9697B300172D76 /* alertlisthome.m in Sources */,
 				7BD58E8C1C93CE7D001360AE /* GridCell.m in Sources */,
 				B4C8AA991C8D22E700DBC035 /* AppDelegate.m in Sources */,
 				7BFBC4FE1C96DEF7007B9E2F /* moreCell.m in Sources */,
 				B447CF491C900465004C7FCD /* ServerConfigView.m in Sources */,
+				7B82F0331CA049D3000A7E3D /* signalCelllist.m in Sources */,
 				B4C8AA961C8D22E700DBC035 /* main.m in Sources */,
 				7BBB66291C9999AF0095FB4A /* AlertAndSingalViewController.m in Sources */,
 				B4C8AB5F1C8D2A2900DBC035 /* LoginViewController.m in Sources */,
