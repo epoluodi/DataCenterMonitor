@@ -11,6 +11,7 @@
 #import "moreCell.h"
 #import "HttpClass.h"
 #import "alertlisthome.h"
+#import "signalCelllist.h"
 #define EveryOnceCounts 10;//一次最多加载总数
 
 

@@ -33,6 +33,9 @@
         case 1:
             bartitle.text=@"信号列表";
             [Common DefaultCommon].IsPickALL = YES;
+            nib = [UINib nibWithNibName:@"signalcelllist" bundle:nil];
+            [table registerNib:nib forCellReuseIdentifier:@"cell"];
+
             break;
         case 2:
             bartitle.text=@"告警列表";
@@ -89,6 +92,245 @@
 }
 
 #pragma mark 信号列表刷新
+
+/**********************
+ 函数名：loadSignalList
+ 描述:加载信号列表信息
+ 参数：
+ 返回：
+ **********************/
+-(void)loadSignalList
+{
+    
+    
+    
+    dispatch_async([Common getThreadQueue], ^{
+        
+        HttpClass *httpclass = [[HttpClass alloc] init:[Common HttpString:GetListSignalAndControlByUser]];
+        [httpclass addParamsString:@"clerkStationID" values:[Common DefaultCommon].ClerkStationID];
+        [httpclass addParamsString:@"clerkID" values:[Common DefaultCommon].ClerkID];
+        [httpclass addParamsString:@"startRecord" values:[NSString stringWithFormat:@"%d",startrecordAlert]];
+        int sum=EveryOnceCounts;
+        [httpclass addParamsString:@"sumRecord" values:[NSString stringWithFormat:@"%d",sum]];
+        
+        NSData *data = [httpclass httprequest:[httpclass getDataForArrary]];
+        NSString *result = [httpclass getXmlString:data];
+        NSLog(@"结果 %@",result);
+        if (!result)
+        {
+            dispatch_async([Common getThreadMainQueue], ^{
+                [morecell.indview stopAnimating];
+                if (loadview){
+                    [loadview StopAnimation];
+                    [loadview removeFromSuperview];
+                    loadview = nil;
+                }
+            });
+            [Common NetErrorAlert:@"信息获取失败"];
+            return ;
+        }
+        NSArray * arry = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
+        if (!arry)
+            [Common NetErrorAlert:@"没有数据"];
+        else
+            [dataarry addObjectsFromArray:arry];
+        
+        dispatch_async([Common getThreadMainQueue], ^{
+            [morecell.indview stopAnimating];
+            if (loadview){
+                [loadview StopAnimation];
+                [loadview removeFromSuperview];
+                loadview = nil;
+            }
+            [table reloadData];
+        });
+        
+        
+    });
+    
+}
+
+
+
+/**********************
+ 函数名：loadSignalListbystationid
+ 描述:根据局站加载信号列表信息
+ 参数：
+ 返回：
+ **********************/
+-(void)loadSignalListbystationid
+{
+    
+    
+    
+    dispatch_async([Common getThreadQueue], ^{
+        
+        HttpClass *httpclass = [[HttpClass alloc] init:[Common HttpString:GetListSignalAndControlByStation]];
+        [httpclass addParamsString:@"clerkStationID" values:[Common DefaultCommon].ClerkStationID];
+        [httpclass addParamsString:@"clerkID" values:[Common DefaultCommon].ClerkID];
+        [httpclass addParamsString:@"stationID" values:stationid];
+        [httpclass addParamsString:@"startRecord" values:[NSString stringWithFormat:@"%d",startrecordAlert]];
+        int sum=EveryOnceCounts;
+        [httpclass addParamsString:@"sumRecord" values:[NSString stringWithFormat:@"%d",sum]];
+        
+        NSData *data = [httpclass httprequest:[httpclass getDataForArrary]];
+        NSString *result = [httpclass getXmlString:data];
+        NSLog(@"结果 %@",result);
+        if (!result)
+        {
+            dispatch_async([Common getThreadMainQueue], ^{
+                [morecell.indview stopAnimating];
+                if (loadview){
+                    [loadview StopAnimation];
+                    [loadview removeFromSuperview];
+                    loadview = nil;
+                }
+            });
+            [Common NetErrorAlert:@"信息获取失败"];
+            return ;
+        }
+        NSArray * arry = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
+        if (!arry)
+            [Common NetErrorAlert:@"没有数据"];
+        else
+            [dataarry addObjectsFromArray:arry];
+        
+        dispatch_async([Common getThreadMainQueue], ^{
+            [morecell.indview stopAnimating];
+            if (loadview){
+                [loadview StopAnimation];
+                [loadview removeFromSuperview];
+                loadview = nil;
+            }
+            [table reloadData];
+        });
+        
+        
+    });
+    
+}
+
+
+
+/**********************
+ 函数名：loadSignalListbystationidandequtypeid
+ 描述:根据局站和大类加载信号列表信息
+ 参数：
+ 返回：
+ **********************/
+-(void)loadSignalListbystationidandequtypeid
+{
+    
+    
+    
+    dispatch_async([Common getThreadQueue], ^{
+        
+        HttpClass *httpclass = [[HttpClass alloc] init:[Common HttpString:GetListSignalAndControlByStationAndTypebase]];
+        [httpclass addParamsString:@"clerkStationID" values:[Common DefaultCommon].ClerkStationID];
+        [httpclass addParamsString:@"clerkID" values:[Common DefaultCommon].ClerkID];
+        [httpclass addParamsString:@"stationID" values:stationid];
+        [httpclass addParamsString:@"typeBaseID" values:equtypeid];
+        [httpclass addParamsString:@"startRecord" values:[NSString stringWithFormat:@"%d",startrecordAlert]];
+        int sum=EveryOnceCounts;
+        [httpclass addParamsString:@"sumRecord" values:[NSString stringWithFormat:@"%d",sum]];
+        
+        NSData *data = [httpclass httprequest:[httpclass getDataForArrary]];
+        NSString *result = [httpclass getXmlString:data];
+        NSLog(@"结果 %@",result);
+        if (!result)
+        {
+            dispatch_async([Common getThreadMainQueue], ^{
+                [morecell.indview stopAnimating];
+                if (loadview){
+                    [loadview StopAnimation];
+                    [loadview removeFromSuperview];
+                    loadview = nil;
+                }
+            });
+            [Common NetErrorAlert:@"信息获取失败"];
+            return ;
+        }
+        NSArray * arry = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
+        if (!arry)
+            [Common NetErrorAlert:@"没有数据"];
+        else
+            [dataarry addObjectsFromArray:arry];
+        
+        dispatch_async([Common getThreadMainQueue], ^{
+            [morecell.indview stopAnimating];
+            if (loadview){
+                [loadview StopAnimation];
+                [loadview removeFromSuperview];
+                loadview = nil;
+            }
+            [table reloadData];
+        });
+        
+        
+    });
+    
+}
+
+
+/**********************
+ 函数名：loadSignalListall
+ 描述:根据局站和大类和设备加载信号列表信息
+ 参数：
+ 返回：
+ **********************/
+-(void)loadSignalListall
+{
+    
+    
+    
+    dispatch_async([Common getThreadQueue], ^{
+        
+        HttpClass *httpclass = [[HttpClass alloc] init:[Common HttpString:GetListSignalAndControlByStationAndTypebase]];
+        [httpclass addParamsString:@"clerkStationID" values:[Common DefaultCommon].ClerkStationID];
+        [httpclass addParamsString:@"clerkID" values:[Common DefaultCommon].ClerkID];
+        [httpclass addParamsString:@"stationID" values:stationid];
+        [httpclass addParamsString:@"typeBaseID" values:equtypeid];
+        [httpclass addParamsString:@"equipmentID" values:deviceid];
+        [httpclass addParamsString:@"startRecord" values:[NSString stringWithFormat:@"%d",startrecordAlert]];
+        int sum=EveryOnceCounts;
+        [httpclass addParamsString:@"sumRecord" values:[NSString stringWithFormat:@"%d",sum]];
+        
+        NSData *data = [httpclass httprequest:[httpclass getDataForArrary]];
+        NSString *result = [httpclass getXmlString:data];
+        NSLog(@"结果 %@",result);
+        if (!result)
+        {
+            dispatch_async([Common getThreadMainQueue], ^{
+                [morecell.indview stopAnimating];
+                if (loadview){
+                    [loadview StopAnimation];
+                    [loadview removeFromSuperview];
+                    loadview = nil;
+                }
+            });
+            [Common NetErrorAlert:@"信息获取失败"];
+            return ;
+        }
+        NSArray * arry = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
+        if (!arry)
+            [Common NetErrorAlert:@"没有数据"];
+        else
+            [dataarry addObjectsFromArray:arry];
+        
+        dispatch_async([Common getThreadMainQueue], ^{
+            [morecell.indview stopAnimating];
+            if (loadview){
+                [loadview StopAnimation];
+                [loadview removeFromSuperview];
+                loadview = nil;
+            }
+            [table reloadData];
+        });
+        
+        
+    });
+    
+}
 
 
 
@@ -334,6 +576,122 @@
 }
 
 
+
+/**********************
+ 函数名：loadHestoryAlertBystationidandequtypeid
+ 描述:根据局站和大类加载告警历史信息
+ 参数：
+ 返回：
+ **********************/
+-(void)loadHestoryAlertBystationidandequtypeid
+{
+    
+    
+    
+    dispatch_async([Common getThreadQueue], ^{
+        
+        HttpClass *httpclass = [[HttpClass alloc] init:[Common HttpString:GetListAlarmDataedByStationAndTypebase]];
+        [httpclass addParamsString:@"stationID" values:stationid];
+        [httpclass addParamsString:@"typeBaseID" values:equtypeid];
+        [httpclass addParamsString:@"startRecord" values:[NSString stringWithFormat:@"%d",startrecordAlert]];
+        [httpclass addParamsString:@"sumRecord" values:[NSString stringWithFormat:@"%d",10]];
+        
+        NSData *data = [httpclass httprequest:[httpclass getDataForArrary]];
+        NSString *result = [httpclass getXmlString:data];
+        NSLog(@"结果 %@",result);
+        if (!result)
+        {
+            dispatch_async([Common getThreadMainQueue], ^{
+                [morecell.indview stopAnimating];
+                if (loadview){
+                    [loadview StopAnimation];
+                    [loadview removeFromSuperview];
+                    loadview = nil;
+                }
+            });
+            [Common NetErrorAlert:@"信息获取失败"];
+            return ;
+        }
+        NSArray * arry = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
+        if (!arry)
+            [Common NetErrorAlert:@"没有数据"];
+        else
+            [dataarry addObjectsFromArray:arry];
+        
+        dispatch_async([Common getThreadMainQueue], ^{
+            [morecell.indview stopAnimating];
+            if (loadview){
+                [loadview StopAnimation];
+                [loadview removeFromSuperview];
+                loadview = nil;
+            }
+            [table reloadData];
+        });
+        
+        
+    });
+    
+}
+
+
+/**********************
+ 函数名：loadHestoryAlertByALL
+ 描述:根据局站和大类和设备加载告警历史信息
+ 参数：
+ 返回：
+ **********************/
+-(void)loadHestoryAlertByALL
+{
+    
+    
+    
+    dispatch_async([Common getThreadQueue], ^{
+        
+        HttpClass *httpclass = [[HttpClass alloc] init:[Common HttpString:GetListAlarmDataed]];
+        [httpclass addParamsString:@"stationID" values:stationid];
+        [httpclass addParamsString:@"typeBaseID" values:equtypeid];
+        [httpclass addParamsString:@"equipmentID" values:deviceid];
+        [httpclass addParamsString:@"startRecord" values:[NSString stringWithFormat:@"%d",startrecordAlert]];
+        [httpclass addParamsString:@"sumRecord" values:[NSString stringWithFormat:@"%d",10]];
+        
+        NSData *data = [httpclass httprequest:[httpclass getDataForArrary]];
+        NSString *result = [httpclass getXmlString:data];
+        NSLog(@"结果 %@",result);
+        if (!result)
+        {
+            dispatch_async([Common getThreadMainQueue], ^{
+                [morecell.indview stopAnimating];
+                if (loadview){
+                    [loadview StopAnimation];
+                    [loadview removeFromSuperview];
+                    loadview = nil;
+                }
+            });
+            [Common NetErrorAlert:@"信息获取失败"];
+            return ;
+        }
+        NSArray * arry = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
+        if (!arry)
+            [Common NetErrorAlert:@"没有数据"];
+        else
+            [dataarry addObjectsFromArray:arry];
+        
+        dispatch_async([Common getThreadMainQueue], ^{
+            [morecell.indview stopAnimating];
+            if (loadview){
+                [loadview StopAnimation];
+                [loadview removeFromSuperview];
+                loadview = nil;
+            }
+            [table reloadData];
+        });
+        
+        
+    });
+    
+}
+
+
 #pragma mark -
 /*
  #pragma mark - Navigation
@@ -387,6 +745,8 @@
 {
     if (indexPath.row == [dataarry count])
         return 44;
+    if (viewtype ==1)
+        return 93;
     return 175;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -448,7 +808,7 @@
     NSDictionary *d = [dataarry objectAtIndex:indexPath.row];
     switch (viewtype) {
         case 1:
-            
+            return  [self Signallistcell:(signalCelllist *)cell d:d];
             break;
             
         case 2:
@@ -457,6 +817,47 @@
             return  [self halertlistcell:(alertlisthome *)cell d:d];
             
     }
+    
+    return cell;
+}
+
+
+
+/**********************
+ 函数名：Signallistcell
+ 描述:返回信号列表cell
+ 参数：cell 信号列表cell对象
+ d 数据
+ 返回：UITableViewCell 对象
+ **********************/
+-(UITableViewCell *)Signallistcell:(signalCelllist *)cell d:(NSDictionary *)d
+{
+  
+    
+    NSString *state;
+    if ([[d objectForKey:@"SignalStatus"] isEqualToString:@"-1" ])
+        state = @"断开";
+    else if ([[d objectForKey:@"SignalStatus"] isEqualToString:@"0" ])
+        state = @"正常连接";
+    else if ([[d objectForKey:@"SignalStatus"] isEqualToString:@"1" ])
+        state = @"一般告警";
+    else if ([[d objectForKey:@"SignalStatus"] isEqualToString:@"2" ])
+        state = @"重要告警";
+    else if ([[d objectForKey:@"SignalStatus"] isEqualToString:@"3" ])
+        state = @"紧急告警";
+    cell.txtdevicename.text=[NSString stringWithFormat:@"设备:%@",[d objectForKey:@"EquipmentName"]];
+    cell.txtsignalname.text = [NSString stringWithFormat:@"信号:%@",[d objectForKey:@"SignalName"]];
+    cell.txtsigstate.text=state;
+    
+    if ([[d objectForKey:@"Controlable"] isEqualToString:@"1" ])
+        cell.btncontrol.hidden=NO;
+    else
+        cell.btncontrol.hidden=YES;
+    
+    cell.signalunit.text = [d objectForKey:@"UnitName"];
+    cell.signalvalue.text = [d objectForKey:@"SignalValue"];
+    
+
     
     return cell;
 }
@@ -473,7 +874,7 @@
 -(UITableViewCell *)halertlistcell:(alertlisthome *)cell d:(NSDictionary *)d
 {
     cell.btncheck.hidden=YES;
-    cell.website.text=[NSString stringWithFormat:@"网站:%@",[d objectForKey:@"StationName"]];
+    cell.website.text=[NSString stringWithFormat:@"局站:%@",[d objectForKey:@"StationName"]];
     cell.device.text = [NSString stringWithFormat:@"设备:%@",[d objectForKey:@"EquipmentName"]];
     cell.alertid.text=[NSString stringWithFormat:@"告警编号:%@", [d objectForKey:@"AlarmNo"]];
     
@@ -502,7 +903,7 @@
     
     
     cell.alerttype.text = [NSString stringWithFormat:@"类别:%@  级别:%@",str1,str2];
-    cell.temp.text=[NSString stringWithFormat:@"%@:%@",[d objectForKey:@"SignalName"],[d objectForKey:@"Meanings"]];
+    cell.temp.text=[NSString stringWithFormat:@"%@:%@",[d objectForKey:@"SignalName"],(viewtype==2)?[d objectForKey:@"Meanings"]:[d objectForKey:@"Msg"]];
     cell.value.text=[NSString stringWithFormat:@"触发值:%@",[d objectForKey:@"TriggerValue"]];
     
     if ([[d objectForKey:@"StartTime"] isEqualToString:@"1900/1/1 0:00:00"])
@@ -539,7 +940,7 @@
     cell.delegate=self;
     cell.btncheck.hidden=NO;
     
-    cell.website.text=[NSString stringWithFormat:@"网站:%@",[d objectForKey:@"StationName"]];
+    cell.website.text=[NSString stringWithFormat:@"局站:%@",[d objectForKey:@"StationName"]];
     cell.device.text = [NSString stringWithFormat:@"设备:%@",[d objectForKey:@"EquipmentName"]];
     cell.alertid.text=[NSString stringWithFormat:@"告警编号:%@", [d objectForKey:@"AlarmNo"]];
     if ([chkAlertidList containsObject:[d objectForKey:@"AlarmNo"]])
@@ -756,7 +1157,14 @@
     }
     switch (viewtype) {
         case 1:
-            
+            if (!stationid && !equtypeid && !deviceid)
+                [self loadSignalList];
+            if (stationid && !equtypeid && !deviceid)
+                [self loadSignalListbystationid];
+            if (stationid && equtypeid && !deviceid)
+                [self loadSignalListbystationidandequtypeid];
+            if (stationid && equtypeid && deviceid)
+                [self loadSignalListall];
             break;
             
         case 2:
@@ -771,13 +1179,14 @@
             if (stationid && !equtypeid && !deviceid)
                 [self loadHestoryAlertBystationid];
             if (stationid && equtypeid && !deviceid)
-                [self loadAlertBystationidAndEqutypeid];
+                [self loadHestoryAlertBystationidandequtypeid];
             if (stationid && equtypeid && deviceid)
-                [self loadAlertByALL];
+                [self loadHestoryAlertByALL];
             
 
             break;
     }
+    
     
 }
 

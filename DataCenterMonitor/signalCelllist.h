@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *txtsigstate;
 @property (weak, nonatomic) IBOutlet UILabel *signalvalue;
 @property (weak, nonatomic) IBOutlet UILabel *signalunit;
+@property (weak, nonatomic) IBOutlet UIButton *btncontrol;
 
 
 

@@ -17,7 +17,11 @@
 #define GetEquipment @"GetEquipment"
 
 //信号列表
-#define GetListSignalByUser @"GetListSignalByUser"
+#define GetListSignalAndControlByUser @"GetListSignalAndControlByUser"
+#define GetListSignalAndControlByStation @"GetListSignalAndControlByStation"
+#define GetListSignalAndControlByStationAndTypebase @"GetListSignalAndControlByStationAndTypebase"
+#define GetListSignalAndControl @"GetListSignalAndControl"
+
 
 
 //刷新时间
