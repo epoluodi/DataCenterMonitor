@@ -9,5 +9,7 @@
 #import "signalCell.h"
 
 @implementation signalCell
+@synthesize signalimg;
+@synthesize signalname,signalstate,signalunit,signalvalue;
 
 @end

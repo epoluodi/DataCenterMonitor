@@ -835,19 +835,31 @@
   
     
     NSString *state;
-    if ([[d objectForKey:@"SignalStatus"] isEqualToString:@"-1" ])
+    UIColor *colorstate;
+    if ([[d objectForKey:@"SignalStatus"] isEqualToString:@"-1" ]){
         state = @"断开";
-    else if ([[d objectForKey:@"SignalStatus"] isEqualToString:@"0" ])
+        colorstate = [UIColor grayColor];
+    }
+    else if ([[d objectForKey:@"SignalStatus"] isEqualToString:@"0" ]){
         state = @"正常连接";
-    else if ([[d objectForKey:@"SignalStatus"] isEqualToString:@"1" ])
+        colorstate = [UIColor greenColor];
+    }
+    else if ([[d objectForKey:@"SignalStatus"] isEqualToString:@"1" ]){
         state = @"一般告警";
-    else if ([[d objectForKey:@"SignalStatus"] isEqualToString:@"2" ])
+        colorstate = [UIColor yellowColor];
+    }
+    else if ([[d objectForKey:@"SignalStatus"] isEqualToString:@"2" ]){
         state = @"重要告警";
-    else if ([[d objectForKey:@"SignalStatus"] isEqualToString:@"3" ])
+        colorstate = [UIColor orangeColor];
+    }
+    else if ([[d objectForKey:@"SignalStatus"] isEqualToString:@"3" ]){
         state = @"紧急告警";
+        colorstate = [UIColor redColor];
+    }
     cell.txtdevicename.text=[NSString stringWithFormat:@"设备:%@",[d objectForKey:@"EquipmentName"]];
     cell.txtsignalname.text = [NSString stringWithFormat:@"信号:%@",[d objectForKey:@"SignalName"]];
     cell.txtsigstate.text=state;
+    cell.txtsigstate.textColor=colorstate;
     
     if ([[d objectForKey:@"Controlable"] isEqualToString:@"1" ])
         cell.btncontrol.hidden=NO;
@@ -856,6 +868,7 @@
     
     cell.signalunit.text = [d objectForKey:@"UnitName"];
     cell.signalvalue.text = [d objectForKey:@"SignalValue"];
+    
     
 
     

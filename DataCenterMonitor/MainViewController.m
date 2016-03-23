@@ -11,10 +11,12 @@
 #import "GridCell.h"
 #import "alertlisthome.h"
 #import "AlertAndSingalViewController.h"
+#import <Common/LoadingView.h>
 
 @interface MainViewController ()
 {
     __block HttpClass *httpclass;
+    LoadingView *loadview;
 }
 @end
 
@@ -27,6 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     IsShow=NO;
+    IsopenSignalTable=NO;
     //根据型号适配局站图片显示的高度
     if (iPhone6plus)
         scrollheight=220;
@@ -69,7 +72,7 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    serverrefreshtime.frame = CGRectMake(10, gridview.frame.size.height - 30, [PublicCommon GetALLScreen].size.width-20, 30);
+    serverrefreshtime.frame = CGRectMake(10, gridview.frame.size.height - 25, [PublicCommon GetALLScreen].size.width-20, 30);
     [self getAlertCounts];
 }
 
@@ -506,7 +509,10 @@
 //UICollectionView被选中时调用的方法
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    NSDictionary *d = [NowEquTypeBaseArry objectAtIndex:indexPath.row];
+    
+    
+    [self LoadSignalinfo:[d objectForKey:@"EquTypeID"] name:[d objectForKey:@"EquTypeName"]];
     
     
 }
@@ -521,8 +527,82 @@
 #pragma mark -
 
 
-
-
+/**********************
+ 函数名：LoadSignalinfo
+ 描述:获取设备信号信息
+ 参数：typeBaseID 大类ID
+ 返回：
+ **********************/
+-(void)LoadSignalinfo:(NSString *)typeBaseID name:(NSString *)name;
+{
+    Stationinfo *stationinfo= [[Common DefaultCommon] getStationinfo:nowPage];
+    
+    
+    loadview= [[LoadingView alloc] init];
+    [loadview setImages:[Common initLoadingImages]];
+    [self.view addSubview:loadview];
+    [loadview StartAnimation];
+    dispatch_async([Common getThreadQueue], ^{
+        
+        httpclass = [[HttpClass alloc] init:[Common HttpString:GetSignal]];
+        [httpclass addParamsString:@"clerkStationID" values:[Common DefaultCommon].ClerkStationID];
+        [httpclass addParamsString:@"clerkID" values:[Common DefaultCommon].ClerkID];
+        [httpclass addParamsString:@"stationID" values:[NSString stringWithCString:stationinfo->stationid encoding:NSUTF8StringEncoding]];
+        [httpclass addParamsString:@"typeBaseID" values:typeBaseID];
+        [httpclass addParamsString:@"isReturnPicture" values:@"1"];
+        NSData *data = [httpclass httprequest:[httpclass getDataForArrary]];
+        NSString *result = [httpclass getXmlString:data];
+        NSLog(@"结果 %@",result);
+        if (!result)
+        {
+            dispatch_async([Common getThreadMainQueue], ^{
+                
+                if (loadview){
+                    [loadview StopAnimation];
+                    [loadview removeFromSuperview];
+                    loadview = nil;
+                }
+            });
+            [Common NetErrorAlert:@"获取数据失败"];
+            return ;
+        }
+        NSArray * dataresult = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
+        if (!dataresult){
+            dispatch_async([Common getThreadMainQueue], ^{
+                
+                if (loadview){
+                    [loadview StopAnimation];
+                    [loadview removeFromSuperview];
+                    loadview = nil;
+                }
+            });
+            [Common NetErrorAlert:@"没有数据"];
+            return;
+        }
+  
+        
+        dispatch_async([Common getThreadMainQueue], ^{
+            
+            if (loadview){
+                [loadview StopAnimation];
+                [loadview removeFromSuperview];
+                loadview = nil;
+            }
+            
+            gridview.hidden=YES;
+            IsopenSignalTable=YES;
+            signaltable = [[SignalTableView alloc] init];
+            signaltable.json =dataresult;
+            Stationinfo *stationinfo= [[Common DefaultCommon] getStationinfo:nowPage];
+            [signaltable setHeadinfo:[NSString stringWithFormat:@"  %@ %@",name,[NSString stringWithUTF8String:stationinfo->StationName]]];
+            signaltableview= [signaltable getTable:gridview.frame];
+            [self.view addSubview:signaltableview];
+            
+        });
+        
+        
+    });
+}
 
 //系统方法
 -(UIStatusBarStyle)preferredStatusBarStyle
@@ -609,5 +689,20 @@
 
 - (IBAction)clickalertlist:(id)sender {
         [self performSegueWithIdentifier:@"showAlertAndSingal" sender:@2];
+}
+
+- (IBAction)clickreturn:(id)sender {
+    [self clickhome:nil];
+}
+
+- (IBAction)clickhome:(id)sender {
+    if (IsopenSignalTable)
+    {
+        IsopenSignalTable=NO;
+        [signaltableview removeFromSuperview];
+        signaltableview=nil;
+        signaltable = nil;
+        gridview.hidden=NO;
+    }
 }
 @end

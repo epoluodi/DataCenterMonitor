@@ -22,6 +22,7 @@
 		7B8E2F211C9C34B8007E90C4 /* signalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B8E2F201C9C34B8007E90C4 /* signalCell.xib */; };
 		7B8E2F231C9D53BA007E90C4 /* button-close.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B8E2F221C9D53BA007E90C4 /* button-close.png */; };
 		7BBB66291C9999AF0095FB4A /* AlertAndSingalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBB66281C9999AF0095FB4A /* AlertAndSingalViewController.m */; };
+		7BC12E771CA2D6C200CF3610 /* SignalTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC12E761CA2D6C200CF3610 /* SignalTableView.m */; };
 		7BD58E891C93CD90001360AE /* girdcell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BD58E881C93CD90001360AE /* girdcell.xib */; };
 		7BD58E8C1C93CE7D001360AE /* GridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BD58E8B1C93CE7D001360AE /* GridCell.m */; };
 		7BEC40071C98380500D0CDE2 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEC40061C98380500D0CDE2 /* MoreViewController.m */; };
@@ -151,6 +152,8 @@
 		7B8E2F221C9D53BA007E90C4 /* button-close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-close.png"; sourceTree = "<group>"; };
 		7BBB66271C9999AF0095FB4A /* AlertAndSingalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertAndSingalViewController.h; sourceTree = "<group>"; };
 		7BBB66281C9999AF0095FB4A /* AlertAndSingalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertAndSingalViewController.m; sourceTree = "<group>"; };
+		7BC12E751CA2D6C200CF3610 /* SignalTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignalTableView.h; sourceTree = "<group>"; };
+		7BC12E761CA2D6C200CF3610 /* SignalTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignalTableView.m; sourceTree = "<group>"; };
 		7BD58E881C93CD90001360AE /* girdcell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = girdcell.xib; sourceTree = "<group>"; };
 		7BD58E8A1C93CE7D001360AE /* GridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridCell.h; sourceTree = "<group>"; };
 		7BD58E8B1C93CE7D001360AE /* GridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridCell.m; sourceTree = "<group>"; };
@@ -377,6 +380,8 @@
 				B4CB42CD1C9959B100E92E69 /* CamereViewController.m */,
 				7BBB66271C9999AF0095FB4A /* AlertAndSingalViewController.h */,
 				7BBB66281C9999AF0095FB4A /* AlertAndSingalViewController.m */,
+				7BC12E751CA2D6C200CF3610 /* SignalTableView.h */,
+				7BC12E761CA2D6C200CF3610 /* SignalTableView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -664,6 +669,7 @@
 				B4C8AA961C8D22E700DBC035 /* main.m in Sources */,
 				7BBB66291C9999AF0095FB4A /* AlertAndSingalViewController.m in Sources */,
 				B4C8AB5F1C8D2A2900DBC035 /* LoginViewController.m in Sources */,
+				7BC12E771CA2D6C200CF3610 /* SignalTableView.m in Sources */,
 				7BEC40071C98380500D0CDE2 /* MoreViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,6 +15,8 @@
 #define GetEquTypebase @"GetEquTypebase"
 #define GetEquTypebaseByUser @"GetEquTypebaseByUser"
 #define GetEquipment @"GetEquipment"
+#define GetSignal @"GetSignal"
+
 
 //信号列表
 #define GetListSignalAndControlByUser @"GetListSignalAndControlByUser"

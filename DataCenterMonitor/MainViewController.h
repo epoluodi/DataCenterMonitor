@@ -11,10 +11,12 @@
 #import "Common.h"
 #import "moreCell.h"
 #import "MoreViewController.h"
+#import "SignalTableView.h"
 
 
 @interface MainViewController : UIViewController<UIScrollViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UITableViewDataSource,UITableViewDelegate,MoreDelegate,MoreViewdelegate>
 {
+    
     BOOL IsShow;
     int scrollheight;
     UIImageView *imgview1;
@@ -26,6 +28,10 @@
     NSMutableArray *alertlist;
     moreCell *morecell;
     int startrecordAlert;
+    
+    SignalTableView *signaltable;//设备信号view
+    BOOL IsopenSignalTable;
+    UITableView *signaltableview;
 }
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
@@ -45,6 +51,8 @@
 - (IBAction)clickmore:(id)sender;
 - (IBAction)clicksingal:(id)sender;
 - (IBAction)clickalertlist:(id)sender;
+- (IBAction)clickreturn:(id)sender;
+- (IBAction)clickhome:(id)sender;
 
 
 
