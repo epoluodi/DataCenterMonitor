@@ -22,8 +22,8 @@
     int page;
 }
 @property (copy,nonatomic)NSArray *json;
-
+@property (copy,nonatomic)NSString *devicename;
 -(UITableView *)getTable:(CGRect)frame;
--(void)setHeadinfo:(NSString *)info;
+-(void)setTableHeight:(int)height;
 
 @end

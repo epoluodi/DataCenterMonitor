@@ -42,7 +42,7 @@
     dispatch_async([Common getThreadQueue], ^{
     if ([fm fileExistsAtPath:_filename])
     {
-        NSData *pngdata = [NSData dataWithContentsOfURL:pngpath];
+        NSData *pngdata = [NSData dataWithContentsOfFile:_filename];
         if (pngdata)
         {
             dispatch_async([Common getThreadMainQueue], ^{

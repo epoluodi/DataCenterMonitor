@@ -594,7 +594,7 @@
             signaltable = [[SignalTableView alloc] init];
             signaltable.json =dataresult;
             Stationinfo *stationinfo= [[Common DefaultCommon] getStationinfo:nowPage];
-            [signaltable setHeadinfo:[NSString stringWithFormat:@"  %@ %@",name,[NSString stringWithUTF8String:stationinfo->StationName]]];
+            signaltable.devicename = name;
             signaltableview= [signaltable getTable:gridview.frame];
             [self.view addSubview:signaltableview];
             
@@ -670,6 +670,12 @@
         
     }
     [UIView commitAnimations];
+    
+    if (IsopenSignalTable)
+    {
+        [signaltable setTableHeight:gridview.frame.size.height];
+    }
+    
     
 }
 

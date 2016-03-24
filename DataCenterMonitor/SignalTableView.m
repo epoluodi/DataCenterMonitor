@@ -11,7 +11,7 @@
 #import "signalCell.h"
 
 @implementation SignalTableView
-@synthesize json;
+@synthesize json,devicename;
 //类初始化
 -(instancetype)init
 {
@@ -43,6 +43,8 @@
     [btnright setBackgroundImage:[UIImage imageNamed:@"buttonright_normal"] forState:UIControlStateNormal];
     [btnright setBackgroundImage:[UIImage imageNamed:@"buttonright_down"] forState:UIControlStateNormal];
     
+    [btnleft addTarget:self action:@selector(clickleft) forControlEvents:UIControlEventTouchUpInside];
+    [btnright addTarget:self action:@selector(clickright) forControlEvents:UIControlEventTouchUpInside];
     [footview addSubview:btnleft];
     [footview addSubview:btnright];
     
@@ -149,7 +151,10 @@
     
     if (!json)
         return 0;
-    return [json count];;
+    NSDictionary *d = [json objectAtIndex:page];
+    NSArray *a = [d objectForKey:@"SignalInfor"];
+    [self setHeadinfo:[NSString stringWithFormat:@"  %@ %@",devicename,[d objectForKey:@"EquipmentName"]]];
+    return [a count];
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -175,11 +180,43 @@
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle= UITableViewCellSelectionStyleNone;
     NSDictionary *d = [json objectAtIndex:page];
+    NSArray *a = [d objectForKey:@"SignalInfor"];
+    NSDictionary *dict = [a objectAtIndex:indexPath.row];
+    cell.signalname.text=[dict objectForKey:@"SignalName"];
+    NSString *alertdesc;
+    NSString *colordesc;
+    if ([[dict objectForKey:@"AlarmGrade"] isEqualToString:@"0"]){
+        alertdesc = @"";//@"无告警";
+        colordesc = [UIColor clearColor];
+        cell.signalimgpath = [dict objectForKey:@"SignalPicturePath"];
+        [cell downloadimg:0];
+    }
+    else     if ([[dict objectForKey:@"AlarmGrade"] isEqualToString:@"1"]){
+        alertdesc = @"一般告警";//@"无告警";
+        colordesc = [UIColor yellowColor];
+        cell.signalimgpath = [dict objectForKey:@"SignalAlarmPicturePath"];
+        [cell downloadimg:1];
+    }
+    else  if ([[dict objectForKey:@"AlarmGrade"] isEqualToString:@"2"]){
+        alertdesc = @"重要告警";//@"无告警";
+        colordesc = [UIColor orangeColor];
+        cell.signalimgpath = [dict objectForKey:@"SignalAlarmPicturePath"];
+        [cell downloadimg:1];
+    }
+    else  if ([[dict objectForKey:@"AlarmGrade"] isEqualToString:@"3"]){
+        alertdesc = @"紧急告警";//@"无告警";
+        colordesc = [UIColor redColor];
+        cell.signalimgpath = [dict objectForKey:@"SignalAlarmPicturePath"];
+        [cell downloadimg:1];
+    }
     
-    cell.signalname.text=@"温度";
-    cell.signalstate.text=@"报警";
-    cell.signalunit.text=@"!!!";
-    cell.signalvalue.text=@"123123";
+    
+    
+    
+    cell.signalstate.text=alertdesc;
+    cell.signalstate.textColor=colordesc;
+    cell.signalunit.text=[dict objectForKey:@"UnitName"];
+    cell.signalvalue.text=[dict objectForKey:@"SignalValue"];
     
     return cell;
 }
@@ -194,7 +231,33 @@
 
 #pragma mark -
 
+//设置table 高度
+//height 高度
+-(void)setTableHeight:(int)height
+{
+    table.frame = CGRectMake(table.frame.origin.x, table.frame.origin.y, table.frame.size.width, height);
+}
 
+#pragma mark 左右按钮
+
+-(void)clickleft
+{
+    if (page ==0)
+        return;
+    page--;
+    [table reloadData];
+        
+}
+
+-(void)clickright
+{
+    if (page == [json count] -1)
+        return;
+    page++;
+    [table reloadData];
+}
+
+#pragma mark -
 
 @end
 

@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 @interface signalCell : UITableViewCell
-
+{
+    UIActivityIndicatorView *indview;
+}
 
 @property (weak, nonatomic) IBOutlet UIImageView *signalimg;
 @property (weak, nonatomic) IBOutlet UILabel *signalname;
@@ -17,8 +20,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *signalvalue;
 @property (weak, nonatomic) IBOutlet UILabel *signalunit;
 
-
-
+@property (weak,nonatomic)NSString *signalimgpath;
+@property (weak,nonatomic)NSString *signalimgpathalert;
+-(void)downloadimg:(int)flag;
 
 
 @end
