@@ -838,23 +838,24 @@
     UIColor *colorstate;
     if ([[d objectForKey:@"SignalStatus"] isEqualToString:@"-1" ]){
         state = @"断开";
-        colorstate = [UIColor grayColor];
+        colorstate = AlertH;
     }
     else if ([[d objectForKey:@"SignalStatus"] isEqualToString:@"0" ]){
         state = @"正常连接";
-        colorstate = [UIColor greenColor];
+        colorstate =[[UIColor blackColor] colorWithAlphaComponent:0.9];
+
     }
     else if ([[d objectForKey:@"SignalStatus"] isEqualToString:@"1" ]){
         state = @"一般告警";
-        colorstate = [UIColor yellowColor];
+        colorstate = AlertY;
     }
     else if ([[d objectForKey:@"SignalStatus"] isEqualToString:@"2" ]){
         state = @"重要告警";
-        colorstate = [UIColor orangeColor];
+        colorstate = AlertZ;
     }
     else if ([[d objectForKey:@"SignalStatus"] isEqualToString:@"3" ]){
         state = @"紧急告警";
-        colorstate = [UIColor redColor];
+        colorstate = AlertR;
     }
     cell.txtdevicename.text=[NSString stringWithFormat:@"设备:%@",[d objectForKey:@"EquipmentName"]];
     cell.txtsignalname.text = [NSString stringWithFormat:@"信号:%@",[d objectForKey:@"SignalName"]];
@@ -866,9 +867,41 @@
     else
         cell.btncontrol.hidden=YES;
     
-    cell.signalunit.text = [d objectForKey:@"UnitName"];
-    cell.signalvalue.text = [d objectForKey:@"SignalValue"];
     
+    NSString *value =[d objectForKey:@"SignalValue"];
+    if ([value isEqualToString:@""])
+    {
+        if ([[d objectForKey:@"SignalType"] isEqualToString:@"A"])
+        {
+            value = [d objectForKey:@"ShowPrecision"];
+        }
+    }
+    else
+    {
+        if ([[d objectForKey:@"SignalType"] isEqualToString:@"A"])
+        {
+            if ( [[d objectForKey:@"ShowPrecision"] isEqualToString:@"0"])
+            {
+                value = [NSString stringWithFormat:@"%d" ,[value intValue]];
+            }
+            else if ( [[d objectForKey:@"ShowPrecision"] isEqualToString:@"0.0"])
+            {
+                value = [NSString stringWithFormat:@"%.1f" ,[value floatValue]];
+                
+            }
+            else if ( [[d objectForKey:@"ShowPrecision"] isEqualToString:@"0.00"])
+            {
+                value = [NSString stringWithFormat:@"%.2f" ,[value floatValue]];
+                
+            }
+        }
+    }
+
+    
+    
+    cell.signalunit.text = [d objectForKey:@"UnitName"];
+    cell.signalvalue.text = value;
+    cell.signalvalue.textColor =colorstate;
     
 
     

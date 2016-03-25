@@ -545,7 +545,8 @@ static Common *_common;
 // 释放Common
 -(void)Uninit
 {
-    [stationinfolist removeAllObjects];
+    
+//    [stationinfolist removeAllObjects];
     stationinfolist=nil;
     equtypelist=nil;
     devicelist=nil;

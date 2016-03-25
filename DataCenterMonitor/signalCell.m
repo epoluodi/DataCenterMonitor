@@ -51,12 +51,7 @@
                 });
             }
         }
-        dispatch_async([Common getThreadMainQueue], ^{
-            indview = [[UIActivityIndicatorView alloc] init];
-            indview.frame = signalimg.frame;
-            [signalimg addSubview:indview];
-            [indview startAnimating];
-        });
+
         
         NSData *data = [NSData dataWithContentsOfURL:pngpath ];
         if (data)
@@ -64,9 +59,8 @@
             [fm createFileAtPath:_filename contents:data attributes:nil];
         }
         dispatch_async([Common getThreadMainQueue], ^{
-            [indview stopAnimating];
-            [indview removeFromSuperview];
-            indview=nil;
+
+
             if (!data)
                 return ;
             signalimg.image= [UIImage imageWithData:data];

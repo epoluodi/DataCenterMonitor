@@ -10,9 +10,7 @@
 #import <Foundation/Foundation.h>
 
 @interface signalCell : UITableViewCell
-{
-    UIActivityIndicatorView *indview;
-}
+
 
 @property (weak, nonatomic) IBOutlet UIImageView *signalimg;
 @property (weak, nonatomic) IBOutlet UILabel *signalname;

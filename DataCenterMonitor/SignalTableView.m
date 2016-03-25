@@ -9,7 +9,7 @@
 #import "SignalTableView.h"
 #import <Common/PublicCommon.h>
 #import "signalCell.h"
-
+#import "Common.h"
 @implementation SignalTableView
 @synthesize json,devicename;
 //类初始化
@@ -34,6 +34,11 @@
     footview = [[UIView alloc] init];
     footview.frame=CGRectMake(0, 0, [PublicCommon GetALLScreen].size.width, 50);
     footview.backgroundColor = [UIColor clearColor];
+    
+//    UIView *lineview = [[UIView alloc] init];
+//    lineview.frame=CGRectMake(0, 1, [PublicCommon GetALLScreen].size.width, 1);
+//    lineview.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.6];
+//    [footview addSubview:lineview];
     
     btnleft = [[UIButton alloc] init];
     btnleft.frame=CGRectMake(20, 5, 40, 40);
@@ -184,40 +189,68 @@
     NSDictionary *dict = [a objectAtIndex:indexPath.row];
     cell.signalname.text=[dict objectForKey:@"SignalName"];
     NSString *alertdesc;
-    NSString *colordesc;
+    UIColor *colordesc;
     if ([[dict objectForKey:@"AlarmGrade"] isEqualToString:@"0"]){
         alertdesc = @"";//@"无告警";
-        colordesc = [UIColor clearColor];
+        colordesc = [[UIColor blackColor] colorWithAlphaComponent:0.9];
         cell.signalimgpath = [dict objectForKey:@"SignalPicturePath"];
         [cell downloadimg:0];
     }
     else     if ([[dict objectForKey:@"AlarmGrade"] isEqualToString:@"1"]){
         alertdesc = @"一般告警";//@"无告警";
-        colordesc = [UIColor yellowColor];
-        cell.signalimgpath = [dict objectForKey:@"SignalAlarmPicturePath"];
+        colordesc = AlertY;
+                cell.signalimgpath = [dict objectForKey:@"SignalAlarmPicturePath"];
         [cell downloadimg:1];
     }
     else  if ([[dict objectForKey:@"AlarmGrade"] isEqualToString:@"2"]){
         alertdesc = @"重要告警";//@"无告警";
-        colordesc = [UIColor orangeColor];
+        colordesc = AlertZ;
         cell.signalimgpath = [dict objectForKey:@"SignalAlarmPicturePath"];
         [cell downloadimg:1];
     }
     else  if ([[dict objectForKey:@"AlarmGrade"] isEqualToString:@"3"]){
         alertdesc = @"紧急告警";//@"无告警";
-        colordesc = [UIColor redColor];
+        colordesc = AlertR;
         cell.signalimgpath = [dict objectForKey:@"SignalAlarmPicturePath"];
         [cell downloadimg:1];
     }
-    
-    
-    
-    
+
     cell.signalstate.text=alertdesc;
     cell.signalstate.textColor=colordesc;
     cell.signalunit.text=[dict objectForKey:@"UnitName"];
-    cell.signalvalue.text=[dict objectForKey:@"SignalValue"];
     
+    NSString *value =[dict objectForKey:@"SignalValue"];
+    if ([value isEqualToString:@""])
+    {
+        if ([[dict objectForKey:@"SignalType"] isEqualToString:@"A"])
+        {
+            value = [dict objectForKey:@"ShowPrecision"];
+        }
+    }
+    else
+    {
+        if ([[dict objectForKey:@"SignalType"] isEqualToString:@"A"])
+        {
+            if ( [[dict objectForKey:@"ShowPrecision"] isEqualToString:@"0"])
+            {
+                value = [NSString stringWithFormat:@"%d" ,[value intValue]];
+            }
+            else if ( [[dict objectForKey:@"ShowPrecision"] isEqualToString:@"0.0"])
+            {
+                value = [NSString stringWithFormat:@"%.1f" ,[value floatValue]];
+
+            }
+            else if ( [[dict objectForKey:@"ShowPrecision"] isEqualToString:@"0.00"])
+            {
+                value = [NSString stringWithFormat:@"%.2f" ,[value floatValue]];
+
+            }
+        }
+    }
+    
+    
+    cell.signalvalue.text=value;
+    cell.signalvalue.textColor=colordesc;
     return cell;
 }
 
@@ -245,6 +278,7 @@
     if (page ==0)
         return;
     page--;
+    [self changepages:page];
     [table reloadData];
         
 }
@@ -254,6 +288,7 @@
     if (page == [json count] -1)
         return;
     page++;
+    [self changepages:page];
     [table reloadData];
 }
 

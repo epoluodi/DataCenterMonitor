@@ -638,8 +638,10 @@
 -(void)exitMainView
 {
     [[Common DefaultCommon] Uninit];
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 
 #pragma  mark -
 
@@ -659,7 +661,10 @@
 //        if ([alertlist count] == 0)
 //            [self LoadAlertlist];
         [alertview addSubview:table];
-        
+        if (IsopenSignalTable)
+        {
+            [signaltable setTableHeight:gridview.frame.size.height -76*3];
+        }
     }
     else{
 
@@ -667,17 +672,21 @@
 
         alertviewheight.constant=76;
         imgview1.image = [UIImage imageNamed:@"closeflag"];
-        
+        if (IsopenSignalTable)
+        {
+            [signaltable setTableHeight:gridview.frame.size.height + 76*3];
+        }
     }
+
+    
     [UIView commitAnimations];
     
-    if (IsopenSignalTable)
-    {
-        [signaltable setTableHeight:gridview.frame.size.height];
-    }
-    
-    
+
 }
+
+
+
+
 
 /**********************
  函数名：clickAlert

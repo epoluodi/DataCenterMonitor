@@ -23,7 +23,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="温度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQW-Zc-WOR">
-                        <rect key="frame" x="80" y="12" width="127" height="21"/>
+                        <rect key="frame" x="92" y="12" width="127" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="YWd-Ip-PT4"/>
                             <constraint firstAttribute="width" constant="127" id="qSe-eN-Oqy"/>
@@ -43,7 +43,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="35.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udl-9D-i2X">
-                        <rect key="frame" x="80" y="35" width="139" height="45"/>
+                        <rect key="frame" x="92" y="35" width="139" height="45"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="45" id="Gdm-s7-ugx"/>
                             <constraint firstAttribute="width" constant="139" id="j4G-qn-tMj"/>
@@ -59,7 +59,7 @@
                             <constraint firstAttribute="height" constant="31" id="PFW-TR-TS8"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -70,9 +70,9 @@
                     <constraint firstItem="B60-5g-sIr" firstAttribute="top" secondItem="UYB-5L-o3I" secondAttribute="bottom" constant="13" id="X96-9A-o5f"/>
                     <constraint firstItem="OwD-dP-AC3" firstAttribute="leading" secondItem="ImB-ng-w8a" secondAttribute="leading" constant="12" id="a8q-nG-mi0"/>
                     <constraint firstItem="OwD-dP-AC3" firstAttribute="top" secondItem="ImB-ng-w8a" secondAttribute="top" constant="20" id="bk9-7v-1x2"/>
-                    <constraint firstItem="cQW-Zc-WOR" firstAttribute="leading" secondItem="OwD-dP-AC3" secondAttribute="trailing" constant="8" id="iCo-7U-G1z"/>
+                    <constraint firstItem="cQW-Zc-WOR" firstAttribute="leading" secondItem="OwD-dP-AC3" secondAttribute="trailing" constant="20" id="iCo-7U-G1z"/>
                     <constraint firstItem="cQW-Zc-WOR" firstAttribute="top" secondItem="ImB-ng-w8a" secondAttribute="topMargin" constant="4" id="kOz-0Y-z63"/>
-                    <constraint firstItem="udl-9D-i2X" firstAttribute="leading" secondItem="OwD-dP-AC3" secondAttribute="trailing" constant="8" id="nlU-IX-icZ"/>
+                    <constraint firstItem="udl-9D-i2X" firstAttribute="leading" secondItem="OwD-dP-AC3" secondAttribute="trailing" constant="20" id="nlU-IX-icZ"/>
                     <constraint firstAttribute="trailing" secondItem="UYB-5L-o3I" secondAttribute="trailing" constant="13" id="qaq-rR-M6M"/>
                     <constraint firstItem="UYB-5L-o3I" firstAttribute="top" secondItem="ImB-ng-w8a" secondAttribute="top" constant="14" id="uuG-17-FFM"/>
                 </constraints>
