@@ -15,7 +15,7 @@
 #define EveryOnceCounts 10;//一次最多加载总数
 
 
-@interface AlertAndSingalViewController : UIViewController<SheetDelegate,MoreDelegate,AlertCellDelegate, UITableViewDataSource,UITableViewDelegate>
+@interface AlertAndSingalViewController : UIViewController<SheetDelegate,MoreDelegate,AlertCellDelegate, UITableViewDataSource,UITableViewDelegate,ControlDelegate>
 {
     NSString *stationid;
     NSString *equtypeid;
@@ -26,8 +26,9 @@
     NSMutableArray *chkAlertidList;//告警确认队列
     NSMutableArray *dataarry;//数据加载队列
     BOOL Isfoot;//是否显示脚
-    
+    NSDictionary *selectedSignalCelldata;//当前选择的信息
     UIButton *btnAlertConfim;
+    NSTimer *signaltimer;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *btnstationinfo;

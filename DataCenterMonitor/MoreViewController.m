@@ -48,7 +48,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return 6;
+    return 7;
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -101,11 +101,17 @@
             break;
         case 4:
             cell = [[UITableViewCell alloc] init];
+            
+            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+            cell.textLabel.text=@"巡检报告";
+            break;
+        case 5:
+            cell = [[UITableViewCell alloc] init];
         
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
             cell.textLabel.text=@"清空本地缓存";
             break;
-        case 5:
+        case 6:
             cell = [[UITableViewCell alloc] init];
             
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
@@ -148,10 +154,13 @@
             [self performSegueWithIdentifier:@"showcamre" sender:nil];
             break;
         case 4:
+             [self performSegueWithIdentifier:@"showreport" sender:nil];
+            break;
+        case 5:
             [self ClearCacheFile];
             
             break;
-        case 5:
+        case 6:
             
             [self dismissViewControllerAnimated:YES completion:nil];
             [_delegate exitMainView];

@@ -167,7 +167,7 @@ static Common *_common;
 -(void)ShowStationSheet:(UIViewController<SheetDelegate> *)delegate
 {
     picktype=1;
-    UIAlertController *alert =[UIAlertController alertControllerWithTitle:@"局站信息" message:@"\n\n\n\n\n\n\n\n\n" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alert =[UIAlertController alertControllerWithTitle:@"局站信息" message:@"\n\n\n\n\n\n\n\n\n\n" preferredStyle:UIAlertControllerStyleActionSheet];
     //添加pickview
     
     pickview =[[UIPickerView alloc] init];
@@ -217,7 +217,7 @@ static Common *_common;
 {
     picktype=2;
     equtypelist =nil;
-    UIAlertController *alert =[UIAlertController alertControllerWithTitle:@"设备大类信息" message:@"\n\n\n\n\n\n\n\n\n" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alert =[UIAlertController alertControllerWithTitle:@"设备大类信息" message:@"\n\n\n\n\n\n\n\n\n\n" preferredStyle:UIAlertControllerStyleActionSheet];
     //添加pickview
     pickview =[[UIPickerView alloc] init];
     pickview.frame = CGRectMake(10, 15, [PublicCommon GetALLScreen].size.width-40, pickview.frame.size.height);
@@ -272,7 +272,7 @@ static Common *_common;
 {
     picktype=3;
     equtypelist =nil;
-    UIAlertController *alert =[UIAlertController alertControllerWithTitle:@"设备信息" message:@"\n\n\n\n\n\n\n\n\n" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alert =[UIAlertController alertControllerWithTitle:@"设备信息" message:@"\n\n\n\n\n\n\n\n\n\n" preferredStyle:UIAlertControllerStyleActionSheet];
     //添加pickview
     pickview =[[UIPickerView alloc] init];
     pickview.frame = CGRectMake(10, 15, [PublicCommon GetALLScreen].size.width-40, pickview.frame.size.height);

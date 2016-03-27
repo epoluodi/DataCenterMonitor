@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+
+
+@protocol ControlDelegate
+
+-(void)Control:(NSDictionary *)celldata;
+
+@end
+
+
 @interface signalCelllist : UITableViewCell
 
 
@@ -17,7 +26,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *signalvalue;
 @property (weak, nonatomic) IBOutlet UILabel *signalunit;
 @property (weak, nonatomic) IBOutlet UIButton *btncontrol;
-
+@property (weak,nonatomic) NSDictionary * data;
+@property (weak,nonatomic) NSObject<ControlDelegate> *delegate;
 
 
 - (IBAction)clickcontrol:(id)sender;

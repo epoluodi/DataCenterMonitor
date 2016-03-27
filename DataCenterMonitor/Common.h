@@ -23,7 +23,8 @@
 #define GetListSignalAndControlByStation @"GetListSignalAndControlByStation"
 #define GetListSignalAndControlByStationAndTypebase @"GetListSignalAndControlByStationAndTypebase"
 #define GetListSignalAndControl @"GetListSignalAndControl"
-
+#define GetControlableSignal @"GetControlableSignal"
+#define ControlEquipment @"ControlEquipment"
 
 
 //刷新时间

@@ -9,7 +9,7 @@
 #import "signalCelllist.h"
 
 @implementation signalCelllist
-
+@synthesize delegate,data;
 - (void)awakeFromNib {
     // Initialization code
 }
@@ -21,5 +21,6 @@
 }
 
 - (IBAction)clickcontrol:(id)sender {
+    [delegate Control:data];
 }
 @end

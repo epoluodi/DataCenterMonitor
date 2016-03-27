@@ -618,12 +618,12 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSLog(@"%@",sender);
-        if ([segue.identifier isEqualToString:@"showMoreVIew"])
-        {
-            MoreViewController *vc = (MoreViewController *)[segue destinationViewController];
-            vc.delegate = self;
-            return;
-        }
+    if ([segue.identifier isEqualToString:@"showMoreVIew"])
+    {
+        MoreViewController *vc = (MoreViewController *)[segue destinationViewController];
+        vc.delegate = self;
+        return;
+    }
     
     if ([segue.identifier isEqualToString:@"showAlertAndSingal"])
     {

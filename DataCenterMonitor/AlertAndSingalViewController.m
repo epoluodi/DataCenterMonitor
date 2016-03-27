@@ -8,6 +8,7 @@
 
 #import "AlertAndSingalViewController.h"
 #import <Common/LoadingView.h>
+#import "SignalControlViewCOntroller.h"
 
 @interface AlertAndSingalViewController ()
 {
@@ -35,7 +36,9 @@
             [Common DefaultCommon].IsPickALL = YES;
             nib = [UINib nibWithNibName:@"signalcelllist" bundle:nil];
             [table registerNib:nib forCellReuseIdentifier:@"cell"];
-
+            signaltimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(signaltimerevent) userInfo:nil repeats:YES];
+            [signaltimer fire];
+            
             break;
         case 2:
             bartitle.text=@"告警列表";
@@ -64,6 +67,12 @@
     // Do any additional setup after loading the view.
 }
 
+
+-(void)signaltimerevent
+{
+    
+    NSLog(@"刷新信号列表");
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -902,7 +911,8 @@
     cell.signalunit.text = [d objectForKey:@"UnitName"];
     cell.signalvalue.text = value;
     cell.signalvalue.textColor =colorstate;
-    
+    cell.data=d;
+    cell.delegate=self;
 
     
     return cell;
@@ -1182,10 +1192,24 @@
 
 //返回
 - (IBAction)clickreturn:(id)sender {
+    if (signaltimer)
+    {
+        [signaltimer invalidate];
+        signaltimer=nil;
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
+//信号点击控制
+//celldata 传回的信号信息
+-(void)Control:(NSDictionary *)celldata
+{
+    selectedSignalCelldata=celldata;
+    
+    [self performSegueWithIdentifier:@"showcontrol" sender:self];
+    
+}
 //点击查询
 - (IBAction)clicksearch:(id)sender {
     
@@ -1259,5 +1283,15 @@
         return;
     [Common DefaultCommon].IsPickALL = YES;
     [[Common DefaultCommon] ShowEquipmentSheet:self stationid:stationid equdtypeid:equtypeid];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"showcontrol"])
+    {
+        SignalControlViewCOntroller *vc = (SignalControlViewCOntroller *)[segue destinationViewController];
+        vc.signaldata = selectedSignalCelldata;
+        return;
+    }
 }
 @end
