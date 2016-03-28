@@ -111,7 +111,7 @@ static Common *_common;
 +(void)NetOKAlert:(NSString *)msg
 {
     dispatch_async([Common getThreadMainQueue], ^{
-        UIAlertView *alert =[[UIAlertView alloc] initWithTitle:@"错误" message:msg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        UIAlertView *alert =[[UIAlertView alloc] initWithTitle:@"提示" message:msg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
     });
 }

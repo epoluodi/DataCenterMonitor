@@ -728,7 +728,6 @@
                                         <state key="highlighted" backgroundImage="ex_titlebackbutton_down.png"/>
                                         <connections>
                                             <action selector="clickreturn:" destination="JBI-d2-FxD" eventType="touchUpInside" id="LPm-UP-lHV"/>
-                                            <action selector="clickreturn:" destination="Ymh-G7-pnb" eventType="touchUpInside" id="RmN-zm-D6M"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="控制" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wpF-gl-sMQ">
@@ -750,9 +749,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="clickreturn:" destination="Ymh-G7-pnb" eventType="touchUpInside" id="Roq-nB-A2c"/>
-                                            <action selector="clickreturn:" destination="JBI-d2-FxD" eventType="touchUpInside" id="xDc-Ms-Fau"/>
-                                            <action selector="clicksave:" destination="JBI-d2-FxD" eventType="touchUpInside" id="3Mb-TH-f8d"/>
+                                            <action selector="clicksave:" destination="JBI-d2-FxD" eventType="touchUpInside" id="tqj-5u-s8M"/>
                                         </connections>
                                     </button>
                                 </subviews>

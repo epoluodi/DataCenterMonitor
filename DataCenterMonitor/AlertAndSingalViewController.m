@@ -815,6 +815,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     NSDictionary *d = [dataarry objectAtIndex:indexPath.row];
+    
     switch (viewtype) {
         case 1:
             return  [self Signallistcell:(signalCelllist *)cell d:d];
@@ -842,7 +843,7 @@
 -(UITableViewCell *)Signallistcell:(signalCelllist *)cell d:(NSDictionary *)d
 {
   
-    
+NSLog(@"信号dict %@",d);
     NSString *state;
     UIColor *colorstate;
     if ([[d objectForKey:@"SignalStatus"] isEqualToString:@"-1" ]){
@@ -904,6 +905,7 @@
                 
             }
         }
+
     }
 
     
@@ -1171,7 +1173,7 @@
             if ([[dataresult objectForKey:@"success"] isEqualToString:@"false"])
                 [Common NetErrorAlert:@"告警确认失败"];
             else
-                [Common NetErrorAlert:@"告警确认成功"];
+                [Common NetOKAlert:@"告警确认成功"];
             
         }
         

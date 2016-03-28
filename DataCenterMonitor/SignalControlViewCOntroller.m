@@ -20,9 +20,9 @@
     table.delegate=self;
     table.dataSource=self;
     
-    if([[signaldata objectForKey:@"SignalType"] isEqualToString:@"S"])
-        signaltype=1;//模拟量
     if([[signaldata objectForKey:@"SignalType"] isEqualToString:@"A"])
+        signaltype=1;//模拟量
+    if([[signaldata objectForKey:@"SignalType"] isEqualToString:@"S"])
         signaltype=2;//开关量
     
     [self loadSignalInfo];
