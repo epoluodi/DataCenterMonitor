@@ -267,23 +267,28 @@
 {
     if (signaltype==2)
     {
+        
         if (indexPath.section==1)
         {
+            
+            NSString *StrOperation = [signalcontrolinfo objectForKey:@"StrOperation"];
+            NSArray *operationlist =[StrOperation componentsSeparatedByString:@","];
+            
+            
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请选择操作方式" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
             UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-            UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"开机手动" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                controlvalue.text = @"开机手动";
-            }];
-            UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"开机自动" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                controlvalue.text = @"开机自动";
-            }];
-            UIAlertAction *action4 = [UIAlertAction actionWithTitle:@"开机制热" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                controlvalue.text = @"开机制热";
-            }];
             [alert addAction:action1];
-            [alert addAction:action2];
-            [alert addAction:action3];
-            [alert addAction:action4];
+            
+            
+            for (NSString *str in operationlist) {
+                UIAlertAction *action = [UIAlertAction actionWithTitle:str style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    controlvalue.text = action.title;
+                }];
+                
+                [alert addAction:action];
+            }
+       
+           
             [self presentViewController:alert animated:YES completion:nil];
         }
     }
@@ -336,6 +341,15 @@
         return;
     }
     
+    if (signaltype ==2)
+    {
+        if (controlvalue.text==nil)
+        {
+            [Common NetErrorAlert:@"请输入操作方式"];
+            return;
+        }
+    }
+    
     loadview= [[LoadingView alloc] init];
     [loadview setImages:[Common initLoadingImages]];
     [self.view addSubview:loadview];
@@ -358,12 +372,15 @@
         if (signaltype ==1)
             [httpclass addParamsString:@"controlValue" values:simvalue.text];
         else{
-            if ([controlvalue.text isEqualToString:@"开机手动"])
-                [httpclass addParamsString:@"controlValue" values:@"34"];
-            else if ([controlvalue.text isEqualToString:@"开机自动"])
-                [httpclass addParamsString:@"controlValue" values:@"17"];
-            else if ([controlvalue.text isEqualToString:@"开机制热"])
-                [httpclass addParamsString:@"controlValue" values:@"51"];
+            NSArray *arry = [controlvalue.text componentsSeparatedByString:@"-"];
+            
+            [httpclass addParamsString:@"controlValue" values:arry[0]];
+//            if ([controlvalue.text isEqualToString:@"开机手动"])
+//                [httpclass addParamsString:@"controlValue" values:@"34"];
+//            else if ([controlvalue.text isEqualToString:@"开机自动"])
+//                [httpclass addParamsString:@"controlValue" values:@"17"];
+//            else if ([controlvalue.text isEqualToString:@"开机制热"])
+//                [httpclass addParamsString:@"controlValue" values:@"51"];
         }
         
         
