@@ -48,6 +48,8 @@
 #define GetCamera @"GetCamera"
 #define GetVideoPicture @"GetVideoPicture"
 
+//报告
+#define GetListCruiseReport @"GetListCruiseReport"
 #import <Foundation/Foundation.h>
 #import <Common/FileCommon.h>
 #import <Common/PublicCommon.h>

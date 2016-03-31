@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B445BED1CAD5A260058771F /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B445BEC1CAD5A260058771F /* ReportViewController.m */; };
+		7B445BEF1CAD5CE10058771F /* reportlistcell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B445BEE1CAD5CE10058771F /* reportlistcell.xib */; };
+		7B445BF21CAD637C0058771F /* ReportListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B445BF11CAD637C0058771F /* ReportListCell.m */; };
 		7B47E9621C90661D00CCB3A8 /* progress_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B47E95A1C90661D00CCB3A8 /* progress_1.png */; };
 		7B47E9631C90661D00CCB3A8 /* progress_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B47E95B1C90661D00CCB3A8 /* progress_2.png */; };
 		7B47E9641C90661D00CCB3A8 /* progress_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B47E95C1C90661D00CCB3A8 /* progress_3.png */; };
@@ -132,6 +135,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7B445BEB1CAD5A260058771F /* ReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportViewController.h; sourceTree = "<group>"; };
+		7B445BEC1CAD5A260058771F /* ReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportViewController.m; sourceTree = "<group>"; };
+		7B445BEE1CAD5CE10058771F /* reportlistcell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = reportlistcell.xib; sourceTree = "<group>"; };
+		7B445BF01CAD637C0058771F /* ReportListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportListCell.h; sourceTree = "<group>"; };
+		7B445BF11CAD637C0058771F /* ReportListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportListCell.m; sourceTree = "<group>"; };
 		7B47E95A1C90661D00CCB3A8 /* progress_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress_1.png; sourceTree = "<group>"; };
 		7B47E95B1C90661D00CCB3A8 /* progress_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress_2.png; sourceTree = "<group>"; };
 		7B47E95C1C90661D00CCB3A8 /* progress_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress_3.png; sourceTree = "<group>"; };
@@ -323,6 +331,8 @@
 				7B82F02D1CA0466A000A7E3D /* signalCell.m */,
 				7B82F0311CA049D3000A7E3D /* signalCelllist.h */,
 				7B82F0321CA049D3000A7E3D /* signalCelllist.m */,
+				7B445BF01CAD637C0058771F /* ReportListCell.h */,
+				7B445BF11CAD637C0058771F /* ReportListCell.m */,
 			);
 			name = xibClass;
 			sourceTree = "<group>";
@@ -387,6 +397,8 @@
 				7BC12E761CA2D6C200CF3610 /* SignalTableView.m */,
 				7BF10E8F1CA6B9D6007771BB /* SignalControlViewCOntroller.h */,
 				7BF10E901CA6B9D6007771BB /* SignalControlViewCOntroller.m */,
+				7B445BEB1CAD5A260058771F /* ReportViewController.h */,
+				7B445BEC1CAD5A260058771F /* ReportViewController.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -400,6 +412,7 @@
 				B4B91BAB1C96BE5A00172D76 /* moreCell.xib */,
 				7B8E2F201C9C34B8007E90C4 /* signalCell.xib */,
 				7B82F02F1CA046D6000A7E3D /* signalcelllist.xib */,
+				7B445BEE1CAD5CE10058771F /* reportlistcell.xib */,
 			);
 			name = XIB;
 			sourceTree = "<group>";
@@ -641,6 +654,7 @@
 				B4C8AB0A1C8D25D800DBC035 /* bottom_signallist.png in Resources */,
 				B4C8AA9F1C8D22E700DBC035 /* Main.storyboard in Resources */,
 				B447CF451C8FFE0C004C7FCD /* serverconfigview.xib in Resources */,
+				7B445BEF1CAD5CE10058771F /* reportlistcell.xib in Resources */,
 				7B47E9671C90661D00CCB3A8 /* progress_6.png in Resources */,
 				B4C8AB531C8D25D900DBC035 /* subgridviewbg_selected_old.png in Resources */,
 				B4C8AB291C8D25D800DBC035 /* listviewbg_normal.png in Resources */,
@@ -670,12 +684,14 @@
 				7BF10E911CA6B9D6007771BB /* SignalControlViewCOntroller.m in Sources */,
 				B4C8AA991C8D22E700DBC035 /* AppDelegate.m in Sources */,
 				7BFBC4FE1C96DEF7007B9E2F /* moreCell.m in Sources */,
+				7B445BF21CAD637C0058771F /* ReportListCell.m in Sources */,
 				B447CF491C900465004C7FCD /* ServerConfigView.m in Sources */,
 				7B82F0331CA049D3000A7E3D /* signalCelllist.m in Sources */,
 				B4C8AA961C8D22E700DBC035 /* main.m in Sources */,
 				7BBB66291C9999AF0095FB4A /* AlertAndSingalViewController.m in Sources */,
 				B4C8AB5F1C8D2A2900DBC035 /* LoginViewController.m in Sources */,
 				7BC12E771CA2D6C200CF3610 /* SignalTableView.m in Sources */,
+				7B445BED1CAD5A260058771F /* ReportViewController.m in Sources */,
 				7BEC40071C98380500D0CDE2 /* MoreViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
