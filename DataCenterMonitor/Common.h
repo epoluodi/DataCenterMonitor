@@ -50,6 +50,9 @@
 
 //报告
 #define GetListCruiseReport @"GetListCruiseReport"
+#define GetCruiseReportDetail @"GetCruiseReportDetail"
+
+
 #import <Foundation/Foundation.h>
 #import <Common/FileCommon.h>
 #import <Common/PublicCommon.h>

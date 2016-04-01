@@ -1,46 +1,56 @@
 //
-//  ReportViewController.m
+//  ReportViewDetail.m
 //  DataCenterMonitor
 //
-//  Created by 程嘉雯 on 16/3/31.
+//  Created by Stereo on 16/4/1.
 //  Copyright © 2016年 pxzdh. All rights reserved.
 //
 
-#import "ReportViewController.h"
 #import "ReportViewDetail.h"
 
-@interface ReportViewController ()
+@interface ReportViewDetail ()
 
 @end
 
-@implementation ReportViewController
+@implementation ReportViewDetail
 @synthesize table;
+@synthesize CRID,viewmode;
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     table.backgroundColor = [UIColor clearColor];
-    UINib *nib=[UINib nibWithNibName:@"reportlistcell" bundle:nil];
-    [table registerNib:nib forCellReuseIdentifier:@"cell"];
-    table.dataSource=self;
-    table.delegate=self;
+
+ 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self clickquery:nil];
+        [self loadReportDetail];
     });
     // Do any additional setup after loading the view.
 }
 
 
 
+
 #pragma mark table委托
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    if (detailDict)
+    {
+        NSArray *arry =[detailDict objectForKey:@"CruiseState"];
+        return [arry count];
+    }
+    return 0;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (reportlist)
-        return [reportlist count];
+    
+    
+    if (detailDict)
+    {
+        NSArray *arry =[detailDict objectForKey:@"CruiseState"];
+        NSDictionary *d = [arry objectAtIndex:section];
+        NSArray* arrysub = [d objectForKey:@"SubType"];
+        return [arrysub count];
+    }
     return 0;
     
 }
@@ -62,13 +72,14 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    ReportListCell *cell = [table dequeueReusableCellWithIdentifier:@"cell"];
-    NSDictionary *d = [reportlist objectAtIndex:indexPath.row];
-    cell.ClerkName.text = [NSString stringWithFormat:@"巡检人:%@", [d objectForKey:@"ClerkName"]];
-    cell.ShowCruiseType.text = [d objectForKey:@"ShowCruiseType"];
-    cell.CruiseTime.text =[d objectForKey:@"CruiseTime"];
-    cell.backgroundColor = [UIColor clearColor];
-    return cell;
+//    ReportListCell *cell = [table dequeueReusableCellWithIdentifier:@"cell"];
+//    NSDictionary *d = [reportlist objectAtIndex:indexPath.row];
+//    cell.ClerkName.text = [NSString stringWithFormat:@"巡检人:%@", [d objectForKey:@"ClerkName"]];
+//    cell.ShowCruiseType.text = [d objectForKey:@"ShowCruiseType"];
+//    cell.CruiseTime.text =[d objectForKey:@"CruiseTime"];
+//    cell.backgroundColor = [UIColor clearColor];
+//    return cell;
+    return nil;
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -81,9 +92,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *d = [reportlist objectAtIndex:indexPath.row];
-    cRid = [d objectForKey:@"CRID"];
-    [self performSegueWithIdentifier:@"showreportdetail" sender:self];
+
     
 }
 
@@ -91,13 +100,15 @@
 #pragma mark -
 
 
+
+
 /**********************
- 函数名：loadReportList
- 描述:加载报告列表
+ 函数名：loadReportDetail
+ 描述:加载报告详细界面
  参数：
  返回：
  **********************/
--(void)loadReportList
+-(void)loadReportDetail
 {
     loadview= [[LoadingView alloc] init];
     [loadview setImages:[Common initLoadingImages]];
@@ -107,10 +118,10 @@
     
     dispatch_async([Common getThreadQueue], ^{
         
-        HttpClass *httpclass = [[HttpClass alloc] init:[Common HttpString:GetListCruiseReport]];
+        HttpClass *httpclass = [[HttpClass alloc] init:[Common HttpString:GetCruiseReportDetail]];
         [httpclass addParamsString:@"clerkStationID" values:[Common DefaultCommon].ClerkStationID];
         [httpclass addParamsString:@"clerkID" values:[Common DefaultCommon].ClerkID];
-        
+        [httpclass addParamsString:@"cRID" values:CRID];
         
         NSData *data = [httpclass httprequest:[httpclass getDataForArrary]];
         NSString *result = [httpclass getXmlString:data];
@@ -126,23 +137,31 @@
         });
         if (!result)
         {
-     
+            
             [Common NetErrorAlert:@"信息获取失败"];
+            dispatch_async([Common getThreadMainQueue], ^{
+                
+                [self clickreturn:nil];
+            });
             return ;
         }
-        reportlist = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
+        detailDict = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
         
         
-        if (!reportlist)
+        if (!detailDict)
         {
             [Common NetErrorAlert:@"没有数据"];
+            dispatch_async([Common getThreadMainQueue], ^{
+                
+                [self clickreturn:nil];
+            });
             return;
         }
         
         
         dispatch_async([Common getThreadMainQueue], ^{
             
-            [table reloadData];
+//            [table reloadData];
         });
         
         
@@ -151,13 +170,21 @@
 }
 
 
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 //系统方法
 -(UIStatusBarStyle)preferredStatusBarStyle
@@ -167,25 +194,10 @@
 
 
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- 
-    if ([segue.identifier isEqualToString:@"showreportdetail"])
-    {
-        ReportViewDetail *vc = (ReportViewDetail *)[segue destinationViewController];
-        vc.CRID = cRid;
-        return;
-    }
-
-}
-
-//点击查询
-- (IBAction)clickquery:(id)sender {
-    [self loadReportList];
-}
-
-//点击返回
 - (IBAction)clickreturn:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
 
+- (IBAction)clickmore:(id)sender {
 }
 @end

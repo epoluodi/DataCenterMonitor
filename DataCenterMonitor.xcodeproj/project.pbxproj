@@ -36,6 +36,7 @@
 		B445BCCF1C8EA7AD00EF4907 /* Common.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B445BCCC1C8EA57700EF4907 /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B447CF451C8FFE0C004C7FCD /* serverconfigview.xib in Resources */ = {isa = PBXBuildFile; fileRef = B447CF441C8FFE0C004C7FCD /* serverconfigview.xib */; };
 		B447CF491C900465004C7FCD /* ServerConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = B447CF481C900465004C7FCD /* ServerConfigView.m */; };
+		B492CC511CAE127000E00738 /* ReportViewDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = B492CC501CAE127000E00738 /* ReportViewDetail.m */; };
 		B4B91BA71C9671C700172D76 /* alertlistathome.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4B91BA61C9671C700172D76 /* alertlistathome.xib */; };
 		B4B91BAA1C9697B300172D76 /* alertlisthome.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B91BA91C9697B300172D76 /* alertlisthome.m */; };
 		B4B91BAC1C96BE5A00172D76 /* moreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4B91BAB1C96BE5A00172D76 /* moreCell.xib */; };
@@ -177,6 +178,8 @@
 		B447CF441C8FFE0C004C7FCD /* serverconfigview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = serverconfigview.xib; sourceTree = "<group>"; };
 		B447CF471C900465004C7FCD /* ServerConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConfigView.h; sourceTree = "<group>"; };
 		B447CF481C900465004C7FCD /* ServerConfigView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConfigView.m; sourceTree = "<group>"; };
+		B492CC4F1CAE127000E00738 /* ReportViewDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportViewDetail.h; sourceTree = "<group>"; };
+		B492CC501CAE127000E00738 /* ReportViewDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportViewDetail.m; sourceTree = "<group>"; };
 		B4B91BA61C9671C700172D76 /* alertlistathome.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = alertlistathome.xib; sourceTree = "<group>"; };
 		B4B91BA81C9697B300172D76 /* alertlisthome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = alertlisthome.h; sourceTree = "<group>"; };
 		B4B91BA91C9697B300172D76 /* alertlisthome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = alertlisthome.m; sourceTree = "<group>"; };
@@ -399,6 +402,8 @@
 				7BF10E901CA6B9D6007771BB /* SignalControlViewCOntroller.m */,
 				7B445BEB1CAD5A260058771F /* ReportViewController.h */,
 				7B445BEC1CAD5A260058771F /* ReportViewController.m */,
+				B492CC4F1CAE127000E00738 /* ReportViewDetail.h */,
+				B492CC501CAE127000E00738 /* ReportViewDetail.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -683,6 +688,7 @@
 				7BD58E8C1C93CE7D001360AE /* GridCell.m in Sources */,
 				7BF10E911CA6B9D6007771BB /* SignalControlViewCOntroller.m in Sources */,
 				B4C8AA991C8D22E700DBC035 /* AppDelegate.m in Sources */,
+				B492CC511CAE127000E00738 /* ReportViewDetail.m in Sources */,
 				7BFBC4FE1C96DEF7007B9E2F /* moreCell.m in Sources */,
 				7B445BF21CAD637C0058771F /* ReportListCell.m in Sources */,
 				B447CF491C900465004C7FCD /* ServerConfigView.m in Sources */,
