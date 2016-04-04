@@ -17,7 +17,7 @@
 @synthesize table;
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     table.backgroundColor = [UIColor clearColor];
     UINib *nib=[UINib nibWithNibName:@"reportlistcell" bundle:nil];
     [table registerNib:nib forCellReuseIdentifier:@"cell"];
@@ -50,11 +50,27 @@
     return 62;
 }
 
-
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if ([reportlist count]> 0)
+        return 50;
+    return 1;
+}
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *v= [[UIView alloc] init];
+    if ([reportlist count] > 0){
+        v.frame=CGRectMake(0, 15, [PublicCommon GetALLScreen].size.width, 50);
+        btnmakeReport = [[UIButton alloc] init];
+        btnmakeReport.frame=CGRectMake([PublicCommon GetALLScreen].size.width /2 - ([PublicCommon GetALLScreen].size.width -150) /2, 5, [PublicCommon GetALLScreen].size.width - 150, 30);
+        [btnmakeReport setBackgroundImage:[UIImage imageNamed:@"longlongnormalbutton_normal"] forState:UIControlStateNormal];
+        [btnmakeReport setBackgroundImage:[UIImage imageNamed:@"longlongnormalbutton_down"] forState:UIControlStateHighlighted];
+        [btnmakeReport setTitle:@"生成报告" forState:UIControlStateNormal];
+        [btnmakeReport addTarget:self action:@selector(clickmakereport) forControlEvents:UIControlEventTouchUpInside];
+        [v addSubview:btnmakeReport];
+    }
+    
     return v;
 }
 
@@ -91,6 +107,13 @@
 #pragma mark -
 
 
+//生成报告
+-(void)clickmakereport
+{
+    cRid=nil;
+     [self performSegueWithIdentifier:@"showreportdetail" sender:self];
+}
+
 /**********************
  函数名：loadReportList
  描述:加载报告列表
@@ -126,7 +149,7 @@
         });
         if (!result)
         {
-     
+            
             [Common NetErrorAlert:@"信息获取失败"];
             return ;
         }
@@ -168,14 +191,14 @@
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- 
+    
     if ([segue.identifier isEqualToString:@"showreportdetail"])
     {
         ReportViewDetail *vc = (ReportViewDetail *)[segue destinationViewController];
         vc.CRID = cRid;
         return;
     }
-
+    
 }
 
 //点击查询
@@ -186,6 +209,6 @@
 //点击返回
 - (IBAction)clickreturn:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-
+    
 }
 @end

@@ -11,11 +11,12 @@
 #import <Common/LoadingView.h>
 #import "HttpClass.h"
 #import <Common/PublicCommon.h>
+#import "ReportCell.h"
 
 
 
 typedef enum {
-    EDITMODE,BROWERSER,
+    EDITMODE,BROWERSERMODE,
 } ViewMode;
 
 
@@ -23,12 +24,16 @@ typedef enum {
 {
     __block LoadingView *loadview;
     NSDictionary *detailDict;
-
+    ViewMode viewmode;
 }
+
 
 @property (weak, nonatomic) IBOutlet UITableView *table;
 @property (weak,nonatomic)NSString *CRID;
-@property (assign)ViewMode viewmode;
+@property (weak, nonatomic) IBOutlet UIButton *btnmore;
+@property (weak, nonatomic) IBOutlet UILabel *bartitle;
+@property (weak, nonatomic) IBOutlet UILabel *reportinfo;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabletop;
 
 
 

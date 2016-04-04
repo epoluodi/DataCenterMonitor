@@ -19,6 +19,7 @@
     __block LoadingView *loadview;
     NSArray *reportlist;
     NSString *cRid;
+    UIButton *btnmakeReport;
 }
 @property (weak, nonatomic) IBOutlet UITableView *table;
 
