@@ -38,6 +38,8 @@
 		B445BCCF1C8EA7AD00EF4907 /* Common.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B445BCCC1C8EA57700EF4907 /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B447CF451C8FFE0C004C7FCD /* serverconfigview.xib in Resources */ = {isa = PBXBuildFile; fileRef = B447CF441C8FFE0C004C7FCD /* serverconfigview.xib */; };
 		B447CF491C900465004C7FCD /* ServerConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = B447CF481C900465004C7FCD /* ServerConfigView.m */; };
+		B44942921CB4F7C6007B56A7 /* reportmemocell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B44942911CB4F7C6007B56A7 /* reportmemocell.xib */; };
+		B44942951CB4F89D007B56A7 /* Reportmemocell.m in Sources */ = {isa = PBXBuildFile; fileRef = B44942941CB4F89D007B56A7 /* Reportmemocell.m */; };
 		B492CC511CAE127000E00738 /* ReportViewDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = B492CC501CAE127000E00738 /* ReportViewDetail.m */; };
 		B4B91BA71C9671C700172D76 /* alertlistathome.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4B91BA61C9671C700172D76 /* alertlistathome.xib */; };
 		B4B91BAA1C9697B300172D76 /* alertlisthome.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B91BA91C9697B300172D76 /* alertlisthome.m */; };
@@ -183,6 +185,9 @@
 		B447CF441C8FFE0C004C7FCD /* serverconfigview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = serverconfigview.xib; sourceTree = "<group>"; };
 		B447CF471C900465004C7FCD /* ServerConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConfigView.h; sourceTree = "<group>"; };
 		B447CF481C900465004C7FCD /* ServerConfigView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConfigView.m; sourceTree = "<group>"; };
+		B44942911CB4F7C6007B56A7 /* reportmemocell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = reportmemocell.xib; sourceTree = "<group>"; };
+		B44942931CB4F89D007B56A7 /* Reportmemocell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reportmemocell.h; sourceTree = "<group>"; };
+		B44942941CB4F89D007B56A7 /* Reportmemocell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reportmemocell.m; sourceTree = "<group>"; };
 		B492CC4F1CAE127000E00738 /* ReportViewDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportViewDetail.h; sourceTree = "<group>"; };
 		B492CC501CAE127000E00738 /* ReportViewDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportViewDetail.m; sourceTree = "<group>"; };
 		B4B91BA61C9671C700172D76 /* alertlistathome.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = alertlistathome.xib; sourceTree = "<group>"; };
@@ -343,6 +348,8 @@
 				7B445BF11CAD637C0058771F /* ReportListCell.m */,
 				7B445BF51CB14F770058771F /* ReportCell.h */,
 				7B445BF61CB14F770058771F /* ReportCell.m */,
+				B44942931CB4F89D007B56A7 /* Reportmemocell.h */,
+				B44942941CB4F89D007B56A7 /* Reportmemocell.m */,
 			);
 			name = xibClass;
 			sourceTree = "<group>";
@@ -426,6 +433,7 @@
 				7B82F02F1CA046D6000A7E3D /* signalcelllist.xib */,
 				7B445BEE1CAD5CE10058771F /* reportlistcell.xib */,
 				7B445BF31CB14DB00058771F /* reportcell.xib */,
+				B44942911CB4F7C6007B56A7 /* reportmemocell.xib */,
 			);
 			name = XIB;
 			sourceTree = "<group>";
@@ -561,7 +569,6 @@
 				TargetAttributes = {
 					B4C8AA901C8D22E700DBC035 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 6K7PURQQL6;
 					};
 				};
 			};
@@ -614,6 +621,7 @@
 				B4C8AB3E1C8D25D900DBC035 /* notifyicon_newalarm.png in Resources */,
 				B4C8AB111C8D25D800DBC035 /* buttonright_normal.png in Resources */,
 				B4C8AB2E1C8D25D900DBC035 /* logintable_logo_password.png in Resources */,
+				B44942921CB4F7C6007B56A7 /* reportmemocell.xib in Resources */,
 				B4C8AB321C8D25D900DBC035 /* longlongnormalbutton_normal.png in Resources */,
 				B4C8AB171C8D25D800DBC035 /* equipmenttype_empty.png in Resources */,
 				B4C8AB3F1C8D25D900DBC035 /* openflag.png in Resources */,
@@ -709,6 +717,7 @@
 				B4C8AB5F1C8D2A2900DBC035 /* LoginViewController.m in Sources */,
 				7BC12E771CA2D6C200CF3610 /* SignalTableView.m in Sources */,
 				7B445BED1CAD5A260058771F /* ReportViewController.m in Sources */,
+				B44942951CB4F89D007B56A7 /* Reportmemocell.m in Sources */,
 				7BEC40071C98380500D0CDE2 /* MoreViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -822,6 +831,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DataCenterMonitor/framework",
@@ -835,6 +845,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.pxzdh.DataCenterMonitor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -844,6 +855,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DataCenterMonitor/framework",
@@ -857,6 +869,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.pxzdh.DataCenterMonitor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

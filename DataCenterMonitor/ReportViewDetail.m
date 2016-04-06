@@ -38,8 +38,12 @@
         [btnmore setTitle:@"保存" forState:UIControlStateNormal];
     }
     
-
-
+    UINib *nib = [UINib nibWithNibName:@"reportmemocell" bundle:nil];
+    [table registerNib:nib forCellReuseIdentifier:@"cell2"];
+  
+    for (int i =0; i<5; i++) {
+        heightlist[i] = 71;
+    }
     
     // Do any additional setup after loading the view.
 }
@@ -78,7 +82,7 @@
         case 5:
             return 1;
         case 6:
-            return 4;
+            return 5;
     }
     
     return 0;
@@ -86,7 +90,12 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
     
+    if (indexPath.section  == 6)
+    {
+        return heightlist[indexPath.row];
+    }
     return 71;
 }
 
@@ -142,13 +151,32 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell2;
+    NSArray *arry;
+    NSDictionary *dict;
     if (indexPath.section==6)
     {
-        
-        cell2 = [[UITableViewCell alloc] init];
-        cell2.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell2.textLabel.text=@"空调出现告警空调出现告警空调出现告警空调出现告警空调出现告警空调出现告警空调出现告警空调出现告警";
-        
+        Reportmemocell *cell2 = (Reportmemocell*)[table dequeueReusableCellWithIdentifier:@"cell2"];
+        cell2.orderid.text = [NSString stringWithFormat:@"序号:%d",indexPath.row+1];
+        if (viewmode == EDITMODE)
+        {
+            [cell2 setCellStyle:UITableViewCellAccessoryDisclosureIndicator];
+            [cell2 setStrMemo:@" "];
+            heightlist[indexPath.row] = 71;
+        }
+        else
+        {
+            [cell2 setCellStyle:UITableViewCellAccessoryNone];
+            arry = [detailDict objectForKey:@"CruiseErrorRecord"];
+            if (indexPath.row+1<= [arry count] ){
+                dict =arry[indexPath.row];
+                [cell2 setStrMemo:[dict objectForKey:@"ErrorDescription"]];
+                heightlist[indexPath.row] = cell2.Height;
+            }
+            else{
+                [cell2 setStrMemo:@"空"];
+                heightlist[indexPath.row] = 71;
+            }
+        }
         
         return  cell2;
     }
@@ -243,8 +271,8 @@
                 cell.celltitile.text = @"巡检方式";
                 [cell changeMode];
                 break;
-     
-
+                
+                
         }
         
         
@@ -270,8 +298,8 @@
                 return cell;
                 
             }
-            NSArray *arry = [detailDict objectForKey:@"CruiseState"];
-            NSDictionary *dict =arry[indexPath.section];
+            arry = [detailDict objectForKey:@"CruiseState"];
+            dict =arry[indexPath.section];
             NSArray *arry2 =[dict objectForKey:@"CruiseSubType"];
             NSDictionary *dict2 =arry2[indexPath.row];
             if ([[dict2  objectForKey:@"CState"] isEqualToString:@"1"])

@@ -12,7 +12,7 @@
 #import "HttpClass.h"
 #import <Common/PublicCommon.h>
 #import "ReportCell.h"
-
+#import "Reportmemocell.h"
 
 
 typedef enum {
@@ -25,6 +25,7 @@ typedef enum {
     __block LoadingView *loadview;
     NSDictionary *detailDict;
     ViewMode viewmode;
+    float heightlist[5] ;
 }
 
 
