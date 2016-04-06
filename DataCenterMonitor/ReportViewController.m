@@ -23,13 +23,16 @@
     [table registerNib:nib forCellReuseIdentifier:@"cell"];
     table.dataSource=self;
     table.delegate=self;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self clickquery:nil];
-    });
+
     // Do any additional setup after loading the view.
 }
 
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self clickquery:nil];
+    });
+}
 
 #pragma mark table委托
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

@@ -442,7 +442,94 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+//点击删除或者是保存
 - (IBAction)clickmore:(id)sender {
+    if (viewmode == BROWERSERMODE){
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否确认删除" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * action =[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction * action1 =[UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                    [self delReport];
+                }];
+        
+        [alert addAction:action];
+        [alert addAction:action1];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    else
+    {
+        
+    }
     
 }
+
+
+
+/**********************
+ 函数名：delReport
+ 描述:删除报告
+ 参数：
+ 返回：
+ **********************/
+-(void)delReport
+{
+    loadview= [[LoadingView alloc] init];
+    [loadview setImages:[Common initLoadingImages]];
+    [self.view addSubview:loadview];
+    [loadview StartAnimation];
+    
+    
+    dispatch_async([Common getThreadQueue], ^{
+        
+        HttpClass *httpclass = [[HttpClass alloc] init:[Common HttpString:DeleteCruiseReport]];
+        [httpclass addParamsString:@"clerkStationID" values:[Common DefaultCommon].ClerkStationID];
+        [httpclass addParamsString:@"clerkID" values:[Common DefaultCommon].ClerkID];
+        [httpclass addParamsString:@"cRID" values:CRID];
+        
+        NSData *data = [httpclass httprequest:[httpclass getDataForArrary]];
+        NSString *result = [httpclass getXmlString:data];
+        NSLog(@"结果 %@",result);
+        dispatch_async([Common getThreadMainQueue], ^{
+            
+            if (loadview){
+                [loadview StopAnimation];
+                [loadview removeFromSuperview];
+                loadview = nil;
+            }
+            
+        });
+        if (!result)
+        {
+            
+            [Common NetErrorAlert:@"删除失败"];
+            return ;
+        }
+        NSDictionary *dictdata = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
+        
+        
+        if (!dictdata)
+        {
+            [Common NetErrorAlert:@"删除失败"];
+            return;
+        }
+        
+        
+        dispatch_async([Common getThreadMainQueue], ^{
+            NSDictionary *d = [dictdata objectForKey:@"data"];
+            if ([[dictdata objectForKey:@"success"] isEqualToString:@"true"])
+                [Common NetOKAlert:[d objectForKey:@"runMsg"]];
+            else
+                [Common NetErrorAlert:[d objectForKey:@"runMsg"]];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        });
+        
+        
+    });
+    
+}
+
+
 @end

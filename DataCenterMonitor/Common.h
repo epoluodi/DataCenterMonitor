@@ -51,7 +51,8 @@
 //报告
 #define GetListCruiseReport @"GetListCruiseReport"
 #define GetCruiseReportDetail @"GetCruiseReportDetail"
-
+#define DeleteCruiseReport @"DeleteCruiseReport"
+#define SaveCruiseReport @"SaveCruiseReport"
 
 #import <Foundation/Foundation.h>
 #import <Common/FileCommon.h>
