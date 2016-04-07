@@ -974,10 +974,10 @@
             </objects>
             <point key="canvasLocation" x="633" y="1862"/>
         </scene>
-        <!--View Controller-->
+        <!--Memo View Controller-->
         <scene sceneID="N3D-nI-sts">
             <objects>
-                <viewController id="yMx-a1-8La" sceneMemberID="viewController">
+                <viewController id="yMx-a1-8La" customClass="MemoViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cHk-I4-7v8"/>
                         <viewControllerLayoutGuide type="bottom" id="k2V-sP-QsC"/>
@@ -1009,6 +1009,7 @@
                                         <connections>
                                             <action selector="clickreturn:" destination="Ehf-hc-Kcp" eventType="touchUpInside" id="2Io-MN-lfY"/>
                                             <action selector="clickreturn:" destination="foG-G2-bs7" eventType="touchUpInside" id="4Nv-Ai-ENm"/>
+                                            <action selector="clickreturn:" destination="yMx-a1-8La" eventType="touchUpInside" id="80U-Zy-eld"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1041,6 +1042,9 @@
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="memotxt" destination="W3J-hM-nNU" id="YFk-40-hI2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yg3-pa-2i4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

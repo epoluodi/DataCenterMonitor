@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B0A4F7B1CB69567002806A9 /* MemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0A4F7A1CB69567002806A9 /* MemoViewController.m */; };
 		7B445BED1CAD5A260058771F /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B445BEC1CAD5A260058771F /* ReportViewController.m */; };
 		7B445BEF1CAD5CE10058771F /* reportlistcell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B445BEE1CAD5CE10058771F /* reportlistcell.xib */; };
 		7B445BF21CAD637C0058771F /* ReportListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B445BF11CAD637C0058771F /* ReportListCell.m */; };
@@ -140,6 +141,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7B0A4F791CB69567002806A9 /* MemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoViewController.h; sourceTree = "<group>"; };
+		7B0A4F7A1CB69567002806A9 /* MemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoViewController.m; sourceTree = "<group>"; };
 		7B445BEB1CAD5A260058771F /* ReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportViewController.h; sourceTree = "<group>"; };
 		7B445BEC1CAD5A260058771F /* ReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportViewController.m; sourceTree = "<group>"; };
 		7B445BEE1CAD5CE10058771F /* reportlistcell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = reportlistcell.xib; sourceTree = "<group>"; };
@@ -418,6 +421,8 @@
 				7B445BEC1CAD5A260058771F /* ReportViewController.m */,
 				B492CC4F1CAE127000E00738 /* ReportViewDetail.h */,
 				B492CC501CAE127000E00738 /* ReportViewDetail.m */,
+				7B0A4F791CB69567002806A9 /* MemoViewController.h */,
+				7B0A4F7A1CB69567002806A9 /* MemoViewController.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -569,6 +574,7 @@
 				TargetAttributes = {
 					B4C8AA901C8D22E700DBC035 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 6K7PURQQL6;
 					};
 				};
 			};
@@ -712,6 +718,7 @@
 				7B445BF71CB14F770058771F /* ReportCell.m in Sources */,
 				B447CF491C900465004C7FCD /* ServerConfigView.m in Sources */,
 				7B82F0331CA049D3000A7E3D /* signalCelllist.m in Sources */,
+				7B0A4F7B1CB69567002806A9 /* MemoViewController.m in Sources */,
 				B4C8AA961C8D22E700DBC035 /* main.m in Sources */,
 				7BBB66291C9999AF0095FB4A /* AlertAndSingalViewController.m in Sources */,
 				B4C8AB5F1C8D2A2900DBC035 /* LoginViewController.m in Sources */,
@@ -832,6 +839,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DataCenterMonitor/framework",
@@ -856,6 +864,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DataCenterMonitor/framework",

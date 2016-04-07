@@ -30,7 +30,7 @@
     }
     else{
         
-        
+        memodict = [[NSMutableDictionary alloc] init];
         bartitle.text=@"生成报告";
         table.delegate=self;
         table.dataSource=self;
@@ -160,7 +160,7 @@
         if (viewmode == EDITMODE)
         {
             [cell2 setCellStyle:UITableViewCellAccessoryDisclosureIndicator];
-            [cell2 setStrMemo:@" "];
+            [cell2 setStrMemo:[memodict objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
             heightlist[indexPath.row] = 71;
         }
         else
@@ -333,7 +333,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (indexPath.section == 6)
+    {
+        selectmemo = indexPath.row;
+        [self performSegueWithIdentifier:@"showeditmemo" sender:self];
+    }
     
 }
 
@@ -420,15 +424,17 @@
 }
 
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"showeditmemo"])
+    {
+        MemoViewController *vc = (MemoViewController *)[segue destinationViewController];
+        vc.viewcontroller = self;
+        vc.index = selectmemo;
+        return;
+    }
+    
+}
 
 //系统方法
 -(UIStatusBarStyle)preferredStatusBarStyle
@@ -531,5 +537,14 @@
     
 }
 
+
+//设置备注信息
+//str 备注内容
+//index 备注索引
+-(void)setMemoStr:(NSString *)str index:(int)index
+{
+    [memodict removeObjectForKey:[NSString stringWithFormat:@"%d",index]];
+    [memodict setObject:str forKey:[NSString stringWithFormat:@"%d",index]];
+}
 
 @end

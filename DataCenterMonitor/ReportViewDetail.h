@@ -13,7 +13,7 @@
 #import <Common/PublicCommon.h>
 #import "ReportCell.h"
 #import "Reportmemocell.h"
-
+#import "MemoViewController.h"
 
 typedef enum {
     EDITMODE,BROWERSERMODE,
@@ -26,6 +26,8 @@ typedef enum {
     NSDictionary *detailDict;
     ViewMode viewmode;
     float heightlist[5] ;
+    NSMutableDictionary *memodict;
+    int selectmemo;
 }
 
 
@@ -41,6 +43,6 @@ typedef enum {
 - (IBAction)clickreturn:(id)sender;
 - (IBAction)clickmore:(id)sender;
 
-
+-(void)setMemoStr:(NSString *)str index:(int)index;
 
 @end
