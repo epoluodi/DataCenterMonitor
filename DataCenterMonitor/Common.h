@@ -54,6 +54,10 @@
 #define DeleteCruiseReport @"DeleteCruiseReport"
 #define SaveCruiseReport @"SaveCruiseReport"
 
+
+//推送
+#define SaveAlarmPushPerson @"SaveAlarmPushPerson"
+
 #import <Foundation/Foundation.h>
 #import <Common/FileCommon.h>
 #import <Common/PublicCommon.h>

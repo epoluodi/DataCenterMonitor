@@ -46,7 +46,7 @@
     [gridview addSubview:serverrefreshtime];
     [self updateLayout];
     [self InitscrollView];
-   
+
     gridview.backgroundColor=[UIColor clearColor];
     imgview1 = [[UIImageView alloc] init];
     imgview1.image= [UIImage imageNamed:@"closeflag"];
@@ -72,10 +72,17 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    serverrefreshtime.frame = CGRectMake(10, gridview.frame.size.height - 25, [PublicCommon GetALLScreen].size.width-20, 30);
+
     [self getAlertCounts];
 }
 
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    if (alertviewheight.constant==76){
+        serverrefreshtime.frame = CGRectMake(10, gridview.frame.size.height - 25, [PublicCommon GetALLScreen].size.width-20, 30);
+    }
+}
 #pragma mark 网络交互
 /**********************
  函数名：LoadEquTypeBase
@@ -678,7 +685,7 @@
         }
     }
 
-    
+
     [UIView commitAnimations];
     
 

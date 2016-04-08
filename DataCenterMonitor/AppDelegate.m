@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-
+#import "HttpClass.h"
+#import "Common.h"
 @interface AppDelegate ()
 
 @end
@@ -16,9 +17,46 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings
+                                                                         settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge)
+                                                                         categories:nil]];
+    
+    
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
+    [[UIApplication sharedApplication]setApplicationIconBadgeNumber:0];//进入
     // Override point for customization after application launch.
     return YES;
 }
+
+
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    _token = [[[[deviceToken description]
+                             stringByReplacingOccurrencesOfString:@"<" withString:@""]
+                            stringByReplacingOccurrencesOfString:@">" withString:@""]
+                           stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+        NSLog(@"regisger success:%@",deviceToken);
+}
+
+
+
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    [[UIApplication sharedApplication]setApplicationIconBadgeNumber:0];
+    // 处理推送消息
+    NSLog(@"userinfo:%@",userInfo);
+//    NSString *title =[[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+//    NSLog(@"收到推送消息:%@",[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]);
+//    
+//    UIAlertView *alert  = [[UIAlertView alloc] initWithTitle:@"通知" message:title delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+//    [alert show];
+    
+}
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -35,6 +73,7 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    sleep(1);
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
