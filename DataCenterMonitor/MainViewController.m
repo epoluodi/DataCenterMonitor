@@ -583,8 +583,9 @@
                     loadview = nil;
                 }
             });
-            [Common NetErrorAlert:@"没有数据"];
-            return;
+            dataresult = nil;
+//            [Common NetErrorAlert:@"没有数据"];
+//            return;
         }
   
         

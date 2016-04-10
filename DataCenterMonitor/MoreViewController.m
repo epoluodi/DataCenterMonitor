@@ -258,9 +258,12 @@
     if (sw.on)
     {
         [userinfo setInteger:1 forKey:@"IsNotification"];
+          [[UIApplication sharedApplication] registerForRemoteNotifications];
     }
-    else
+    else{
         [userinfo setInteger:0 forKey:@"IsNotification"];
+        [[UIApplication sharedApplication] unregisterForRemoteNotifications];
+    }
 }
 
 //清除缓存

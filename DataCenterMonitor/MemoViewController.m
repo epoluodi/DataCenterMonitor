@@ -13,12 +13,17 @@
 @end
 
 @implementation MemoViewController
-@synthesize viewcontroller,memotxt,index;
+@synthesize viewcontroller,memotxt,index,str;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    memotxt.inputAccessoryView = [PublicCommon getInputToolbar:self sel:@selector(closeinput)];
+    memotxt.text=str;
     // Do any additional setup after loading the view.
 }
-
+-(void)closeinput
+{
+    [memotxt resignFirstResponder];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

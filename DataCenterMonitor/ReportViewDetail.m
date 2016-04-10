@@ -19,6 +19,7 @@
     [super viewDidLoad];
     table.backgroundColor = [UIColor clearColor];
     reportinfo.text = @"";
+    celllist = [[NSMutableArray alloc] init];
     if (CRID){
         [btnmore setTitle:@"删除" forState:UIControlStateNormal];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -40,7 +41,7 @@
     
     UINib *nib = [UINib nibWithNibName:@"reportmemocell" bundle:nil];
     [table registerNib:nib forCellReuseIdentifier:@"cell2"];
-  
+    
     for (int i =0; i<5; i++) {
         heightlist[i] = 71;
     }
@@ -90,7 +91,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    
     
     if (indexPath.section  == 6)
     {
@@ -160,8 +161,10 @@
         if (viewmode == EDITMODE)
         {
             [cell2 setCellStyle:UITableViewCellAccessoryDisclosureIndicator];
+            
             [cell2 setStrMemo:[memodict objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]]];
-            heightlist[indexPath.row] = 71;
+            heightlist[indexPath.row] = cell2.Height;
+            
         }
         else
         {
@@ -180,6 +183,7 @@
         
         return  cell2;
     }
+ 
     ReportCell *cell = [table dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"%i%i",indexPath.section,indexPath.row]];
     if (!cell)
     {
@@ -317,6 +321,7 @@
             
         }
         [cell setCellInfo:indexPath.section subid:indexPath.row];
+        [celllist addObject:cell];
         return cell;
     }
     else
@@ -333,10 +338,12 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 6)
-    {
-        selectmemo = indexPath.row;
-        [self performSegueWithIdentifier:@"showeditmemo" sender:self];
+    if (viewmode == EDITMODE){
+        if (indexPath.section == 6)
+        {
+            selectmemo = indexPath.row;
+            [self performSegueWithIdentifier:@"showeditmemo" sender:self];
+        }
     }
     
 }
@@ -431,6 +438,7 @@
         MemoViewController *vc = (MemoViewController *)[segue destinationViewController];
         vc.viewcontroller = self;
         vc.index = selectmemo;
+        vc.str =[memodict objectForKey:[NSString stringWithFormat:@"%d",selectmemo]];
         return;
     }
     
@@ -456,8 +464,8 @@
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否确认删除" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * action =[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction * action1 =[UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                    [self delReport];
-                }];
+            [self delReport];
+        }];
         
         [alert addAction:action];
         [alert addAction:action1];
@@ -467,6 +475,49 @@
     }
     else
     {
+        [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:6] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        
+        
+        __block NSString *cruiseType;
+        __block NSString *listCruiseState;
+        __block NSString *listCruiseErrorRecord;
+   
+        
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            NSMutableArray *arry = [[NSMutableArray alloc] init];
+
+            for (ReportCell *cell in celllist) {
+                
+                if (cell.state.numberOfSegments == 2)
+                {
+                    cruiseType = [NSString stringWithFormat:@"%d",cell.state.selectedSegmentIndex+1];
+                    NSLog(@"巡检类型 %@",cruiseType);
+                    continue;
+                }
+                [arry addObject:[cell getResultString]];
+                
+                
+            }
+           
+            NSLog(@"状态字符串 %@",arry);
+            listCruiseState =[arry componentsJoinedByString:@";"];
+            [arry removeAllObjects];
+            NSString *m;
+            for (int i = 0; i<5; i++) {
+                m=[memodict objectForKey:[NSString stringWithFormat:@"%d",i]];
+                if (!m)
+                    m=@"";
+                [arry addObject:m];
+            }
+            listCruiseErrorRecord =[arry componentsJoinedByString:@";"];
+            
+            [self saveReport:cruiseType listCruiseState:listCruiseState listCruiseErrorRecord:listCruiseErrorRecord];
+        });
+        
+        
+        
+        
         
     }
     
@@ -538,6 +589,72 @@
 }
 
 
+
+/**********************
+ 函数名：saveReport
+ 描述:生成报告
+ 参数：
+ 返回：
+ **********************/
+-(void)saveReport:(NSString*)cruiseType listCruiseState:(NSString *)listCruiseState listCruiseErrorRecord:(NSString *)listCruiseErrorRecord
+{
+    loadview= [[LoadingView alloc] init];
+    [loadview setImages:[Common initLoadingImages]];
+    [self.view addSubview:loadview];
+    [loadview StartAnimation];
+    
+    
+    dispatch_async([Common getThreadQueue], ^{
+        
+        HttpClass *httpclass = [[HttpClass alloc] init:[Common HttpString:SaveCruiseReport]];
+        [httpclass addParamsString:@"clerkStationID" values:[Common DefaultCommon].ClerkStationID];
+        [httpclass addParamsString:@"clerkID" values:[Common DefaultCommon].ClerkID];
+        [httpclass addParamsString:@"cruiseType" values:cruiseType];
+        [httpclass addParamsString:@"listCruiseState" values:listCruiseState];
+        [httpclass addParamsString:@"listCruiseErrorRecord" values:listCruiseErrorRecord];
+        NSData *data = [httpclass httprequest:[httpclass getDataForArrary]];
+        NSString *result = [httpclass getXmlString:data];
+        NSLog(@"结果 %@",result);
+        dispatch_async([Common getThreadMainQueue], ^{
+            
+            if (loadview){
+                [loadview StopAnimation];
+                [loadview removeFromSuperview];
+                loadview = nil;
+            }
+            
+        });
+        if (!result)
+        {
+            
+            [Common NetErrorAlert:@"生成失败"];
+            return ;
+        }
+        NSDictionary *dictdata = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
+        
+        
+        if (!dictdata)
+        {
+            [Common NetErrorAlert:@"生成失败"];
+            return;
+        }
+        
+        
+        dispatch_async([Common getThreadMainQueue], ^{
+            NSDictionary *d = [dictdata objectForKey:@"data"];
+            if ([[dictdata objectForKey:@"success"] isEqualToString:@"true"])
+                [Common NetOKAlert:[d objectForKey:@"runMsg"]];
+            else
+                [Common NetErrorAlert:[d objectForKey:@"runMsg"]];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        });
+        
+        
+    });
+    
+}
+
+
 //设置备注信息
 //str 备注内容
 //index 备注索引
@@ -545,6 +662,7 @@
 {
     [memodict removeObjectForKey:[NSString stringWithFormat:@"%d",index]];
     [memodict setObject:str forKey:[NSString stringWithFormat:@"%d",index]];
+    [table reloadData];
 }
 
 @end

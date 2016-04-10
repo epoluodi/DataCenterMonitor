@@ -11,7 +11,7 @@
 #import <Common/LoadingView.h>
 
 #import "HttpClass.h"
-#import "AppDelegate.h"
+
 
 @class ServerConfigViewController;
 @interface LoginViewController ()
@@ -19,7 +19,7 @@
     ServerConfigView *scv;
     UIView *backview;
     LoadingView *loadview;
-    AppDelegate *app;
+   
 }
 
 @end
@@ -32,7 +32,7 @@
 //系统方法
 - (void)viewDidLoad {
     [super viewDidLoad];
-    app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+
     IsShow = NO;
     // Do any additional setup after loading the view.
 }
@@ -400,25 +400,12 @@
         [Common DefaultCommon].ClerkID =[returndata objectForKey:@"ClerkID"];
         [Common DefaultCommon].ClerkStationID =[returndata objectForKey:@"ClerkStationID"];
         
-        
-        
-        
-        
-        
-        httpclass = [[HttpClass alloc] init:[Common HttpString:SaveAlarmPushPerson]];
-        [httpclass addParamsString:@"deviceID" values:[UIDevice currentDevice].identifierForVendor.UUIDString ];
-        [httpclass addParamsString:@"token" values:app.token];
-        [httpclass addParamsString:@"clerkStationID" values:[Common DefaultCommon].ClerkStationID];
-        [httpclass addParamsString:@"clerkID" values:[Common DefaultCommon].ClerkID];
-        
-        
-        data = [httpclass httprequest:[httpclass getDataForArrary]];
-        result = [httpclass getXmlString:data];
-        NSLog(@"结果 %@",result);
 
+        int isNotification = [userinfo integerForKey:@"IsNotification"];
         
-        
-        
+        if (isNotification ==1)
+            [[UIApplication sharedApplication] registerForRemoteNotifications];
+                
         httpclass = [[HttpClass alloc] init:[Common HttpString:GetStation]];
         [httpclass addParamsString:@"clerkStationID" values:[Common DefaultCommon].ClerkStationID];
         [httpclass addParamsString:@"clerkID" values:[Common DefaultCommon].ClerkID];

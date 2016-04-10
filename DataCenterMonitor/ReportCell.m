@@ -54,6 +54,7 @@
     [state removeAllSegments];
     [state insertSegmentWithTitle:@"现场" atIndex:0 animated:YES];
     [state insertSegmentWithTitle:@"远程" atIndex:1 animated:YES];
+    state.selectedSegmentIndex=0;
 }
 -(void)setCellInfo:(int)bigid subid:(int)subid
 {

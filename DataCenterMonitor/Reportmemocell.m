@@ -16,7 +16,7 @@
     // Initialization code
     
     memo.numberOfLines=0;
-    memo.lineBreakMode = NSLineBreakByCharWrapping;
+    memo.lineBreakMode = NSLineBreakByWordWrapping;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -48,7 +48,9 @@
 -(void)setStrMemo:(NSString *)strmemo
 {
     memo.text = strmemo;
-    CGSize size =[strmemo sizeWithFont:memo.font forWidth:memo.frame.size.width lineBreakMode:NSLineBreakByCharWrapping];
+    
+    NSDictionary *attribute = @{NSFontAttributeName: memo.font};
+    CGSize size = [strmemo boundingRectWithSize:CGSizeMake(memo.frame.size.width, 0) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
     if (size.height >21)
         Height = size.height + 50;
     else

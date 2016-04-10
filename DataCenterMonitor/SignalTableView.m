@@ -27,18 +27,18 @@
 {
     headview = [[UILabel alloc] init];
     headview.frame=CGRectMake(0, 0, [PublicCommon GetALLScreen].size.width, 25);
-    headview.backgroundColor = [UIColor clearColor];
+    headview.backgroundColor = [UIColor whiteColor];
     headview.textColor = [UIColor grayColor];
     headview.font=[UIFont systemFontOfSize:20];
     
     footview = [[UIView alloc] init];
     footview.frame=CGRectMake(0, 0, [PublicCommon GetALLScreen].size.width, 50);
-    footview.backgroundColor = [UIColor clearColor];
+    footview.backgroundColor = [UIColor whiteColor];
     
-//    UIView *lineview = [[UIView alloc] init];
-//    lineview.frame=CGRectMake(0, 1, [PublicCommon GetALLScreen].size.width, 1);
-//    lineview.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.6];
-//    [footview addSubview:lineview];
+    //    UIView *lineview = [[UIView alloc] init];
+    //    lineview.frame=CGRectMake(0, 1, [PublicCommon GetALLScreen].size.width, 1);
+    //    lineview.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.6];
+    //    [footview addSubview:lineview];
     
     btnleft = [[UIButton alloc] init];
     btnleft.frame=CGRectMake(20, 5, 40, 40);
@@ -87,7 +87,7 @@
         [btnleft setBackgroundImage:[UIImage imageNamed:@"buttonleft_disable"] forState:UIControlStateNormal];
         return;
         [btnright setBackgroundImage:[UIImage imageNamed:@"buttonright_normal"] forState:UIControlStateNormal];
- 
+        
     }
     
     
@@ -95,15 +95,15 @@
     {
         [btnright setBackgroundImage:[UIImage imageNamed:@"buttonright_disable"] forState:UIControlStateNormal];
         [btnleft setBackgroundImage:[UIImage imageNamed:@"buttonleft_normal"] forState:UIControlStateNormal];
-
+        
         return;
     }
     else
     {
         [btnright setBackgroundImage:[UIImage imageNamed:@"buttonright_normal"] forState:UIControlStateNormal];
-
+        
         [btnleft setBackgroundImage:[UIImage imageNamed:@"buttonleft_normal"] forState:UIControlStateNormal];
-
+        
     }
 }
 
@@ -112,11 +112,15 @@
  函数名：getTable
  描述:获得设备信号tableview
  参数：frame 布局参数
-
+ 
  返回：tableview 类
  **********************/
 -(UITableView *)getTable:(CGRect)frame
 {
+    
+    if (!json)
+        return table;
+    
     page=0;
     [self changepages:page];
     table.frame = frame;
@@ -125,8 +129,8 @@
     UINib *nib  = [UINib nibWithNibName:@"signalCell" bundle:nil];
     [table registerNib:nib forCellReuseIdentifier:@"cell"];
     
-
-  
+    
+    
     
     return table;
 }
@@ -164,7 +168,7 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-
+    
     return footview;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -199,22 +203,22 @@
     else     if ([[dict objectForKey:@"AlarmGrade"] isEqualToString:@"1"]){
         alertdesc = @"一般告警";//@"无告警";
         colordesc = AlertY;
-                cell.signalimgpath = [dict objectForKey:@"SignalAlarmPicturePath"];
+        cell.signalimgpathalert = [dict objectForKey:@"SignalAlarmPicturePath"];
         [cell downloadimg:1];
     }
     else  if ([[dict objectForKey:@"AlarmGrade"] isEqualToString:@"2"]){
         alertdesc = @"重要告警";//@"无告警";
         colordesc = AlertZ;
-        cell.signalimgpath = [dict objectForKey:@"SignalAlarmPicturePath"];
+        cell.signalimgpathalert = [dict objectForKey:@"SignalAlarmPicturePath"];
         [cell downloadimg:1];
     }
     else  if ([[dict objectForKey:@"AlarmGrade"] isEqualToString:@"3"]){
         alertdesc = @"紧急告警";//@"无告警";
         colordesc = AlertR;
-        cell.signalimgpath = [dict objectForKey:@"SignalAlarmPicturePath"];
+        cell.signalimgpathalert = [dict objectForKey:@"SignalAlarmPicturePath"];
         [cell downloadimg:1];
     }
-
+    
     cell.signalstate.text=alertdesc;
     cell.signalstate.textColor=colordesc;
     cell.signalunit.text=[dict objectForKey:@"UnitName"];
@@ -238,12 +242,12 @@
             else if ( [[dict objectForKey:@"ShowPrecision"] isEqualToString:@"0.0"])
             {
                 value = [NSString stringWithFormat:@"%.1f" ,[value floatValue]];
-
+                
             }
             else if ( [[dict objectForKey:@"ShowPrecision"] isEqualToString:@"0.00"])
             {
                 value = [NSString stringWithFormat:@"%.2f" ,[value floatValue]];
-
+                
             }
         }
     }
@@ -280,7 +284,7 @@
     page--;
     [self changepages:page];
     [table reloadData];
-        
+    
 }
 
 -(void)clickright

@@ -28,10 +28,11 @@ typedef enum {
     float heightlist[5] ;
     NSMutableDictionary *memodict;
     int selectmemo;
+    NSMutableArray *celllist;
 }
 
 
-@property (weak, nonatomic) IBOutlet UITableView *table;
+@property  (weak, nonatomic) IBOutlet UITableView *table;
 @property (weak,nonatomic)NSString *CRID;
 @property (weak, nonatomic) IBOutlet UIButton *btnmore;
 @property (weak, nonatomic) IBOutlet UILabel *bartitle;
