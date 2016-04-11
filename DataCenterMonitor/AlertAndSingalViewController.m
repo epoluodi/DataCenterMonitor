@@ -33,11 +33,14 @@
     switch (viewtype) {
         case 1:
             bartitle.text=@"信号列表";
-            [Common DefaultCommon].IsPickALL = YES;
+//            [Common DefaultCommon].IsPickALL = YES;
             nib = [UINib nibWithNibName:@"signalcelllist" bundle:nil];
             [table registerNib:nib forCellReuseIdentifier:@"cell"];
             signaltimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(signaltimerevent) userInfo:nil repeats:YES];
             [signaltimer fire];
+            s = [[Common DefaultCommon]getStationinfo:0];
+             [btnstationinfo setTitle:[NSString stringWithUTF8String:s->StationName] forState:UIControlStateNormal];
+            stationid = [NSString stringWithUTF8String:s->stationid];
             
             break;
         case 2:
@@ -143,7 +146,7 @@
         }
         NSArray * arry = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
         if (!arry)
-            [Common NetErrorAlert:@"没有数据"];
+            [Common NetOKAlert:@"没有数据"];
         else
             [dataarry addObjectsFromArray:arry];
         
@@ -203,7 +206,7 @@
         }
         NSArray * arry = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
         if (!arry)
-            [Common NetErrorAlert:@"没有数据"];
+            [Common NetOKAlert:@"没有数据"];
         else
             [dataarry addObjectsFromArray:arry];
         
@@ -264,7 +267,7 @@
         }
         NSArray * arry = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
         if (!arry)
-            [Common NetErrorAlert:@"没有数据"];
+            [Common NetOKAlert:@"没有数据"];
         else
             [dataarry addObjectsFromArray:arry];
         
@@ -325,7 +328,7 @@
         }
         NSArray * arry = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
         if (!arry)
-            [Common NetErrorAlert:@"没有数据"];
+            [Common NetOKAlert:@"没有数据"];
         else
             [dataarry addObjectsFromArray:arry];
         
@@ -389,7 +392,7 @@
         }
         NSArray * arry = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
         if (!arry)
-            [Common NetErrorAlert:@"没有数据"];
+            [Common NetOKAlert:@"没有数据"];
         else
             [dataarry addObjectsFromArray:arry];
         
@@ -448,7 +451,7 @@
         }
         NSArray * arry = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
         if (!arry)
-            [Common NetErrorAlert:@"没有数据"];
+            [Common NetOKAlert:@"没有数据"];
         else
             [dataarry addObjectsFromArray:arry];
         
@@ -507,7 +510,7 @@
         }
         NSArray * arry = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
         if (!arry)
-            [Common NetErrorAlert:@"没有数据"];
+            [Common NetOKAlert:@"没有数据"];
         else
             [dataarry addObjectsFromArray:arry];
         
@@ -568,7 +571,7 @@
         }
         NSArray * arry = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
         if (!arry)
-            [Common NetErrorAlert:@"没有数据"];
+            [Common NetOKAlert:@"没有数据"];
         else
             [dataarry addObjectsFromArray:arry];
         
@@ -626,7 +629,7 @@
         }
         NSArray * arry = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
         if (!arry)
-            [Common NetErrorAlert:@"没有数据"];
+            [Common NetOKAlert:@"没有数据"];
         else
             [dataarry addObjectsFromArray:arry];
         
@@ -684,7 +687,7 @@
         }
         NSArray * arry = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
         if (!arry)
-            [Common NetErrorAlert:@"没有数据"];
+            [Common NetOKAlert:@"没有数据"];
         else
             [dataarry addObjectsFromArray:arry];
         

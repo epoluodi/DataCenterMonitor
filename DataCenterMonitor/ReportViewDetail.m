@@ -508,8 +508,10 @@
                 m=[memodict objectForKey:[NSString stringWithFormat:@"%d",i]];
                 if (!m)
                     m=@"";
-                [arry addObject:m];
+                [arry addObject:[NSString stringWithFormat:@"%d,%@",i,m]];
             }
+            
+            
             listCruiseErrorRecord =[arry componentsJoinedByString:@";"];
             
             [self saveReport:cruiseType listCruiseState:listCruiseState listCruiseErrorRecord:listCruiseErrorRecord];

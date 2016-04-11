@@ -18,6 +18,7 @@
     [super viewDidLoad];
     memotxt.inputAccessoryView = [PublicCommon getInputToolbar:self sel:@selector(closeinput)];
     memotxt.text=str;
+    [memotxt becomeFirstResponder];
     // Do any additional setup after loading the view.
 }
 -(void)closeinput

@@ -63,10 +63,10 @@
 #import <Common/PublicCommon.h>
 
 
-#define AlertY [UIColor colorWithRed:255/255 green:250/255 blue:107/255 alpha:1]
-#define AlertZ [UIColor colorWithRed:186/255 green:2/255 blue:255/255 alpha:1]
-#define AlertR [UIColor colorWithRed:255/255 green:55/255 blue:0/255 alpha:1]
-#define AlertH [UIColor colorWithRed:128/255 green:128/255 blue:128/255 alpha:1]
+#define AlertY [UIColor colorWithRed:255/255.0 green:250/255.0 blue:107/255.0 alpha:1]
+#define AlertZ [UIColor colorWithRed:186/255.0 green:2/255.0 blue:255/255.0 alpha:1]
+#define AlertR [UIColor colorWithRed:255/255.0 green:55/255.0 blue:0/255.0 alpha:1]
+#define AlertH [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1]
 
 typedef enum {
     NETINSIDE,//内网
