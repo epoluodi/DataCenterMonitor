@@ -40,8 +40,8 @@
             [signaltimer fire];
             s = [[Common DefaultCommon]getStationinfo:0];
              [btnstationinfo setTitle:[NSString stringWithUTF8String:s->StationName] forState:UIControlStateNormal];
-            stationid = [NSString stringWithUTF8String:s->stationid];
-            
+            tempstationid = [NSString stringWithUTF8String:s->stationid];
+          
             break;
         case 2:
             bartitle.text=@"告警列表";
@@ -49,7 +49,8 @@
             [table registerNib:nib forCellReuseIdentifier:@"cell"];
             s = [[Common DefaultCommon]getStationinfo:0];
             [btnstationinfo setTitle:[NSString stringWithUTF8String:s->StationName] forState:UIControlStateNormal];
-            stationid = [NSString stringWithUTF8String:s->stationid];
+            tempstationid = [NSString stringWithUTF8String:s->stationid];
+         
             break;
         case 3:
             
@@ -58,8 +59,8 @@
             [table registerNib:nib forCellReuseIdentifier:@"cell"];
             s = [[Common DefaultCommon]getStationinfo:0];
             [btnstationinfo setTitle:[NSString stringWithUTF8String:s->StationName] forState:UIControlStateNormal];
-            stationid = [NSString stringWithUTF8String:s->stationid];
-            startrecordAlert=0;
+            tempstationid = [NSString stringWithUTF8String:s->stationid];
+           
             break;
     }
     
@@ -1075,19 +1076,19 @@ NSLog(@"信号dict %@",d);
     
     if (stationinfo == NULL)
     {
-        stationid=nil;
+        tempstationid=nil;
         [btnstationinfo setTitle:@"<全部>" forState:UIControlStateNormal];
     }
     else
     {
-        stationid =[NSString stringWithUTF8String:stationinfo->stationid];
+        tempstationid =[NSString stringWithUTF8String:stationinfo->stationid];
         [btnstationinfo setTitle:[NSString stringWithUTF8String:stationinfo->StationName] forState:UIControlStateNormal];
     }
     
-    equtypeid=nil;
-    deviceid =nil;
-    startrecordAlert=0;
-    [dataarry removeAllObjects];
+    tempequtypeid=nil;
+    tempdeviceid =nil;
+//    tempstartrecordAlert=0;
+//    [dataarry removeAllObjects];
     [btnEquType setTitle:@"<全部>" forState:UIControlStateNormal];
     [btndevicetype setTitle:@"<全部>" forState:UIControlStateNormal];
 }
@@ -1099,17 +1100,17 @@ NSLog(@"信号dict %@",d);
     
     if (EquTypeID == NULL)
     {
-        equtypeid =nil;
+        tempequtypeid =nil;
         [btnEquType setTitle:@"<全部>" forState:UIControlStateNormal];
     }
     else
     {
-        equtypeid=EquTypeID;
+        tempequtypeid=EquTypeID;
         [btnEquType setTitle:EquName forState:UIControlStateNormal];
     }
-    deviceid =nil;
-    startrecordAlert=0;
-    [dataarry removeAllObjects];
+    tempdeviceid =nil;
+//    startrecordAlert=0;
+//    [dataarry removeAllObjects];
     [btndevicetype setTitle:@"<全部>" forState:UIControlStateNormal];
 }
 
@@ -1119,16 +1120,16 @@ NSLog(@"信号dict %@",d);
     
     if (EquipmentID == NULL)
     {
-        deviceid =nil;
+        tempdeviceid =nil;
         [btndevicetype setTitle:@"<全部>" forState:UIControlStateNormal];
     }
     else
     {
-        deviceid=EquipmentID;
+        tempdeviceid=EquipmentID;
         [btndevicetype setTitle:EquipmentName forState:UIControlStateNormal];
     }
-    startrecordAlert=0;
-    [dataarry removeAllObjects];
+//    startrecordAlert=0;
+//    [dataarry removeAllObjects];
 }
 #pragma mark -
 
@@ -1223,6 +1224,7 @@ NSLog(@"信号dict %@",d);
     
     if (sender)
     {
+        
         startrecordAlert=0;
         [dataarry removeAllObjects];
         [chkAlertidList removeAllObjects];
@@ -1231,6 +1233,9 @@ NSLog(@"信号dict %@",d);
         [loadview setImages:[Common initLoadingImages]];
         [self.view addSubview:loadview];
         [loadview StartAnimation];
+        stationid=tempstationid;
+        equtypeid=tempequtypeid;
+        deviceid=tempdeviceid;
         
     }
     switch (viewtype) {
@@ -1281,16 +1286,16 @@ NSLog(@"信号dict %@",d);
 - (IBAction)clickequtype:(id)sender {
     
     [Common DefaultCommon].IsPickALL = YES;
-    [[Common DefaultCommon] ShowEquTypeSheet:self stationid:stationid];
+    [[Common DefaultCommon] ShowEquTypeSheet:self stationid:tempstationid];
 }
 
 //点击设备
 - (IBAction)clickdevice:(id)sender {
     
-    if (stationid==nil || equtypeid==nil)
+    if (tempstationid==nil || tempequtypeid==nil)
         return;
     [Common DefaultCommon].IsPickALL = YES;
-    [[Common DefaultCommon] ShowEquipmentSheet:self stationid:stationid equdtypeid:equtypeid];
+    [[Common DefaultCommon] ShowEquipmentSheet:self stationid:tempstationid equdtypeid:tempequtypeid];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

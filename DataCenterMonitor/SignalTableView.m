@@ -63,6 +63,11 @@
     
 }
 
+//重置当前页面到0页
+-(void)updatePage
+{
+    page=0;
+}
 
 /**********************
  函数名：changepages
@@ -85,9 +90,9 @@
     if (page == 0)
     {
         [btnleft setBackgroundImage:[UIImage imageNamed:@"buttonleft_disable"] forState:UIControlStateNormal];
-        return;
+       
         [btnright setBackgroundImage:[UIImage imageNamed:@"buttonright_normal"] forState:UIControlStateNormal];
-        
+         return;
     }
     
     
@@ -168,7 +173,10 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    
+    if (!json)
+        footview.hidden=YES;
+    else
+        footview.hidden=NO;
     return footview;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -177,6 +185,7 @@
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    
     return headview;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

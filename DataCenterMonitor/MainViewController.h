@@ -28,6 +28,7 @@
     NSMutableArray *alertlist;
     moreCell *morecell;
     int startrecordAlert;
+    NSString *tempEquTypeID,*tempEquTypeName;
     
     SignalTableView *signaltable;//设备信号view
     BOOL IsopenSignalTable;

@@ -21,6 +21,11 @@
     NSString *equtypeid;
     NSString *deviceid;
     
+    NSString *tempstationid;
+    NSString *tempequtypeid;
+    NSString *tempdeviceid;
+    
+    
     int startrecordAlert;//当前加载位置
     moreCell *morecell;//更多view
     NSMutableArray *chkAlertidList;//告警确认队列

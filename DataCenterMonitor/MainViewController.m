@@ -15,7 +15,7 @@
 
 @interface MainViewController ()
 {
-    __block HttpClass *httpclass;
+ 
     LoadingView *loadview;
 }
 @end
@@ -94,7 +94,7 @@
 {
     dispatch_async([Common getThreadQueue], ^{
         Stationinfo *stationinfo= [[Common DefaultCommon] getStationinfo:scrollindex];
-        httpclass = [[HttpClass alloc] init:[Common HttpString:GetEquTypebase]];
+        HttpClass *httpclass = [[HttpClass alloc] init:[Common HttpString:GetEquTypebase]];
         [httpclass addParamsString:@"clerkStationID" values:[Common DefaultCommon].ClerkStationID];
         [httpclass addParamsString:@"clerkID" values:[Common DefaultCommon].ClerkID];
         [httpclass addParamsString:@"stationID" values:[NSString stringWithCString:stationinfo->stationid encoding:NSUTF8StringEncoding]];
@@ -133,7 +133,7 @@
 {
     dispatch_async([Common getThreadQueue], ^{
    
-        httpclass = [[HttpClass alloc] init:[Common HttpString:GetLastCommTime]];
+        HttpClass *httpclass = [[HttpClass alloc] init:[Common HttpString:GetLastCommTime]];
         [httpclass addParamsString:@"stationID" values:stationID];
        
         NSData *data = [httpclass httprequest:[httpclass getDataForArrary]];
@@ -175,7 +175,7 @@
 {
     dispatch_async([Common getThreadQueue], ^{
         
-        httpclass = [[HttpClass alloc] init:[Common HttpString:GetSumOfAlarm]];
+        HttpClass *httpclass = [[HttpClass alloc] init:[Common HttpString:GetSumOfAlarm]];
         NSData *data = [httpclass httprequest:[httpclass getDataForArrary]];
         NSString *result = [httpclass getXmlString:data];
         NSLog(@"结果 %@",result);
@@ -210,7 +210,7 @@
 -(void)LoadAlertlist
 {
     dispatch_async([Common getThreadQueue], ^{
-        httpclass = [[HttpClass alloc] init:[Common HttpString:GetAllListAlarm]];
+        HttpClass *httpclass = [[HttpClass alloc] init:[Common HttpString:GetAllListAlarm]];
         [httpclass addParamsString:@"startRecord" values:[NSString stringWithFormat:@"%d",startrecordAlert]];
         [httpclass addParamsString:@"sumRecord" values:[NSString stringWithFormat:@"%d",3]];
         
@@ -356,6 +356,11 @@
         [gridview reloadData];
        
         [self LoadEquTypeBase:page];
+        if (IsopenSignalTable)
+        {
+            [self LoadSignalinfo:tempEquTypeID name:tempEquTypeName];
+        }
+        
     }
 
     
@@ -518,7 +523,8 @@
 {
     NSDictionary *d = [NowEquTypeBaseArry objectAtIndex:indexPath.row];
     
-    
+    tempEquTypeID=[d objectForKey:@"EquTypeID"];
+    tempEquTypeName=[d objectForKey:@"EquTypeName"];
     [self LoadSignalinfo:[d objectForKey:@"EquTypeID"] name:[d objectForKey:@"EquTypeName"]];
     
     
@@ -551,7 +557,7 @@
     [loadview StartAnimation];
     dispatch_async([Common getThreadQueue], ^{
         
-        httpclass = [[HttpClass alloc] init:[Common HttpString:GetSignal]];
+        HttpClass *httpclass = [[HttpClass alloc] init:[Common HttpString:GetSignal]];
         [httpclass addParamsString:@"clerkStationID" values:[Common DefaultCommon].ClerkStationID];
         [httpclass addParamsString:@"clerkID" values:[Common DefaultCommon].ClerkID];
         [httpclass addParamsString:@"stationID" values:[NSString stringWithCString:stationinfo->stationid encoding:NSUTF8StringEncoding]];
@@ -596,15 +602,22 @@
                 [loadview removeFromSuperview];
                 loadview = nil;
             }
-            
-            gridview.hidden=YES;
-            IsopenSignalTable=YES;
-            signaltable = [[SignalTableView alloc] init];
-            signaltable.json =dataresult;
-            Stationinfo *stationinfo= [[Common DefaultCommon] getStationinfo:nowPage];
-            signaltable.devicename = name;
-            signaltableview= [signaltable getTable:gridview.frame];
-            [self.view addSubview:signaltableview];
+            if (IsopenSignalTable)
+            {
+                signaltable.json =dataresult;
+                [signaltable updatePage];
+                [signaltable changepages:0];
+                [signaltableview reloadData];
+            }
+            else{
+                gridview.hidden=YES;
+                IsopenSignalTable=YES;
+                signaltable = [[SignalTableView alloc] init];
+                signaltable.json =dataresult;
+                signaltable.devicename = name;
+                signaltableview= [signaltable getTable:gridview.frame];
+                [self.view addSubview:signaltableview];
+            }
             
         });
         

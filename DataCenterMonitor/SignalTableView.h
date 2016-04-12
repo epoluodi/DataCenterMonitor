@@ -25,5 +25,6 @@
 @property (copy,nonatomic)NSString *devicename;
 -(UITableView *)getTable:(CGRect)frame;
 -(void)setTableHeight:(int)height;
-
+-(void)changepages:(int)page;
+-(void)updatePage;
 @end
