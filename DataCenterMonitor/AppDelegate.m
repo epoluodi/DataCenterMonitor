@@ -68,13 +68,12 @@
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     [[UIApplication sharedApplication]setApplicationIconBadgeNumber:0];
-    // 处理推送消息
-    NSLog(@"userinfo:%@",userInfo);
-//    NSString *title =[[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
-//    NSLog(@"收到推送消息:%@",[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]);
-//    
-//    UIAlertView *alert  = [[UIAlertView alloc] initWithTitle:@"通知" message:title delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-//    [alert show];
+ 
+    NSString *title =[[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+    NSLog(@"收到推送消息:%@",[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]);
+    
+    UIAlertView *alert  = [[UIAlertView alloc] initWithTitle:@"通知" message:title delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alert show];
     
 }
 
