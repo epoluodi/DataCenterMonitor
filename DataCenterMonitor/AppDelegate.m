@@ -17,18 +17,19 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+//    
     [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings
                                                                          settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge)
                                                                          categories:nil]];
     
     
-
     
     [[UIApplication sharedApplication]setApplicationIconBadgeNumber:0];//进入
+ 
     // Override point for customization after application launch.
     return YES;
 }
+
 
 
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
