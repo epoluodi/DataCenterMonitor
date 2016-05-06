@@ -14,6 +14,7 @@
 @end
 
 @implementation AppDelegate
+@synthesize IsAlert;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -27,6 +28,12 @@
     [[UIApplication sharedApplication]setApplicationIconBadgeNumber:0];//进入
  
     // Override point for customization after application launch.
+    IsAlert=NO;
+    if (launchOptions)
+    {
+        IsAlert=YES;
+    }
+ 
     return YES;
 }
 

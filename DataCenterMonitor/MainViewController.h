@@ -34,6 +34,7 @@
     BOOL IsopenSignalTable;
     UITableView *signaltableview;
 }
+@property (weak, nonatomic) IBOutlet UILabel *refreshlab;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
 @property (weak, nonatomic) IBOutlet UICollectionView *gridview;

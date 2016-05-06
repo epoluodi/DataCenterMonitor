@@ -12,11 +12,13 @@
 #import "alertlisthome.h"
 #import "AlertAndSingalViewController.h"
 #import <Common/LoadingView.h>
+#import "AppDelegate.h"
 
 @interface MainViewController ()
 {
  
     LoadingView *loadview;
+    AppDelegate *app;
 }
 @end
 
@@ -38,15 +40,10 @@
     if (iPhone5)
         scrollheight=190;
     nowPage=0;
-    serverrefreshtime=[[UILabel alloc] init];
-    serverrefreshtime.textAlignment=NSTextAlignmentRight;
-    serverrefreshtime.textColor= [[UIColor grayColor] colorWithAlphaComponent:0.8];
-    serverrefreshtime.font=[UIFont systemFontOfSize:14];
-    
-    [gridview addSubview:serverrefreshtime];
+
     [self updateLayout];
     [self InitscrollView];
-
+    _refreshlab.text=@"正在获取服务器时间";
     gridview.backgroundColor=[UIColor clearColor];
     imgview1 = [[UIImageView alloc] init];
     imgview1.image= [UIImage imageNamed:@"closeflag"];
@@ -65,7 +62,16 @@
     startrecordAlert=0;
     [self initAlertList];
     [self LoadAlertlist];
+    app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
+    //点击通知 打开后弹出 告警列表
+    if (app.IsAlert)
+    {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self clickalertlist:nil];
+
+        });
+    }
         // Do any additional setup after loading the view.
 }
 
@@ -76,13 +82,7 @@
     [self getAlertCounts];
 }
 
--(void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    if (alertviewheight.constant==76){
-        serverrefreshtime.frame = CGRectMake(10, gridview.frame.size.height - 25, [PublicCommon GetALLScreen].size.width-20, 30);
-    }
-}
+
 #pragma mark 网络交互
 /**********************
  函数名：LoadEquTypeBase
@@ -141,14 +141,14 @@
         NSLog(@"结果 %@",result);
         if (!result)
         {
-            serverrefreshtime.text=@"";
+            _refreshlab.text=@"";
 //            [Common NetErrorAlert:@"信息获取失败"];
             return ;
         }
         NSArray *resultjson = [NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:NULL];
         if (!resultjson)
         {
-            serverrefreshtime.text=@"";
+            _refreshlab.text=@"";
 //            [Common NetErrorAlert:@"信息获取失败"];
             return ;
         }
@@ -156,7 +156,7 @@
         
         dispatch_async([Common getThreadMainQueue], ^{
             NSDictionary *d =resultjson[0];
-            serverrefreshtime.text = [NSString stringWithFormat:@"%@ 最后刷新时间::%@",[d objectForKey:@"WorkStationName"],[d objectForKey:@"LastCommTime"]];
+            _refreshlab.text = [NSString stringWithFormat:@"%@ 最后刷新时间::%@",[d objectForKey:@"WorkStationName"],[d objectForKey:@"LastCommTime"]];
             
         });
         
